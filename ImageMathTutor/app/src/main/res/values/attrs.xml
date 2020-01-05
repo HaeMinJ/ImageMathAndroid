@@ -9,4 +9,10 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="ToggleConstraintLayout">
+        <attr name="checked" format="boolean"/>
+        <attr name="drawableOn" format="integer"/>
+        <attr name="drawableOff" format="integer"/>
+    </declare-styleable>
+
 </resources>

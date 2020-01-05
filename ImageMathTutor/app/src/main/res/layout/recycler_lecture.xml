@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    app:cardCornerRadius="14dp"
+    >
+
+    <com.haemin.imagemathtutor.UI.ToggleConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        app:checked="true"
+        app:drawableOn="@drawable/box_lecture_on"
+        app:drawableOff="@drawable/box_lecture_off"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/text_class_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="종로 이투스 수(가) 심화반"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="24dp"
+            />
+
+        <TextView
+            android:id="@+id/text_class_times"
+            android:textSize="10sp"
+            app:layout_constraintTop_toTopOf="@+id/text_class_name"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수 20:00 - 22:00\n목 18:00 - 20:00"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="10sp"
+            android:id="@+id/text_academy_name"/>
+        <RelativeLayout
+            android:background="@drawable/btn_task_on"
+            android:layout_marginTop="45dp"
+            app:layout_constraintTop_toBottomOf="@id/text_class_name"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="74dp">
+        </RelativeLayout>
+
+    </com.haemin.imagemathtutor.UI.ToggleConstraintLayout>
+
+</androidx.cardview.widget.CardView>
