@@ -1,6 +1,7 @@
 package com.haemin.imagemathtutor.Activity;
 
 import android.content.Intent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -37,5 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     }
     void bindListener(){
         textRegister.setOnClickListener(v->startActivity(new Intent(LoginActivity.this,RegisterTermsActivity.class)));
+        btnLogin.setOnClickListener(v->{
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        });
     }
 }
