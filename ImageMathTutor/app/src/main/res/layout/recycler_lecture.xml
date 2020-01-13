@@ -6,9 +6,10 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"
-    app:cardCornerRadius="14dp">
+    app:cardElevation="0dp">
 
-    <com.haemin.imagemathtutor.UI.ToggleConstraintLayout
+    <com.haemin.imagemathtutor.View.UI.ToggleConstraintLayout
+        android:id="@+id/toggle_whole_recycler"
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:background="?attr/selectableItemBackground"
@@ -189,7 +190,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <com.haemin.imagemathtutor.UI.ToggleConstraintLayout
+        <com.haemin.imagemathtutor.View.UI.ToggleConstraintLayout
             android:id="@+id/btn_list_group"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -222,8 +223,8 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </com.haemin.imagemathtutor.UI.ToggleConstraintLayout>
+        </com.haemin.imagemathtutor.View.UI.ToggleConstraintLayout>
 
-    </com.haemin.imagemathtutor.UI.ToggleConstraintLayout>
+    </com.haemin.imagemathtutor.View.UI.ToggleConstraintLayout>
 
 </androidx.cardview.widget.CardView>
