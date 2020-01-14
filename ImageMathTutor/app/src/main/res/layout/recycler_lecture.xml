@@ -16,54 +16,37 @@
         app:checked="true"
         app:drawableOff="@drawable/box_lecture_off"
         app:drawableOn="@drawable/box_lecture_on"
-        tools:checked="false">
+        tools:checked="true">
 
-        <ImageView
-            android:id="@+id/image_end_class"
-            android:layout_width="100dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/img_thisisendlecture"
-            android:visibility="gone"
-            app:layout_constraintDimensionRatio="210:48"
+        <Button
+
+            android:elevation="14dp"
+            android:text="학생관리"
+            android:textSize="14sp"
+            android:id="@+id/btn_student_manage"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_rounded_btn_box"
+            android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="@id/text_class_name"
             app:layout_constraintTop_toBottomOf="@id/text_class_name"
-            tools:visibility="visible" />
+             />
 
-        <ImageView
-            android:id="@+id/dummy_icon_pass"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:padding="1dp"
-            android:src="@drawable/img_showpass_big"
-            app:layout_constraintRight_toLeftOf="@+id/text_pass"
-            app:layout_constraintTop_toBottomOf="@id/btn_list_group" />
+        <Button
 
-
-        <ImageView
-            android:id="@+id/dummy_icon_unsubmit"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:padding="2dp"
-            android:src="@drawable/icon_unsubmit"
-            app:layout_constraintLeft_toRightOf="@+id/text_pass"
-            app:layout_constraintRight_toLeftOf="@id/text_unsubmit"
-            app:layout_constraintTop_toTopOf="@id/dummy_icon_pass" />
-
-        <ImageView
-            android:id="@+id/dummy_icon_neglect"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:padding="2dp"
-            android:src="@drawable/icon_neglect"
-            app:layout_constraintLeft_toRightOf="@+id/text_unsubmit"
-            app:layout_constraintRight_toLeftOf="@+id/text_neglect"
-            app:layout_constraintTop_toTopOf="@id/dummy_icon_pass" />
-
+            android:elevation="14dp"
+            android:layout_marginStart="8dp"
+            android:text="인증요청"
+            android:textSize="14sp"
+            android:id="@+id/btn_recognition"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_rounded_btn_box"
+            android:visibility="visible"
+            app:layout_constraintLeft_toRightOf="@+id/btn_student_manage"
+            app:layout_constraintTop_toTopOf="@id/btn_student_manage"
+            />
         <TextView
             android:id="@+id/text_class_name"
             android:layout_width="wrap_content"
@@ -104,39 +87,7 @@
             app:layout_constraintRight_toRightOf="@+id/text_academy_name"
             app:layout_constraintTop_toBottomOf="@+id/text_academy_name" />
 
-        <TextView
-            android:id="@+id/text_pass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="새로운 통과 1개"
-            android:textColor="@android:color/black"
-            android:textSize="10sp"
-            app:layout_constraintLeft_toRightOf="@id/dummy_icon_pass"
-            app:layout_constraintTop_toTopOf="@+id/dummy_icon_pass" />
 
-        <TextView
-            android:id="@+id/text_unsubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="미제출 2개"
-            android:textColor="@android:color/black"
-            android:textSize="10sp"
-            app:layout_constraintLeft_toRightOf="@id/dummy_icon_unsubmit"
-            app:layout_constraintTop_toTopOf="@id/dummy_icon_unsubmit" />
-
-        <TextView
-            android:id="@+id/text_neglect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="불성실 1개"
-            android:textColor="@android:color/black"
-            android:textSize="10sp"
-            app:layout_constraintLeft_toRightOf="@id/dummy_icon_neglect"
-            app:layout_constraintRight_toRightOf="@id/btn_list_group"
-            app:layout_constraintTop_toTopOf="@id/dummy_icon_neglect" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_notice_group"
@@ -196,12 +147,13 @@
             android:layout_height="0dp"
             android:layout_marginLeft="28dp"
             android:layout_marginRight="28dp"
-            android:layout_marginTop="45dp"
             app:drawableOff="@drawable/btn_task_off"
             app:drawableOn="@drawable/btn_task_on"
             app:layout_constraintDimensionRatio="722:141"
-            app:layout_constraintTop_toBottomOf="@id/text_class_name"
-            tools:checked="false">
+            app:layout_constraintTop_toBottomOf="@id/btn_student_manage"
+            app:layout_constraintBottom_toTopOf="@+id/btn_notice_group"
+            android:layout_marginBottom="8dp"
+            tools:checked="true">
 
             <Button
                 android:id="@+id/btn_assignment"
