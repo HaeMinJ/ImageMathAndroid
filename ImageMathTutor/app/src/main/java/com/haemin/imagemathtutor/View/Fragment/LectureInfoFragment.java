@@ -4,7 +4,6 @@ package com.haemin.imagemathtutor.View.Fragment;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ToggleButton;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.haemin.imagemathtutor.Adapter.LectureRecyclerAdapter;
-import com.haemin.imagemathtutor.Model.Lecture;
+import com.haemin.imagemathtutor.Data.Lecture;
 import com.haemin.imagemathtutor.R;
 
 import java.util.ArrayList;

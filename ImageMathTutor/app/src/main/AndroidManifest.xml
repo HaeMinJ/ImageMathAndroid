@@ -10,9 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".View.Activity.MainActivity"></activity>
-        <activity android:name=".View.Activity.RegisterSuccessActivity" />
-        <activity android:name=".View.Activity.RegisterActivity" />
-        <activity android:name=".View.Activity.RegisterTermsActivity" />
+        <activity android:name=".View.RegisterProcess.RegisterSuccessActivity" />
+        <activity android:name=".View.RegisterProcess.RegisterActivity" />
+        <activity android:name=".View.RegisterProcess.RegisterTermsActivity" />
         <activity android:name=".View.Activity.LoginActivity" />
         <activity
             android:name=".View.Activity.SplashActivity"

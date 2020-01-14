@@ -12,7 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.haemin.imagemathtutor.Model.Lecture;
+import com.haemin.imagemathtutor.Data.Lecture;
 import com.haemin.imagemathtutor.R;
 import com.haemin.imagemathtutor.View.UI.ToggleConstraintLayout;
 

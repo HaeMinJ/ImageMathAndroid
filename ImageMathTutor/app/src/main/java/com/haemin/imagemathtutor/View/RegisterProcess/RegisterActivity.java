@@ -1,14 +1,14 @@
-package com.haemin.imagemathtutor.View.Activity;
+package com.haemin.imagemathtutor.View.RegisterProcess;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.haemin.imagemathtutor.R;
 
-public class RegisterSuccessActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_success);
+        setContentView(R.layout.activity_register);
     }
 }

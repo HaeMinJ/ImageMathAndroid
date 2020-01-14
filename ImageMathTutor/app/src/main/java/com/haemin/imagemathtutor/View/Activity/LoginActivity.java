@@ -10,6 +10,7 @@ import android.os.Bundle;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.haemin.imagemathtutor.R;
+import com.haemin.imagemathtutor.View.RegisterProcess.RegisterTermsActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         bindListener();
     }
     void bindListener(){
-        textRegister.setOnClickListener(v->startActivity(new Intent(LoginActivity.this,RegisterTermsActivity.class)));
+        textRegister.setOnClickListener(v->startActivity(new Intent(LoginActivity.this, RegisterTermsActivity.class)));
         btnLogin.setOnClickListener(v->{
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
         });
