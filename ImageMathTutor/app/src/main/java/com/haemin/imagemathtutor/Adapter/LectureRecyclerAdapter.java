@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -31,7 +30,7 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
     @NonNull
     @Override
     public LectureViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.recycler_lecture,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.recycler_lecture, parent, false);
 
         return new LectureViewHolder(v);
     }
@@ -53,23 +52,20 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         @BindView(R.id.btn_list_group)
         ToggleConstraintLayout toggleBtnList;
 
-        @BindView(R.id.image_end_class)
-        ImageView imageEndClass;
+        @BindView(R.id.btn_student_manage)
+        Button btnStudentManage;
 
-        @BindView(R.id.text_class_name)
-        TextView textClassName;
-        @BindView(R.id.text_class_times)
+        @BindView(R.id.btn_recognition)
+        Button btnRecognition;
+
+        @BindView(R.id.text_lecture_name)
+        TextView textlectureName;
+        @BindView(R.id.text_lecture_times)
         TextView textClassTimes;
         @BindView(R.id.text_academy_name)
         TextView textAcademyName;
-        @BindView(R.id.text_class_duration)
+        @BindView(R.id.text_lecture_duration)
         TextView textClassDuration;
-        @BindView(R.id.text_pass)
-        TextView textPass;
-        @BindView(R.id.text_unsubmit)
-        TextView textUnSubmit;
-        @BindView(R.id.text_neglect)
-        TextView textNeglect;
 
         @BindView(R.id.btn_notice_group)
         ConstraintLayout btnNoticeGroup;

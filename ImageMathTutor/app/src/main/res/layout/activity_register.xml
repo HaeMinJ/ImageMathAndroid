@@ -58,7 +58,7 @@
             app:layout_constraintTop_toTopOf="@id/edit_code" />
 
         <Button
-            android:id="@+id/btn_search_class"
+            android:id="@+id/btn_search_lecture"
             android:layout_width="70dp"
             android:layout_height="50dp"
             android:layout_marginLeft="8dp"
@@ -66,15 +66,15 @@
             android:text="검색"
             android:textColor="@android:color/white"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/edit_class"
-            app:layout_constraintLeft_toRightOf="@id/edit_class"
+            app:layout_constraintBottom_toBottomOf="@id/edit_lecture"
+            app:layout_constraintLeft_toRightOf="@id/edit_lecture"
             app:layout_constraintRight_toRightOf="@id/dummy_img"
-            app:layout_constraintTop_toBottomOf="@id/dummy_text_class"
-            app:layout_constraintTop_toTopOf="@id/edit_class" />
+            app:layout_constraintTop_toBottomOf="@id/dummy_text_lecture"
+            app:layout_constraintTop_toTopOf="@id/edit_lecture" />
 
 
         <Button
-            android:id="@+id/btn_add_class"
+            android:id="@+id/btn_add_lecture"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@color/register_add_btn"
@@ -82,7 +82,7 @@
             android:textColor="@android:color/black"
             app:layout_constraintLeft_toLeftOf="@+id/btn_back"
             app:layout_constraintRight_toRightOf="@id/dummy_img"
-            app:layout_constraintTop_toBottomOf="@id/viewholder_class" />
+            app:layout_constraintTop_toBottomOf="@id/viewholder_lecture" />
 
         <Button
             android:id="@+id/btn_search_school"
@@ -285,7 +285,7 @@
             android:singleLine="true"
             android:lines="1"
             android:maxLines="1"
-            android:id="@+id/edit_class"
+            android:id="@+id/edit_lecture"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="14dp"
@@ -296,8 +296,8 @@
             android:paddingStart="14dp"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
-            app:layout_constraintRight_toLeftOf="@id/btn_search_class"
-            app:layout_constraintTop_toBottomOf="@+id/dummy_text_class" />
+            app:layout_constraintRight_toLeftOf="@id/btn_search_lecture"
+            app:layout_constraintTop_toBottomOf="@+id/dummy_text_lecture" />
 
         <EditText
             android:singleLine="true"
@@ -343,14 +343,14 @@
             app:layout_constraintTop_toTopOf="@id/btn_back" />
 
         <LinearLayout
-            android:id="@+id/viewholder_class"
+            android:id="@+id/viewholder_lecture"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintRight_toRightOf="@id/dummy_img"
-            app:layout_constraintTop_toBottomOf="@id/edit_class" />
+            app:layout_constraintTop_toBottomOf="@id/edit_lecture" />
 
 
         <TextView
@@ -545,7 +545,7 @@
             app:layout_constraintTop_toBottomOf="@id/text_pw_re_confirm" />
 
         <TextView
-            android:id="@+id/dummy_text_class"
+            android:id="@+id/dummy_text_lecture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -568,7 +568,7 @@
             android:textColor="@android:color/black"
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
-            app:layout_constraintTop_toBottomOf="@id/btn_add_class" />
+            app:layout_constraintTop_toBottomOf="@id/btn_add_lecture" />
 
         <ToggleButton
             android:id="@+id/toggle_gender_male"
