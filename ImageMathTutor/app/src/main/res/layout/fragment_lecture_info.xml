@@ -13,7 +13,7 @@
         android:layout_height="36dp"
         android:elevation="0dp"
         android:gravity="center"
-        android:text="+추가하기"
+        android:text="+강좌개설"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/toggle_except_expire"
         app:layout_constraintRight_toRightOf="parent"
