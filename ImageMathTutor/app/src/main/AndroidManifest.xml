@@ -10,10 +10,11 @@
         android:roundIcon="@mipmap/icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NoticeMVP.NoticeActivity"></activity>
-        <activity android:name=".View.Activity.MainActivity" >
+        <activity android:name=".NoticeEditMVP.NoticeEditActivity"></activity>
+        <activity android:name=".NoticeMVP.NoticeActivity" />
+        <activity android:name=".View.Activity.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity android:name=".View.RegisterProcess.RegisterSuccessActivity" />
