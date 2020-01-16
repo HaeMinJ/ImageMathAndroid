@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
@@ -14,9 +15,9 @@ import com.haemin.imagemathtutor.R;
 public class TutorToolbar extends Toolbar {
 
     @BindView(R.id.btn_setting)
-    Button btnSetting;
+    ImageButton btnSetting;
     @BindView(R.id.btn_notification)
-    Button btnNotification;
+    ImageButton btnNotification;
 
     public TutorToolbar(Context context) {
         super(context);
@@ -34,6 +35,7 @@ public class TutorToolbar extends Toolbar {
     }
     void init(Context context){
         View toolbar = LayoutInflater.from(context).inflate(R.layout.toolbar, this, false);
+        addView(toolbar);
         ButterKnife.bind(this,toolbar);
 
         btnSetting.setOnClickListener(v -> {

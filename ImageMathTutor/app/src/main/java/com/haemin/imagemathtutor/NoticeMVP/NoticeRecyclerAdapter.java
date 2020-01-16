@@ -18,13 +18,14 @@ import java.util.ArrayList;
 
 public class NoticeRecyclerAdapter extends RecyclerView.Adapter<NoticeRecyclerAdapter.NoticeViewHolder>
 {
-    NoticeContract.Presenter presenter;
+    NoticeContract.NoticePresenter noticePresenter;
     Context context;
     ArrayList<Notice> notices;
 
-    public NoticeRecyclerAdapter(NoticeContract.Presenter presenter, Context context) {
-        this.presenter = presenter;
+    public NoticeRecyclerAdapter(NoticeContract.NoticePresenter noticePresenter, Context context) {
+        this.noticePresenter = noticePresenter;
         this.context = context;
+        this.notices = noticePresenter.getData();
     }
     public void notifyData(ArrayList<Notice> notices){
         this.notices = notices;

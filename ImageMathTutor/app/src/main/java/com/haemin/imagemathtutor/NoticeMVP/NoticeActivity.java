@@ -20,7 +20,7 @@ import com.haemin.imagemathtutor.Utils.ConfirmStarter;
 
 import java.util.ArrayList;
 
-public class NoticeActivity extends AppCompatActivity implements NoticeContract.View {
+public class NoticeActivity extends AppCompatActivity implements NoticeContract.NoticeView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -38,7 +38,7 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
     SwipeRefreshLayout refreshLayout;
 
     NoticeRecyclerAdapter recyclerAdapter;
-    NoticeContract.Presenter presenter;
+    NoticeContract.NoticePresenter noticePresenter;
 
     int lectureSeq;
     String lectureName;
@@ -60,15 +60,15 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
         Intent fromOutside= getIntent();
         ConfirmStarter.checkIntent(this, fromOutside);
 
-        presenter = new NoticePresenter(this);
-        recyclerAdapter = new NoticeRecyclerAdapter(presenter,this);
+        noticePresenter = new NoticePresenter(this);
+        recyclerAdapter = new NoticeRecyclerAdapter(noticePresenter,this);
         noticeRecycler.setAdapter(recyclerAdapter);
         noticeRecycler.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
 
         lectureSeq = fromOutside.getIntExtra("lectureSeq",lectureSeq);
         lectureName = fromOutside.getStringExtra("lectureName");
 
-        presenter.updateData(lectureSeq);
+        noticePresenter.updateData(lectureSeq);
         textLectureName.setText(lectureName);
 
         bindListeners();
@@ -76,7 +76,8 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
 
     private void bindListeners() {
         refreshLayout.setOnRefreshListener(() -> {
-            presenter.updateData(lectureSeq);
+            noticePresenter.updateData(lectureSeq);
+            refreshView();
             refreshLayout.setRefreshing(false);
         });
         btnAddNotice.setOnClickListener(v -> {
@@ -85,8 +86,8 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
     }
 
     @Override
-    public void refreshView(ArrayList<Notice> notices) {
-        recyclerAdapter.notifyData(notices);
+    public void refreshView() {
+        recyclerAdapter.notifyDataSetChanged();
     }
 
     @Override

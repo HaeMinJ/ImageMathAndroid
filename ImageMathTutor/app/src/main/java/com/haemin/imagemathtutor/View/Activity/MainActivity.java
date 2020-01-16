@@ -22,12 +22,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    @BindView(R.id.btn_notification)
-    ImageButton btnNotification;
-    @BindView(R.id.btn_setting)
-    ImageButton btnSetting;
-
     @BindView(R.id.viewpager)
     ViewPager viewPager;
 

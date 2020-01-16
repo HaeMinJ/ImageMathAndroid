@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.haemin.imagemathtutor.Data.Lecture;
+import com.haemin.imagemathtutor.NoticeMVP.NoticeActivity;
 import com.haemin.imagemathtutor.R;
 import com.haemin.imagemathtutor.View.UI.ToggleConstraintLayout;
 
@@ -37,7 +38,9 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
 
     @Override
     public void onBindViewHolder(@NonNull LectureViewHolder holder, int position) {
-
+            holder.btnNoticeGroup.setOnClickListener(v -> {
+                NoticeActivity.start(context,0,"종로 이투스 수학(가) 반");
+            });
     }
 
     @Override

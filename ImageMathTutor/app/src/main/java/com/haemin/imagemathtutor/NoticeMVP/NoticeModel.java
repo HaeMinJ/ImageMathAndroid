@@ -20,7 +20,7 @@ public class NoticeModel {
         retrofitInterface.getNoticeInfos(TutorApplication.getAccessToken(), lectureSeq).enqueue(new Callback<ArrayList<Notice>>() {
             @Override
             public void onResponse(Call<ArrayList<Notice>> call, Response<ArrayList<Notice>> response) {
-                if(response.isSuccessful()){
+                if(response.code() == 200 && response.body() != null){
                     apiListener.onSuccess(response);
                 }else{
                     apiListener.onError(response.message());

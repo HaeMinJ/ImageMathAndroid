@@ -5,11 +5,12 @@ import com.haemin.imagemathtutor.Data.Notice;
 import java.util.ArrayList;
 
 public interface NoticeContract {
-    interface View{
-        void refreshView(ArrayList<Notice> notices);
+    interface NoticeView {
+        void refreshView();
         void showErrorMessage(String error);
     }
-    interface Presenter{
-        ArrayList<Notice> updateData(int lectureSeq);
+    interface NoticePresenter {
+        void updateData(int lectureSeq);
+        ArrayList<Notice> getData();
     }
 }
