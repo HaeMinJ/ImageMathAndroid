@@ -15,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.haemin.imagemathtutor.Data.Notice;
+import com.haemin.imagemathtutor.NoticeEditMVP.NoticeEditActivity;
 import com.haemin.imagemathtutor.R;
 import com.haemin.imagemathtutor.Utils.ConfirmStarter;
 
@@ -81,7 +82,7 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
             refreshLayout.setRefreshing(false);
         });
         btnAddNotice.setOnClickListener(v -> {
-
+            NoticeEditActivity.start(this,lectureSeq,lectureName);
         });
     }
 

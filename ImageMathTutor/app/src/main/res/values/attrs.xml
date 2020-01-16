@@ -14,5 +14,8 @@
         <attr name="drawableOn" format="reference"/>
         <attr name="drawableOff" format="reference"/>
     </declare-styleable>
+    <declare-styleable name="FileButton">
+        <attr name="deleteable" format="boolean"/>
+    </declare-styleable>
 
 </resources>

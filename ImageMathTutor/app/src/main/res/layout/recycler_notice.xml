@@ -37,35 +37,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_notice_text">
 
-            <RelativeLayout
-                android:id="@+id/recycler_file"
+            <com.haemin.imagemathtutor.View.UI.FileButton
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp">
+                android:layout_height="wrap_content"
+                app:deleteable="false"/>
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="14dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:elevation="1dp"
-                    android:padding="4dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/img_file"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/btn_file"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#E8E8E8"
-                    android:elevation="0dp"
-                    android:gravity="start|center_vertical"
-                    android:paddingStart="50dp"
-                    android:text="45p-55p 풀이.jpg"
-                    android:textSize="12sp" />
-
-            </RelativeLayout>
         </LinearLayout>
 
         <TextView
