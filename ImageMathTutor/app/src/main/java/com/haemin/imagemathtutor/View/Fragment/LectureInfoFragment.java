@@ -1,6 +1,7 @@
 package com.haemin.imagemathtutor.View.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ToggleButton;
@@ -17,6 +18,7 @@ import butterknife.ButterKnife;
 import com.haemin.imagemathtutor.Adapter.LectureRecyclerAdapter;
 import com.haemin.imagemathtutor.Data.Lecture;
 import com.haemin.imagemathtutor.R;
+import com.haemin.imagemathtutor.LectureAddMVP.AddLectureActivity;
 
 import java.util.ArrayList;
 
@@ -51,11 +53,17 @@ public class LectureInfoFragment extends Fragment {
         ButterKnife.bind(this, v);
         lectures = new ArrayList<>();
         lectureRecyclerAdapter = new LectureRecyclerAdapter(getContext(),lectures);
+
         recyclerLecture.setAdapter(lectureRecyclerAdapter);
         recyclerLecture.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
         refreshLayout.setOnRefreshListener(() -> {
             refresh();
             refreshLayout.setRefreshing(false);
+        });
+
+        btnAddLecture.setOnClickListener(v1 -> {
+            Intent i = new Intent(getContext(), AddLectureActivity.class);
+            startActivity(i);
         });
 
         return v;
