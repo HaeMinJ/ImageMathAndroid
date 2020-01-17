@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
-        app:layout_constraintHorizontal_weight="0.75"
+        app:layout_constraintHorizontal_weight="1"
         android:gravity="center"
         app:layout_constraintLeft_toRightOf="@id/dummy_divide_2"
         app:layout_constraintRight_toLeftOf="@id/dummy_divide_3"
