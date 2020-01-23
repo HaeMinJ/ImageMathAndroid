@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Activity.StudentTestActivity"></activity>
+        <activity android:name=".View.Activity.AssignmentInfoActivity"></activity>
+        <activity android:name=".View.Activity.AssignmentEditActivity" />
+        <activity android:name=".View.Activity.StudentTestActivity" />
         <activity android:name=".View.Activity.StudentManageActivity" />
         <activity android:name=".View.Activity.RecognitionActivity" />
         <activity android:name=".LectureAddMVP.AddLectureActivity" />
