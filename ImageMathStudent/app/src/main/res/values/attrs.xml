@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ToggleConstraintLayout">
+        <attr name="checked" format="boolean"/>
+        <attr name="drawableOn" format="reference"/>
+        <attr name="drawableOff" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="FileButton">
+        <attr name="deleteable" format="boolean"/>
+    </declare-styleable>
+
+</resources>
