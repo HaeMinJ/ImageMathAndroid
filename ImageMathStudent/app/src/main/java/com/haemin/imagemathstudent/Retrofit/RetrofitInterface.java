@@ -10,51 +10,53 @@ import java.util.Map;
 
 public interface RetrofitInterface {
 
-    @GET("/alarm")
+    @GET("/alarm")//알림리스트 출력 ok
     ArrayList<Alarm> getAlarmList(@Header("x-access-token") String accessToken);
 
-    @GET("/notice")
+    @GET("/notice")//수업에 해당하는 공지 출력 ok page구현 안함
     ArrayList<Notice> getNoticeList(@Header("x-access-token") String accessToken, @Query("lectureSeq") String lectureSeq, @Query("page") int page);
 
     @Multipart
-    @POST("/notice")
+    @POST("/notice")//수정필요
     void addNotice(@Header("x-access-token") String accessToken, @Field("name") String name, @Field("contents") String contents, @Part MultipartBody.Part noticeFiles);
     // imageFiles Parameter name : ?, normalFiles Parameter name : ?
 
-    @GET("/school")
+
+    @GET("/account/school")//경로바꿈 ok
     ArrayList<School> getSchoolList();
 
-    @GET("/assignment")
+    @GET("/assignment")//page 안함  ok
     ArrayList<Assignment> getAssignmentList(@Header("x-access-token") String accessToken, @Query("lectureSeq")String lectureSeq, @Query("page") int page);
 
-    @GET("/assignment/{assignmentSeq}")
+    @GET("/assignment/{assignmentSeq}")//보류
     Assignment getAssignmentInfo(@Path("assignmentSeq") String assignmentSeq);
 
     @Multipart
-    @POST("/assignment/{assignmentSeq}")
+    @POST("/assignment/{assignmentSeq}")//이건 과제 이미지 올리는거였나? 일단 보류
     void postPicture(@Header("x-access-token") String accessToken, @Path("assignmentSeq") String assignmentSeq, @Part MultipartBody.Part assignmentPart);
     // imageFile Parameter name : ?
 
-    @GET("/lecture")
+    @GET("/lecture")//수업 리스트 출력 ok
     ArrayList<Lecture> getLectureList(@Header("x-access-token") String accessToken, @Query("page") int page);
 
-    @POST("/lecture")
+    @POST("/lecture/add")//경로바꿈
     ArrayList<Lecture> addLecture(@Header("x-access-token") String accessToken, @FieldMap Map<String, String> lectureField);
     /*
-    academySeq, name, lectureTimes "\n",
+    academySeq, name, weekDay, time, totalDate, week, studentNum, userType
      */
 
-    @GET("/recognition/{lectureSeq}")
+    @GET("/recognition/{lectureSeq}")// 보류
     ArrayList<User> getRequestUserList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
 
-    @PATCH("/recognition")
+    @PATCH("/recognition")//보류
     void recognizeStudents(@Header("x-access-token") String accessToken, @Field("students") ArrayList<User> recognizedStudents, @Field("isAccept") boolean isAccept);
 
-    @GET("/student/{lectureSeq}")
+    @GET("/student/{lectureSeq}")//보류
     ArrayList<User> getStudentList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq);
-
+//---------------------------------------------------
     @GET("/test/student/{lectureSeq}")
     ArrayList<StudentTest> getUserTest(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
+
     @GET("/test/student")
     StudentTest getStudentTestInfo(@Header("x-access-token") String accessToken, @Query("testSeq") String testSeq);
 
