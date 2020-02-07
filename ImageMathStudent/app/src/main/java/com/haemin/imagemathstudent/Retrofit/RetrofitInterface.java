@@ -13,7 +13,7 @@ public interface RetrofitInterface {
     @GET("/alarm")//알림리스트 출력 ok
     ArrayList<Alarm> getAlarmList(@Header("x-access-token") String accessToken);
 
-    @GET("/notice")//수업에 해당하는 공지 출력 ok page구현 안함
+    @GET("/notice")//수업에 해당하는 공지 출력 ok page구현
     ArrayList<Notice> getNoticeList(@Header("x-access-token") String accessToken, @Query("lectureSeq") String lectureSeq, @Query("page") int page);
 
     @Multipart
@@ -25,10 +25,10 @@ public interface RetrofitInterface {
     @GET("/account/school")//경로바꿈 ok
     ArrayList<School> getSchoolList();
 
-    @GET("/assignment")//page 안함  ok
+    @GET("/assignment")//ok
     ArrayList<Assignment> getAssignmentList(@Header("x-access-token") String accessToken, @Query("lectureSeq")String lectureSeq, @Query("page") int page);
 
-    @GET("/assignment/{assignmentSeq}")//보류
+    @GET("/assignment/{assignmentSeq}")//assignment/{assignmentSeq}:1  이런식으로 경로작성 ok
     Assignment getAssignmentInfo(@Path("assignmentSeq") String assignmentSeq);
 
     @Multipart
@@ -39,12 +39,12 @@ public interface RetrofitInterface {
     @GET("/lecture")//수업 리스트 출력 ok
     ArrayList<Lecture> getLectureList(@Header("x-access-token") String accessToken, @Query("page") int page);
 
-    @POST("/lecture/add")//경로바꿈
+    @POST("/lecture/add")//경로바꿈 ok
     ArrayList<Lecture> addLecture(@Header("x-access-token") String accessToken, @FieldMap Map<String, String> lectureField);
     /*
     academySeq, name, weekDay, time, totalDate, week, studentNum, userType
      */
-
+//------------------------------------------------------------------------
     @GET("/recognition/{lectureSeq}")// 보류
     ArrayList<User> getRequestUserList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
 
@@ -53,7 +53,7 @@ public interface RetrofitInterface {
 
     @GET("/student/{lectureSeq}")//보류
     ArrayList<User> getStudentList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq);
-//---------------------------------------------------
+
     @GET("/test/student/{lectureSeq}")
     ArrayList<StudentTest> getUserTest(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
 
