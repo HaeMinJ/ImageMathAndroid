@@ -12,6 +12,9 @@ public class User {
     String reqLectureSeqs;
     int schoolSeq;
     String phone;
+    String accessToken;
+
+
 
 
     public User(int userSeq, String name, String birthday, String email, String password, String lectureSeqs, String reqLectureSeqs, int schoolSeq, String phone) {
@@ -24,6 +27,14 @@ public class User {
         this.reqLectureSeqs = reqLectureSeqs;
         this.schoolSeq = schoolSeq;
         this.phone = phone;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     public int getUserSeq() {

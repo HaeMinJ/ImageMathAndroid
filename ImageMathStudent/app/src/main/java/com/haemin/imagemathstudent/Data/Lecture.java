@@ -2,15 +2,29 @@ package com.haemin.imagemathstudent.Data;
 
 import android.annotation.SuppressLint;
 
-public class Lecture {
+public class Lecture extends SelectableData{
     int lectureSeq;
     String time;
+    String name;
     String totalDate; // ,를 구분자로 사용함.
     //String week;
     @SuppressLint("reqStudentCnt")
     int reqStudentCount;
     String studentNum;
     Academy academy;
+
+    @Override
+    public String getListName() {
+        return name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getLectureSeq() {
         return lectureSeq;

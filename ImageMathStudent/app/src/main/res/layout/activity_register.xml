@@ -20,6 +20,7 @@
             android:text="인증하기"
             android:textColor="@android:color/white"
             android:textSize="14sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/edit_email"
             app:layout_constraintLeft_toRightOf="@id/edit_email"
             app:layout_constraintRight_toRightOf="@id/dummy_img"
@@ -113,9 +114,6 @@
             app:layout_constraintTop_toBottomOf="@id/edit_school" />
 
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_name"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -123,8 +121,11 @@
             android:background="@drawable/etoos_reactangle"
             android:hint="이미지"
             android:inputType="textPersonName"
+            android:lines="1"
+            android:maxLines="1"
             android:nextFocusDown="@id/dummy_text_gender"
             android:paddingStart="14dp"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintRight_toRightOf="@id/dummy_img"
@@ -132,18 +133,18 @@
 
 
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_birthYear"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="14dp"
             android:background="@drawable/etoos_reactangle"
             android:gravity="center"
-            android:hint="2000"
+            android:hint="0000"
             android:inputType="numberDecimal"
+            android:lines="1"
+            android:maxLines="1"
             android:nextFocusDown="@id/edit_birthMonth"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_weight="3"
@@ -152,18 +153,18 @@
             app:layout_constraintTop_toBottomOf="@+id/dummy_text_birth" />
 
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_birthMonth"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="14dp"
             android:background="@drawable/etoos_reactangle"
             android:gravity="center"
-            android:hint="12"
+            android:hint="00"
             android:inputType="numberDecimal"
+            android:lines="1"
+            android:maxLines="1"
             android:nextFocusDown="@id/edit_birthDay"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_weight="1"
@@ -172,18 +173,18 @@
             app:layout_constraintTop_toBottomOf="@+id/dummy_text_birth" />
 
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_birthDay"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="14dp"
             android:background="@drawable/etoos_reactangle"
             android:gravity="center"
-            android:hint="12"
+            android:hint="00"
             android:inputType="numberDecimal"
+            android:lines="1"
+            android:maxLines="1"
             android:nextFocusDown="@+id/edit_email"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_weight="1"
@@ -192,25 +193,23 @@
             app:layout_constraintTop_toBottomOf="@+id/dummy_text_birth" />
 
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_email"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="14dp"
             android:background="@drawable/etoos_reactangle"
-            android:hint="haemin001212@naver.com"
+            android:hint="이메일 입력"
+            android:lines="1"
+            android:maxLines="1"
             android:nextFocusDown="@id/edit_pw"
             android:paddingStart="14dp"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintRight_toLeftOf="@+id/btn_email_confirm"
             app:layout_constraintTop_toBottomOf="@+id/dummy_text_email" />
+
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_pw"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -218,17 +217,17 @@
             android:background="@drawable/etoos_reactangle"
             android:hint="비밀번호 입력"
             android:inputType="textPassword"
+            android:lines="1"
+            android:maxLines="1"
             android:nextFocusDown="@id/edit_pw_re"
             android:paddingStart="14dp"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintRight_toRightOf="@id/dummy_img"
             app:layout_constraintTop_toBottomOf="@+id/dummy_text_pw" />
 
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_pw_re"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -236,34 +235,35 @@
             android:background="@drawable/etoos_reactangle"
             android:hint="비밀번호 확인 입력"
             android:inputType="textPassword"
+            android:lines="1"
+            android:maxLines="1"
             android:nextFocusDown="@id/edit_phone"
             android:paddingStart="14dp"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintRight_toRightOf="@id/dummy_img"
             app:layout_constraintTop_toBottomOf="@+id/dummy_text_pw_re" />
+
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_phone"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="14dp"
             android:background="@drawable/etoos_reactangle"
-            android:hint="01098810664"
+            android:hint="휴대폰 번호 입력"
             android:inputType="phone"
+            android:lines="1"
+            android:maxLines="1"
             android:nextFocusRight="@id/btn_phone_confirm"
             android:paddingStart="14dp"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintRight_toLeftOf="@+id/btn_phone_confirm"
             app:layout_constraintTop_toBottomOf="@+id/dummy_text_phone" />
 
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_code"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -271,20 +271,19 @@
             android:background="@drawable/etoos_reactangle"
             android:enabled="false"
             android:hint="인증번호 입력"
-            android:inputType="number"
+            android:inputType="numberDecimal"
+            android:lines="1"
+            android:maxLines="1"
             android:nextFocusRight="@id/btn_code_confirm"
             android:paddingStart="14dp"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintRight_toLeftOf="@+id/btn_code_confirm"
             app:layout_constraintTop_toBottomOf="@+id/edit_phone" />
 
 
-
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_lecture"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -293,16 +292,16 @@
             android:focusable="false"
             android:hint="검색 버튼을 눌러주세요."
             android:inputType="none"
+            android:lines="1"
+            android:maxLines="1"
             android:paddingStart="14dp"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintRight_toLeftOf="@id/btn_search_lecture"
             app:layout_constraintTop_toBottomOf="@+id/dummy_text_lecture" />
 
         <EditText
-            android:singleLine="true"
-            android:lines="1"
-            android:maxLines="1"
             android:id="@+id/edit_school"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -311,7 +310,10 @@
             android:focusable="false"
             android:hint="검색 버튼을 눌러주세요."
             android:inputType="none"
+            android:lines="1"
+            android:maxLines="1"
             android:paddingStart="14dp"
+            android:singleLine="true"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintRight_toLeftOf="@id/btn_search_school"
@@ -325,7 +327,7 @@
             android:layout_marginTop="40dp"
             android:background="?attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            android:src="@drawable/btn_goback_big"
+            android:src="@drawable/btn_goback"
             app:layout_constraintDimensionRatio="1:2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -364,7 +366,6 @@
             app:layout_constraintBottom_toBottomOf="@id/btn_back"
             app:layout_constraintLeft_toRightOf="@+id/btn_back"
             app:layout_constraintTop_toTopOf="@id/btn_back" />
-
 
 
         <TextView
@@ -429,6 +430,7 @@
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintTop_toBottomOf="@id/toggle_gender_male" />
+
         <TextView
             android:id="@+id/dummy_text_birth_year"
             android:layout_width="wrap_content"
@@ -526,6 +528,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="비밀번호와 일치하지 않습니다."
+            android:visibility="invisible"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
@@ -569,6 +572,7 @@
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="@id/btn_back"
             app:layout_constraintTop_toBottomOf="@id/btn_add_lecture" />
+
 
         <ToggleButton
             android:id="@+id/toggle_gender_male"

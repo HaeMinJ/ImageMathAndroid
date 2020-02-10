@@ -37,8 +37,7 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
 
     @Override
     public void onBindViewHolder(@NonNull LectureViewHolder holder, int position) {
-        holder.btnNoticeGroup.setOnClickListener(v -> {
-        });
+        holder.btnNoticeGroup.setOnClickListener(v -> {});
     }
 
     @Override

@@ -346,7 +346,7 @@
                 android:background="@color/edit_disabled"
                 app:layout_constraintTop_toBottomOf="@id/btn_answer_file" />
 
-            <com.haemin.imagemathtutor.View.UI.FileButton
+            <com.haemin.imagemathstudent.View.UI.FileButton
                 android:id="@+id/btn_answer_file"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -445,7 +445,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.haemin.imagemathtutor.View.UI.TutorToolbar
+        <com.haemin.imagemathstudent.View.UI.TutorToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

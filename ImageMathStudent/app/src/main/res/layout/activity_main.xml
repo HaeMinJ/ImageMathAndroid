@@ -32,7 +32,7 @@
         app:tabMode="fixed"
         app:tabTextAppearance="@style/MyTabTextAppearance" />
 
-    <com.haemin.imagemathtutor.View.UI.TutorToolbar
+    <com.haemin.imagemathstudent.View.UI.TutorToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
