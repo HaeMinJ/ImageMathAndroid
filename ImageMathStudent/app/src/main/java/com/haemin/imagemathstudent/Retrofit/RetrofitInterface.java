@@ -50,7 +50,7 @@ public interface RetrofitInterface {
     @GET("/lecture/recognition/{lectureSeq}")// ok mysql contain 경로바꿈
     ArrayList<User> getRequestUserList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
 
-    @PATCH("/lecture/recognition/{lectureSeq}")//보류
+    @PATCH("/lecture/recognition/{lectureSeq}")//ok
     void recognizeStudents(@Header("x-access-token") String accessToken,@Path("lectureSeq")String lectureSeq, @Field("students") ArrayList<User> recognizedStudents, @Field("isAccept") boolean isAccept);
 
     @GET("/lecture/student/{lectureSeq}")//ok  mysql contain
@@ -74,7 +74,7 @@ public interface RetrofitInterface {
     @POST("/auth/register")//ok
     User registerEmail(@FieldMap Map<String, String> registerField);
     /*
-    name, eamil, password, birthday, schoolSeq, reqLedctureSeqs, userType, phone
+    name, eamil, password, birthday, schoolSeq, reqLedctureSeqs, userType, phone, gender
      */
 
     @GET("/auth/autologin")//ok
