@@ -12,6 +12,7 @@ public class Lecture extends SelectableData{
     int reqStudentCount;
     String studentNum;
     Academy academy;
+    boolean isExpired;
 
     @Override
     public String getListName() {
@@ -20,6 +21,14 @@ public class Lecture extends SelectableData{
 
     public String getName() {
         return name;
+    }
+
+    public boolean isExpired() {
+        return isExpired;
+    }
+
+    public void setExpired(boolean expired) {
+        isExpired = expired;
     }
 
     public void setName(String name) {

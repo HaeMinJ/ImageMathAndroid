@@ -1,6 +1,5 @@
 package com.haemin.imagemathstudent.View.Activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,42 +34,42 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
     }
-    private void autoLoginProcess(){
-        if(GlobalApplication.getAccessToken() != null){
+
+    private void autoLoginProcess() {
+        if (GlobalApplication.getAccessToken() != null) {
             GlobalApplication.getAPIService().loginWithToken(GlobalApplication.getAccessToken())
-            .enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    if(response.isSuccessful() && response.body() != null){
-                        GoToMain(response.body());
-                    }else{
-                        Toast.makeText(SplashActivity.this, AppString.ERROR_TOKEN_EXPIRED,Toast.LENGTH_SHORT).show();
-                        GoToLogin();
-                    }
-                }
+                    .enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                GoToMain(response.body());
+                            } else {
+                                Toast.makeText(SplashActivity.this, AppString.ERROR_TOKEN_EXPIRED, Toast.LENGTH_SHORT).show();
+                                GoToLogin();
+                            }
+                        }
 
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                    Toast.makeText(SplashActivity.this, AppString.ERROR_NETWORK_MESSAGE,Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            });
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(SplashActivity.this, AppString.ERROR_NETWORK_MESSAGE, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
 
-        }
-        else{
+        } else {
             GoToLogin();
         }
     }
 
     private void GoToMain(User user) {
-        Intent i = new Intent(SplashActivity.this,MainActivity.class);
+        Intent i = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(i);
-        Toast.makeText(this,AppString.SUCCESS_LOGIN_MESSAGE(user.getName()),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, AppString.SUCCESS_LOGIN_MESSAGE(user.getName()), Toast.LENGTH_SHORT).show();
         finish();
     }
 
-    private void GoToLogin(){
-        Intent i = new Intent(SplashActivity.this,LoginActivity.class);
+    private void GoToLogin() {
+        Intent i = new Intent(SplashActivity.this, LoginActivity.class);
         startActivity(i);
         finish();
     }

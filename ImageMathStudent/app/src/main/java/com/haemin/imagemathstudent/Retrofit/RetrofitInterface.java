@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public interface RetrofitInterface {
@@ -40,7 +41,7 @@ public interface RetrofitInterface {
     Call<ArrayList<Lecture>> getLectureList();
 
     @GET("/lecture/student")
-    Call<ArrayList<Lecture>> getMyLectureList(@Header("x-access-token")String accessToken, @Query("page") int page);
+    Call<ArrayList<Lecture>> getMyLectureList(@Header("x-access-token")String accessToken, @Query("exceptExpired")boolean exceptExpired, @Query("page") int page);
 
     @FormUrlEncoded
     @POST("/lecture/add")//경로바꿈 ok
@@ -48,15 +49,18 @@ public interface RetrofitInterface {
     /*
     academySeq, name, weekDay, time, totalDate, week, studentNum, userType
      */
+    @FormUrlEncoded
+    @POST("/lecture/add/student")
+    Call<Void> requestAddLecture(@Header("x-access-token")String accessToken, @Field("lectureSeq")String lectureSeq);
 //------------------------------------------------------------------------
-    @GET("/recognition/{lectureSeq}")// 보류 mysql contain
-    Call<ArrayList<User>> getRequestUserList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
+    @GET("/lecture/recognition/{lectureSeq}")// ok mysql contain 경로바꿈 이거랑 /student/{lectureSeq}랑 구분이 안가네;;
+    ArrayList<User> getRequestUserList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
 
-    @PATCH("/recognition")//보류
-    Call<Void> recognizeStudents(@Header("x-access-token") String accessToken, @Field("students") ArrayList<User> recognizedStudents, @Field("isAccept") boolean isAccept);
+    @PATCH("/lecture/recognition/{lectureSeq}")//보류
+    void recognizeStudents(@Header("x-access-token") String accessToken,@Path("lectureSeq")String lectureSeq, @Field("students") ArrayList<User> recognizedStudents, @Field("isAccept") boolean isAccept);
 
-    @GET("/student/{lectureSeq}")//보류  mysql contain
-    Call<ArrayList<User>> getStudentList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq);
+    @GET("/lecture/student/{lectureSeq}")//보류  mysql contain 내일 확인바람
+    ArrayList<User> getStudentList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq);
 
     @GET("/test/student/{lectureSeq}")//보류 testAdm userSeq, lectureSeq 해당 데이터리스트
     Call<ArrayList<StudentTest>> getUserTest(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
@@ -76,7 +80,7 @@ public interface RetrofitInterface {
 
     @FormUrlEncoded
     @POST("/auth/register")
-    Call<User> registerEmail(@FieldMap Map<String, String> registerField);
+    Call<User> registerEmail(@FieldMap HashMap<String, String> registerField);
     /*
     name , school~~~~~~~
      */

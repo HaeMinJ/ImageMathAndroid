@@ -1,9 +1,20 @@
 package com.haemin.imagemathstudent.Data;
 
+import android.text.format.DateUtils;
+
 public class Alarm {
+    String title;
     String text;
     String type;
-    String time;
+    long time;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getText() {
         return text;
@@ -22,10 +33,10 @@ public class Alarm {
     }
 
     public String getTime() {
-        return time;
+        return DateUtils.getRelativeTimeSpanString(time,System.currentTimeMillis(),3000,DateUtils.FORMAT_ABBREV_ALL).toString();
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 }

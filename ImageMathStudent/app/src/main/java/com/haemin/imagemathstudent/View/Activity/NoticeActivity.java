@@ -2,27 +2,26 @@ package com.haemin.imagemathstudent.View.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
 import com.haemin.imagemathstudent.R;
-import com.haemin.imagemathstudent.Utils.ConfirmStarter;
 
-public class AssignmentInfoActivity extends AppCompatActivity {
+public class NoticeActivity extends AppCompatActivity {
+
 
     String lectureSeq;
 
     public static void start(Context context, String lectureSeq) {
-        Intent starter = new Intent(context, AssignmentInfoActivity.class);
+        Intent starter = new Intent(context, NoticeActivity.class);
         starter.putExtra("lectureSeq",lectureSeq);
         context.startActivity(starter);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assignment_info);
-        Intent i = getIntent();
-        ConfirmStarter.checkIntent(this, i);
-        lectureSeq = i.getStringExtra("lectureSeq");
+        setContentView(R.layout.activity_notice);
+        Intent fromOutside = getIntent();
+        lectureSeq = fromOutside.getStringExtra("lectureSeq");
 
     }
 }

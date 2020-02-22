@@ -3,6 +3,7 @@ package com.haemin.imagemathstudent.View.RegisterProcess;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -80,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
     String schoolSeq = "";
     String lectureSeq = "";
     String lectureSeqs = "";
-    Map<String,String> registerField;
+    HashMap<String,String> registerField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,24 +179,19 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         showToast(AppString.ERROR_NETWORK_MESSAGE);
+                        Log.e("RegisterActivity",t.getMessage(),t);
                     }
                 });
             }
         });
 
-        toggleGenderMale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(toggleGenderMale.isChecked())
-                toggleGenderFemale.setChecked(false);
-            }
+        toggleGenderMale.setOnClickListener(v -> {
+            if(toggleGenderMale.isChecked())
+            toggleGenderFemale.setChecked(false);
         });
-        toggleGenderFemale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(toggleGenderFemale.isChecked())
-                    toggleGenderMale.setChecked(false);
-            }
+        toggleGenderFemale.setOnClickListener(v -> {
+            if(toggleGenderFemale.isChecked())
+                toggleGenderMale.setChecked(false);
         });
 
     }
@@ -233,6 +229,7 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }else if(editPw.getText().toString().equals(editPwRe.getText().toString())){
             textPwReConfirm.setVisibility(View.INVISIBLE);
+            registerField.put("password",editPw.getText().toString());
         }else{
             registerField.put("password",editPw.getText().toString());
         }

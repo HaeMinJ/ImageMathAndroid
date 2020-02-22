@@ -28,6 +28,9 @@ public class GlobalApplication extends Application {
 
     public static void setAccessToken(String accessToken) {
         GlobalApplication.accessToken = accessToken;
+        SharedPreferences pref = context.getSharedPreferences("ImageMathStudent",MODE_PRIVATE);
+        pref.edit().putString("accessToken",accessToken).apply();
+
     }
 
     private static Retrofit getRetrofit() {

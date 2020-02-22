@@ -18,43 +18,15 @@
         app:drawableOn="@drawable/box_lecture_on"
         tools:checked="true">
 
-        <Button
-
-            android:id="@+id/btn_student_manage"
-            android:layout_width="90dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_rounded_btn_box"
-            android:elevation="14dp"
-            android:text="학생관리"
-            android:textSize="14sp"
-            android:visibility="visible"
-            app:layout_constraintLeft_toLeftOf="@id/text_lecture_name"
-            app:layout_constraintTop_toBottomOf="@id/text_lecture_name" />
-
-        <Button
-
-            android:id="@+id/btn_recognition"
-            android:layout_width="90dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/bg_rounded_btn_box"
-            android:elevation="14dp"
-            android:text="인증요청"
-            android:textSize="14sp"
-            android:visibility="visible"
-            app:layout_constraintLeft_toRightOf="@+id/btn_student_manage"
-            app:layout_constraintTop_toTopOf="@id/btn_student_manage" />
-
         <TextView
             android:id="@+id/text_lecture_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="38dp"
             android:text="종로 이투스 수(가) 심화반"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -139,6 +111,84 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/btn_list_group">
+
+            <ImageView
+                android:id="@+id/dummy_icon_neglect"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:padding="3dp"
+                android:src="@drawable/icon_neglect"
+                app:layout_constraintBottom_toBottomOf="@id/text_assignment_neglect"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintRight_toLeftOf="@id/text_assignment_neglect"
+                app:layout_constraintTop_toTopOf="@id/text_assignment_neglect" />
+
+            <TextView
+                android:textSize="12sp"
+                android:id="@+id/text_assignment_neglect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="불성실 1개"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/dummy_icon_unsubmit"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:padding="3dp"
+                android:src="@drawable/icon_unsubmit"
+                app:layout_constraintBottom_toBottomOf="@id/text_assignment_unsubmit"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintRight_toLeftOf="@id/text_assignment_unsubmit"
+                app:layout_constraintTop_toTopOf="@id/text_assignment_unsubmit" />
+
+            <TextView
+                android:textSize="12sp"
+                android:id="@+id/text_assignment_unsubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="미제출 1개"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/dummy_icon_neglect"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/dummy_icon_pass"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:padding="1dp"
+                android:src="@drawable/img_showpass_big"
+                app:layout_constraintBottom_toBottomOf="@id/text_assignment_neglect"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintRight_toLeftOf="@id/text_assignment_pass"
+                app:layout_constraintTop_toTopOf="@id/text_assignment_neglect" />
+
+            <TextView
+                android:textSize="12sp"
+                android:id="@+id/text_assignment_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="통과 1개"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/dummy_icon_unsubmit"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.haemin.imagemathstudent.View.UI.ToggleConstraintLayout
             android:id="@+id/btn_list_group"
             android:layout_width="match_parent"
@@ -150,7 +200,7 @@
             app:drawableOn="@drawable/btn_task_on"
             app:layout_constraintBottom_toTopOf="@+id/btn_notice_group"
             app:layout_constraintDimensionRatio="722:141"
-            app:layout_constraintTop_toBottomOf="@id/btn_student_manage"
+            app:layout_constraintTop_toBottomOf="@id/text_lecture_name"
             tools:checked="true">
 
             <Button
