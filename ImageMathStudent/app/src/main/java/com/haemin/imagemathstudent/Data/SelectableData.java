@@ -1,6 +1,6 @@
 package com.haemin.imagemathstudent.Data;
 
-public class SelectableData {
+public class SelectableData extends ServerData{
     String listName;
 
     public String getListName() {

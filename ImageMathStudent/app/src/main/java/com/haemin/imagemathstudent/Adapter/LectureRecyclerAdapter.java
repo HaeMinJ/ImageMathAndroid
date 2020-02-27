@@ -1,6 +1,7 @@
 package com.haemin.imagemathstudent.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import com.haemin.imagemathstudent.Data.Notice;
 import com.haemin.imagemathstudent.R;
 import com.haemin.imagemathstudent.SingleTon.AppString;
 import com.haemin.imagemathstudent.SingleTon.GlobalApplication;
-import com.haemin.imagemathstudent.View.Activity.AssignmentInfoActivity;
+import com.haemin.imagemathstudent.AssignmentInfoMVP.AssignmentInfoActivity;
 import com.haemin.imagemathstudent.View.Activity.NoticeActivity;
 import com.haemin.imagemathstudent.View.Activity.TestInfoActivity;
 import com.haemin.imagemathstudent.View.UI.ToggleConstraintLayout;
@@ -72,7 +73,7 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         .enqueue(new Callback<ArrayList<Notice>>() {
             @Override
             public void onResponse(Call<ArrayList<Notice>> call, Response<ArrayList<Notice>> response) {
-                if(response.isSuccessful() && response.body() != null){
+                if(response.code() == 200 && response.body() != null){
                     ArrayList<Notice> notices = response.body();
                     if(notices.size() >= 2){
                         holder.notice_preview.setText(notices.get(0).getTitle()+"\n"+notices.get(1).getTitle());
@@ -89,6 +90,7 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
             @Override
             public void onFailure(Call<ArrayList<Notice>> call, Throwable t) {
                 showToast(AppString.ERROR_NETWORK_MESSAGE);
+                Log.e("LectureRecyclerAdapter",t.getMessage(),t);
             }
         });
 

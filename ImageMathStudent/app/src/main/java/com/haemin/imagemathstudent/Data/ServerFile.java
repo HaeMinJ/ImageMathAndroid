@@ -1,6 +1,6 @@
 package com.haemin.imagemathstudent.Data;
 
-public class ServerFile {
+public class ServerFile extends ServerData{
 
     public static final String FILE_TYPE_IMAGE = "image";
     public static final String FILE_TYPE_NORMAL = "normal";

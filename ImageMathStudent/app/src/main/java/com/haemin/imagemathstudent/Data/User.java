@@ -2,7 +2,7 @@ package com.haemin.imagemathstudent.Data;
 
 import java.util.ArrayList;
 
-public class User {
+public class User extends ServerData{
     int userSeq;
     String name;
     String birthday;

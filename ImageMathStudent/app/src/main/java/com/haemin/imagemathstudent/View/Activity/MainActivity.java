@@ -1,6 +1,7 @@
 package com.haemin.imagemathstudent.View.Activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,12 +11,13 @@ import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import com.haemin.imagemathstudent.Adapter.MainPagerAdapter;
 import com.haemin.imagemathstudent.R;
+import com.haemin.imagemathstudent.View.UI.TutorToolbar;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
 
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    TutorToolbar toolbar;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
 
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         tabLayout.setupWithViewPager(viewPager,true);
 
+        toolbar.setNotificationOnClickListener(v -> {
+            startActivity(new Intent(this, AlarmActivity.class));
+        });
     }
 
     @Override

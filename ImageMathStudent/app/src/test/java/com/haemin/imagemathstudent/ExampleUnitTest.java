@@ -2,6 +2,9 @@ package com.haemin.imagemathstudent;
 
 import org.junit.Test;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -12,6 +15,13 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        long dateTime = System.currentTimeMillis();
+        Date date = new Date(dateTime);
+        String[] calHeader = {"일","월","화","수","목","금","토"};
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        String time = (calendar.get(Calendar.MONTH)+1)+". "+calendar.get(Calendar.DATE)+" "+calHeader[calendar.get(Calendar.DAY_OF_WEEK) - 1];
+        System.out.println(time);
+        assertEquals("2. 22 토",time);
     }
 }

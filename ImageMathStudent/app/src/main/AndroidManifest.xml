@@ -14,7 +14,7 @@
         <activity android:name=".View.Activity.AlarmActivity"></activity>
         <activity android:name=".View.Activity.NoticeActivity" />
         <activity android:name=".View.Activity.TestInfoActivity" />
-        <activity android:name=".View.Activity.AssignmentInfoActivity" />
+        <activity android:name=".AssignmentInfoMVP.AssignmentInfoActivity" />
         <activity android:name=".View.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

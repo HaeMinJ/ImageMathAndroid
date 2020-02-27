@@ -2,7 +2,7 @@ package com.haemin.imagemathstudent.Data;
 
 import android.text.format.DateUtils;
 
-public class Alarm {
+public class Alarm extends ServerData{
     String title;
     String text;
     String type;

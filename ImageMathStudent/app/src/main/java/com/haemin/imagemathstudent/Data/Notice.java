@@ -2,7 +2,7 @@ package com.haemin.imagemathstudent.Data;
 
 import java.util.ArrayList;
 
-public class Notice {
+public class Notice extends ServerData{
     int noticeSeq;
     String title;
     ArrayList<ServerFile> files;

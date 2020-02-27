@@ -16,6 +16,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.ArrayList;
+
 public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.btn_login)
@@ -57,12 +59,12 @@ public class LoginActivity extends AppCompatActivity {
                         .enqueue(new Callback<User>() {
                             @Override
                             public void onResponse(Call<User> call, Response<User> response) {
-                                if(response.isSuccessful()&& response.body() != null){
+                                if(response.code() == 200&& response.body() != null){
                                     User user = response.body();
                                     GlobalApplication.setAccessToken(user.getAccessToken());
                                     GoToMain(user.getName());
                                 }else{
-                                    showToast(response.message());
+                                    showToast("아이디 혹은 비밀번호가 일치하지 않습니다.");
                                 }
                             }
 

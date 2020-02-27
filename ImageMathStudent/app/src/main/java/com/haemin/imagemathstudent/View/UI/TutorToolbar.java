@@ -18,6 +18,38 @@ public class TutorToolbar extends Toolbar {
     @BindView(R.id.btn_notification)
     ImageButton btnNotification;
 
+    OnClickListener settingOnClickListener;
+    OnClickListener notificationOnClickListener;
+
+    public void setSettingOnClickListener(OnClickListener settingOnClickListener) {
+        this.settingOnClickListener = settingOnClickListener;
+
+        if(settingOnClickListener == null){
+            settingOnClickListener = new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            };
+        }
+        btnSetting.setOnClickListener(settingOnClickListener);
+
+    }
+
+    public void setNotificationOnClickListener(OnClickListener notificationOnClickListener) {
+        this.notificationOnClickListener = notificationOnClickListener;
+
+        if(notificationOnClickListener == null){
+            notificationOnClickListener = new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            };
+        }
+        btnNotification.setOnClickListener(notificationOnClickListener);
+    }
+
     public TutorToolbar(Context context) {
         super(context);
         init(context);
@@ -37,11 +69,6 @@ public class TutorToolbar extends Toolbar {
         addView(toolbar);
         ButterKnife.bind(this,toolbar);
 
-        btnSetting.setOnClickListener(v -> {
 
-        });
-        btnNotification.setOnClickListener(v -> {
-
-        });
     }
 }

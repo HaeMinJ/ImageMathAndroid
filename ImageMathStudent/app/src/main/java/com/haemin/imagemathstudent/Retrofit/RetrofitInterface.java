@@ -18,16 +18,29 @@ public interface RetrofitInterface {
     @GET("/notice")//수업에 해당하는 공지 출력 ok page구현
     Call<ArrayList<Notice>> getNoticeList(@Header("x-access-token") String accessToken, @Query("lectureSeq") String lectureSeq, @Query("page") int page);
 
-    @Multipart
+
     @POST("/notice")//수정필요
-    Call<Void> addNotice(@Header("x-access-token") String accessToken, @Field("title") String title, @Field("contents") String contents, @Part MultipartBody.Part noticeFiles);
+    Call<Notice> addNotice(@Header("x-access-token") String accessToken, @Field("title") String title, @Field("contents") String contents, @Field("lectureSeq")String lectureSeq);
     // imageFiles Parameter name : ?, normalFiles Parameter name : ?
+
+    @Multipart
+    @POST("/notice/{noticeSeq}")
+    Call<Void> addNoticeFile(@Header("x-access-token")String accessToken,@Path("noticeSeq")String noticeSeq, @Part MultipartBody.Part noticeFile);
 
     @GET("/account/school")//경로바꿈 ok
     Call<ArrayList<School>> getSchoolList();
 
+    @GET("/assignment/student")
+    Call<ArrayList<StudentAssignment>> getStudentAssignmentList(@Header("x-access-token")String accessToken, @Query("page") int page);
+
+    @GET("/assignment/student/{assignmentSeq}")
+    Call<StudentAssignment> getStudentAssignmentInfo(@Header("x-access-token")String accessToken, @Path("assignmentSeq")String assignmentSeq);
+
     @GET("/assignment")//ok  assignmentInfo
     Call<ArrayList<Assignment>> getAssignmentList(@Header("x-access-token") String accessToken, @Query("lectureSeq")String lectureSeq, @Query("page") int page);
+
+    @POST("/assignment/add")
+    Call<Assignment> postAssignmentInfo(@Header("x-access-token")String accessToken, @FieldMap Map<String,String> assignmentField);
 
     @GET("/assignment/{assignmentSeq}")//assignment/{assignmentSeq}:1  이런식으로 경로작성 ok    내일 만들거 studentAssignment 필요함
     Call<Assignment> getAssignmentInfo(@Path("assignmentSeq") String assignmentSeq);
@@ -77,6 +90,8 @@ public interface RetrofitInterface {
     @GET("/test/result")//수정필요  testAdm score포함 accessToken -> student: 상위 10개 , tutor : 전부 다
     Call<ArrayList<StudentTest>> getTestResults(@Header("x-access-token")String accessToken, @Query("testSeq") String testSeq, @Query("page") int page);
 
+    @POST("/test/{testSeq}")
+    Call<Test> postTestWithExcel(@Header("x-access-token")String accessToken, @Path("testSeq")String testSeq,@Part MultipartBody.Part excelFile);
 
     @FormUrlEncoded
     @POST("/auth/register")

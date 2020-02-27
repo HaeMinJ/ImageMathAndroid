@@ -2,9 +2,17 @@ package com.haemin.imagemathstudent.Data;
 
 public class StudentAssignment{
         String userSeq;
-        String assignmentSeq;
-        ServerFile submitFile;
+        String submitFileUrl;
         int submitState;
+        Assignment assignment;
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
 
     public String getUserSeq() {
         return userSeq;
@@ -14,20 +22,12 @@ public class StudentAssignment{
         this.userSeq = userSeq;
     }
 
-    public String getAssignmentSeq() {
-        return assignmentSeq;
+    public String getSubmitFileUrl() {
+        return submitFileUrl;
     }
 
-    public void setAssignmentSeq(String assignmentSeq) {
-        this.assignmentSeq = assignmentSeq;
-    }
-
-    public ServerFile getSubmitFile() {
-        return submitFile;
-    }
-
-    public void setSubmitFile(ServerFile submitFile) {
-        this.submitFile = submitFile;
+    public void setSubmitFileUrl(String submitFileUrl) {
+        this.submitFileUrl = submitFileUrl;
     }
 
     public int getSubmitState() {

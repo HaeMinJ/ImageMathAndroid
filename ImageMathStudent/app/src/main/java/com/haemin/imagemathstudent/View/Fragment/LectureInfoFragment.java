@@ -73,13 +73,13 @@ public class LectureInfoFragment extends Fragment {
                 @Override
                 public void onResponse(Call<ArrayList<Lecture>> call, Response<ArrayList<Lecture>> response) {
 
-                    if (response.isSuccessful() && response.body() != null) {
+                    if (response.code() == 200 && response.body() != null) {
 
                         ListPickerDialog<Lecture> lectureListPickerDialog = new ListPickerDialog<>(response.body(), "수업을 선택하세요.");
                         lectureListPickerDialog.setOnItemClickListener(data -> {
                             requestAddLecture(data);
                         });
-
+                        lectureListPickerDialog.show(getFragmentManager(),"LECTURE_INFO_LIST");
                     } else {
                         showToast(AppString.ERROR_LOAD_LECTURE_LIST);
                     }
@@ -93,15 +93,11 @@ public class LectureInfoFragment extends Fragment {
             });
         });
 
-        toggleExceptExpire.setOnClickListener(v12 -> {
-            if(!toggleExceptExpire.isChecked()){
-                toggleExceptExpire.setChecked(true);
-
-            }else{
-                toggleExceptExpire.setChecked(false);
-            }
+        toggleExceptExpire.setOnCheckedChangeListener((buttonView, isChecked) -> {
             refresh(toggleExceptExpire.isChecked());
         });
+
+        refresh(toggleExceptExpire.isChecked());
         return v;
     }
 
@@ -110,7 +106,7 @@ public class LectureInfoFragment extends Fragment {
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()) {
+                        if (response.code() == 200) {
                             showToast("수업추가 요청이 완료되었습니다.\n수업이 승인될 때까지 기다려주세요.");
                         } else {
                             showToast(response.message());
@@ -138,7 +134,7 @@ public class LectureInfoFragment extends Fragment {
                 .enqueue(new Callback<ArrayList<Lecture>>() {
                     @Override
                     public void onResponse(Call<ArrayList<Lecture>> call, Response<ArrayList<Lecture>> response) {
-                        if (response.isSuccessful() && response.body() != null) {
+                        if (response.code() == 200 && response.body() != null) {
                             lectures.clear();
                             lectures.addAll(response.body());
                             lectureRecyclerAdapter.notifyDataSetChanged();

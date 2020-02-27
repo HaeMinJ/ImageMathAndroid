@@ -46,7 +46,7 @@ public class AlarmActivity extends AppCompatActivity {
                 .enqueue(new Callback<ArrayList<Alarm>>() {
                     @Override
                     public void onResponse(Call<ArrayList<Alarm>> call, Response<ArrayList<Alarm>> response) {
-                        if(response.isSuccessful() && response.body() != null){
+                        if(response.code() == 200 && response.body() != null){
                             alarms.clear();
                             alarms.addAll(response.body());
                             recyclerAdapter.notifyDataSetChanged();

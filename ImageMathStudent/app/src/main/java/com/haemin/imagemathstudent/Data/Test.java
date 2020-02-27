@@ -1,6 +1,6 @@
 package com.haemin.imagemathstudent.Data;
 
-public class Test {
+public class Test extends ServerData{
     int testSeq;
     String title;
     long postTime;

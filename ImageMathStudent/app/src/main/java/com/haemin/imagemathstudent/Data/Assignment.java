@@ -1,13 +1,31 @@
 package com.haemin.imagemathstudent.Data;
 
-public class Assignment {
+public class Assignment extends ServerData{
     int assignmentSeq;
     String title;
+    String contents;
     long postTime;
     String endDate;
     String lectureDate;
     String solutionFileUrl;
+    String lectureName;
     Lecture lecture;
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public String getLectureName() {
+        return lectureName;
+    }
+
+    public void setLectureName(String lectureName) {
+        this.lectureName = lectureName;
+    }
 
     public int getAssignmentSeq() {
         return assignmentSeq;

@@ -88,6 +88,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        lectureSeqs = "0/";
+
         registerField = new HashMap<>();
         ButterKnife.bind(this);
         bindListener();
@@ -118,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
             GlobalApplication.getAPIService().getLectureList().enqueue(new Callback<ArrayList<Lecture>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Lecture>> call, Response<ArrayList<Lecture>> response) {
-                    if (response.isSuccessful() && response.body() != null) {
+                    if (response.code() == 200 && response.body() != null) {
                         showLectureDialog(response.body());
                     } else {
                         showToast(AppString.ERROR_LOAD_LECTURE_LIST);
@@ -136,7 +138,7 @@ public class RegisterActivity extends AppCompatActivity {
             GlobalApplication.getAPIService().getSchoolList().enqueue(new Callback<ArrayList<School>>() {
                 @Override
                 public void onResponse(Call<ArrayList<School>> call, Response<ArrayList<School>> response) {
-                    if (response.isSuccessful() && response.body() != null) {
+                    if (response.code() == 200 && response.body() != null) {
                         showSchoolDialog(response.body());
                     } else {
                         showToast(AppString.ERROR_LOAD_SCHOOL_LIST);
@@ -165,7 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
                 GlobalApplication.getAPIService().registerEmail(registerField).enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.isSuccessful() && response.body() != null){
+                        if(response.code() == 200 && response.body() != null){
                             User user = response.body();
                             GlobalApplication.setAccessToken(user.getAccessToken());
                             showToast(AppString.SUCCESS_REGISTER);
@@ -257,7 +259,8 @@ public class RegisterActivity extends AppCompatActivity {
             editLecture.requestFocus();
             return false;
         }else{
-            registerField.put("reqLectureSeqs",lectureSeqs);
+
+            registerField.put("reqLectureSeqs",lectureSeqs + "/0");
         }
         if(toggleGenderMale.isChecked()){
             registerField.put("gender","0");
