@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.haemin.imagemathstudent.View.Fragment.AssignmentFragment;
 import com.haemin.imagemathstudent.View.Fragment.LectureInfoFragment;
 import com.haemin.imagemathstudent.View.Fragment.QAFragment;
-import com.haemin.imagemathstudent.View.Fragment.TestFragment;
+import com.haemin.imagemathstudent.TestFragmentMVP.TestFragment;
 
 public class MainPagerAdapter extends FragmentPagerAdapter {
 

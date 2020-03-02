@@ -15,17 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/btn_delete"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="?attr/selectableItemBackground"
-            android:padding="4dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/btn_delete"
-            app:layout_constraintBottom_toBottomOf="@+id/dummy_line_divide"
-            app:layout_constraintRight_toRightOf="@id/text_notice_time"
-            app:layout_constraintTop_toTopOf="@id/dummy_line_divide" />
 
         <LinearLayout
             android:id="@+id/group_file"

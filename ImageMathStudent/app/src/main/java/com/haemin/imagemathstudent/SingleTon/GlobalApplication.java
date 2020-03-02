@@ -36,7 +36,7 @@ public class GlobalApplication extends Application {
     private static Retrofit getRetrofit() {
         if(retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://ec2-18-191-226-139.us-east-2.compute.amazonaws.com:3000")
+                    .baseUrl("http://ec2-54-180-115-237.ap-northeast-2.compute.amazonaws.com:3000")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

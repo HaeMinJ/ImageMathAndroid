@@ -1,6 +1,7 @@
 package com.haemin.imagemathstudent.View.UI;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.haemin.imagemathstudent.R;
+import com.haemin.imagemathstudent.View.Activity.AlarmActivity;
 
 public class TutorToolbar extends Toolbar {
 
@@ -28,7 +30,7 @@ public class TutorToolbar extends Toolbar {
             settingOnClickListener = new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    getContext().startActivity(new Intent(getContext(), AlarmActivity.class));
                 }
             };
         }
