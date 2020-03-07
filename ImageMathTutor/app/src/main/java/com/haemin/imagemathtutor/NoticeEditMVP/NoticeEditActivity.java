@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.haemin.imagemathtutor.Data.ServerFile;
@@ -44,19 +44,20 @@ public class NoticeEditActivity extends AppCompatActivity implements NoticeEditC
     public static void start(Context context, int lectureSeq, String lectureName) {
         Intent starter = new Intent(context, NoticeEditActivity.class);
         starter.putExtra("lectureSeq", lectureSeq);
-        starter.putExtra("lectureName",lectureName);
+        starter.putExtra("lectureName", lectureName);
         context.startActivity(starter);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_edit);
         Intent fromOutside = getIntent();
-        ConfirmStarter.checkIntent(this,fromOutside);
+        ConfirmStarter.checkIntent(this, fromOutside);
         ButterKnife.bind(this);
 
         noticeEditPresenter = new NoticeEditPresenter(this);
-        lectureSeq = fromOutside.getIntExtra("lectureSeq",0);
+        lectureSeq = fromOutside.getIntExtra("lectureSeq", 0);
         lectureName = fromOutside.getStringExtra("lectureName");
 
         initView();
@@ -69,16 +70,17 @@ public class NoticeEditActivity extends AppCompatActivity implements NoticeEditC
             Intent i = new Intent(Intent.ACTION_GET_CONTENT);
             i.addCategory(Intent.CATEGORY_OPENABLE);
             i.setType("*/*");
-            startActivityForResult(i,READ_REQUEST_CODE);
+            startActivityForResult(i, READ_REQUEST_CODE);
         });
         btnUploadNotice.setOnClickListener(v -> {
-            noticeEditPresenter.uploadNotice(lectureSeq,editNoticeTitle.getText().toString(),editNoticeText.getText().toString());
+            noticeEditPresenter.uploadNotice(lectureSeq, editNoticeTitle.getText().toString(), editNoticeText.getText().toString());
         });
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent resultData) {
-        super.onActivityResult(requestCode,resultCode,resultData);
+        super.onActivityResult(requestCode, resultCode, resultData);
 
         if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
@@ -95,7 +97,7 @@ public class NoticeEditActivity extends AppCompatActivity implements NoticeEditC
     @Override
     public void refreshFileList(ArrayList<ServerFile> files) {
         holderFileGroup.removeAllViews();
-        for(ServerFile file : files){
+        for (ServerFile file : files) {
 
             FileButton button = new FileButton(this);
             button.setFile(file);
@@ -117,7 +119,7 @@ public class NoticeEditActivity extends AppCompatActivity implements NoticeEditC
     @Override
     public void showError(String errorMsg) {
 
-        Toast.makeText(this,errorMsg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show();
 
     }
 }

@@ -59,6 +59,7 @@
             app:layout_constraintTop_toTopOf="@id/edit_code" />
 
         <Button
+            android:visibility="gone"
             android:id="@+id/btn_search_lecture"
             android:layout_width="70dp"
             android:layout_height="50dp"
@@ -75,6 +76,7 @@
 
 
         <Button
+            android:visibility="gone"
             android:id="@+id/btn_add_lecture"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -287,6 +289,7 @@
 
 
         <EditText
+            android:visibility="gone"
             android:id="@+id/edit_lecture"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -551,6 +554,7 @@
             app:layout_constraintTop_toBottomOf="@id/text_pw_re_confirm" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/dummy_text_lecture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

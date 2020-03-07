@@ -1,12 +1,7 @@
 package com.haemin.imagemathtutor.NoticeMVP;
 
-import android.util.Log;
 import com.haemin.imagemathtutor.Data.Notice;
 import com.haemin.imagemathtutor.Retrofit.RetrofitInterface;
-import com.haemin.imagemathtutor.TutorApplication;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import java.util.ArrayList;
 

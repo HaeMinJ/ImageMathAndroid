@@ -11,106 +11,101 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/icon_status"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_showsubmit"
+        <TextView
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_test_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:text="9등"
             android:layout_marginStart="14dp"
-            android:text="3차 모의고사"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@id/icon_status"
-            app:layout_constraintLeft_toRightOf="@id/icon_status"
-            app:layout_constraintTop_toTopOf="@id/icon_status" />
-
-        <TextView
-            android:id="@+id/text_test_submit_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="24dp"
-            android:text="18 / 21"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/text_rank"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/img_testinfo_on"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:elevation="14dp"
+            android:background="@android:color/white"
+            android:layout_marginStart="108dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_height="140dp">
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/dummy_icon"
+                android:src="@drawable/img_showsubmit"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginStart="14dp"/>
+            <TextView
+                android:id="@+id/text_test_name"
+                android:layout_marginStart="14dp"
+                app:layout_constraintLeft_toRightOf="@id/dummy_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="6모 대비"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"/>
+            <View
+                android:layout_marginStart="24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="0.1dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/dummy_boundary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@android:color/black"/>
+            <TextView
+                android:id="@+id/dummy_text_score"
+                android:layout_marginStart="12dp"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintBottom_toTopOf="@id/dummy_text_rank"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/dummy_boundary"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="배점 결과 : "/>
 
-        <TextView
-            android:id="@+id/dummy_text_test_average"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="평균 :"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="@id/text_test_name"
-            app:layout_constraintTop_toBottomOf="@id/text_test_name" />
-
-        <TextView
-            android:id="@+id/text_test_average"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="30dp"
-            android:text="정보없음"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="@id/dummy_text_test_average"
-            app:layout_constraintTop_toBottomOf="@id/text_test_name" />
-
-        <TextView
-            android:id="@+id/dummy_text_lecture_student_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="총인원 :"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="@id/text_test_name"
-            app:layout_constraintTop_toBottomOf="@id/dummy_text_test_average" />
-
-        <TextView
-            android:id="@+id/text_lecture_student_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="21 / 24"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="@id/text_test_average"
-            app:layout_constraintTop_toTopOf="@id/dummy_text_lecture_student_num" />
-
-        <TextView
-            android:id="@+id/dummy_text_submit_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="추가제출 :"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="@id/text_test_name"
-            app:layout_constraintTop_toBottomOf="@id/dummy_text_lecture_student_num" />
-
-        <TextView
-            android:id="@+id/text_submit_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="정보없음"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="@id/text_lecture_student_num"
-            app:layout_constraintTop_toTopOf="@id/dummy_text_submit_more" />
+            <TextView
+                android:layout_marginStart="12dp"
+                android:id="@+id/dummy_text_rank"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dummy_text_score"
+                app:layout_constraintLeft_toRightOf="@id/dummy_boundary"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="등수          : "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/dummy_text_score"
+                android:text="90점"
+                android:id="@+id/text_score"
+                android:textColor="@color/etoos_color"
+                app:layout_constraintBottom_toBottomOf="@id/dummy_text_score"
+                app:layout_constraintLeft_toRightOf="@id/dummy_text_score"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/dummy_text_rank"
+                android:text="9등"
+                android:id="@+id/text_rank_small"
+                android:textColor="@color/etoos_color"
+                app:layout_constraintBottom_toBottomOf="@id/dummy_text_rank"
+                app:layout_constraintLeft_toRightOf="@id/dummy_text_rank"/>
 
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.cardview.widget.CardView>

@@ -1,18 +1,14 @@
 package com.haemin.imagemathtutor.LectureAddMVP;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.haemin.imagemathtutor.Data.Academy;
-import com.haemin.imagemathtutor.Data.Lecture;
 import com.haemin.imagemathtutor.Data.ServerTime;
 import com.haemin.imagemathtutor.R;
 import com.haemin.imagemathtutor.View.UI.AcademyPicker;
@@ -58,17 +54,17 @@ public class AddLectureActivity extends AppCompatActivity implements AddLectureC
 
     private void initView() {
         btnUploadLecture.setOnClickListener(v -> {
-            if(academy == null){
-                Toast.makeText(this, "학원을 선택해주세요.",Toast.LENGTH_SHORT).show();
-            }else if(editAcademy.getText().toString().equals("")){
-                Toast.makeText(this,"수업 이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
-            }else if(serverTimes.size() == 0){
-                Toast.makeText(this, "수업 시간을 입력해주세요.",Toast.LENGTH_SHORT).show();
+            if (academy == null) {
+                Toast.makeText(this, "학원을 선택해주세요.", Toast.LENGTH_SHORT).show();
+            } else if (editAcademy.getText().toString().equals("")) {
+                Toast.makeText(this, "수업 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            } else if (serverTimes.size() == 0) {
+                Toast.makeText(this, "수업 시간을 입력해주세요.", Toast.LENGTH_SHORT).show();
             }
-            for(LectureTimeView timeView : lectureTimeViews){
+            for (LectureTimeView timeView : lectureTimeViews) {
                 serverTimes.add(timeView.getServerTime());
             }
-            presenter.uploadLecture(academy, editLectureName.getText().toString(),serverTimes,
+            presenter.uploadLecture(academy, editLectureName.getText().toString(), serverTimes,
                     editDurationFirst.getText().toString() + "~" + editDurationSecond.getText().toString());
         });
 
@@ -80,7 +76,7 @@ public class AddLectureActivity extends AppCompatActivity implements AddLectureC
                     Iterator<LectureTimeView> iter = lectureTimeViews.iterator();
                     while (iter.hasNext()) {
                         LectureTimeView timeView = iter.next();
-                        if(timeView.getSeq() == view.getSeq()){
+                        if (timeView.getSeq() == view.getSeq()) {
                             holderLectureTime.removeView(timeView);
                             iter.remove();
                         }
@@ -93,21 +89,22 @@ public class AddLectureActivity extends AppCompatActivity implements AddLectureC
         });
         editAcademy.setOnClickListener(v -> {
             AcademyPicker academyPicker = new AcademyPicker(presenter.getAcademyList());
-            academyPicker.show(getSupportFragmentManager(),"TAG");
+            academyPicker.show(getSupportFragmentManager(), "TAG");
             academyPicker.setOnItemClickListener(academy1 -> {
                 academy = academy1;
                 editAcademy.setText(academy.getAcademyName());
             });
         });
     }
+
     @Override
     public void showSuccess() {
-        Toast.makeText(this,"수업이 성공적으로 등록되었습니다.",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "수업이 성공적으로 등록되었습니다.", Toast.LENGTH_SHORT).show();
         finish();
     }
 
     @Override
     public void showErrorMsg(String msg) {
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

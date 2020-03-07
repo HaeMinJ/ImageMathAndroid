@@ -55,7 +55,7 @@ public class SplashActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
-                            Toast.makeText(SplashActivity.this, AppString.ERROR_NETWORK_MESSAGE, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SplashActivity.this, AppString.ERROR_SERVER_INSPECT, Toast.LENGTH_SHORT).show();
                             Log.e("SplashActivity",t.getMessage(),t);
                             finish();
                         }

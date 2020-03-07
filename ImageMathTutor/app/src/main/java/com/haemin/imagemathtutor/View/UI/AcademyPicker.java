@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import com.haemin.imagemathtutor.Data.Academy;
-import com.haemin.imagemathtutor.R;
 
 import java.util.ArrayList;
 
@@ -26,15 +25,15 @@ public class AcademyPicker extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         CharSequence[] names = new CharSequence[academies.size()];
-        for(int i = 0; i < academies.size() ; i++){
+        for (int i = 0; i < academies.size(); i++) {
             names[i] = academies.get(i).getAcademyName();
         }
         builder.setTitle("학원을 선택하세요.")
-                .setItems(names , new DialogInterface.OnClickListener() {
+                .setItems(names, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         selectedAcademy = academies.get(which);
-                        if(onItemClickListener != null) onItemClickListener.onItemClick(selectedAcademy);
+                        if (onItemClickListener != null) onItemClickListener.onItemClick(selectedAcademy);
                         dialog.dismiss();
                     }
                 });
@@ -45,7 +44,7 @@ public class AcademyPicker extends DialogFragment {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(Academy academy);
     }
 

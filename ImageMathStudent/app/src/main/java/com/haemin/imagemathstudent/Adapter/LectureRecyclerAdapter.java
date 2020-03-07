@@ -50,18 +50,18 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
     public void onBindViewHolder(@NonNull LectureViewHolder holder, int position) {
         Lecture lecture = lectures.get(position);
         holder.btnNoticeGroup.setOnClickListener(v -> {
-            NoticeActivity.start(context,lecture.getLectureSeq()+"");
+            NoticeActivity.start(context,lecture);
         });
         holder.textLectureName.setText(lecture.getName());
         holder.textClassTimes.setText(lecture.getTime());
-        holder.textAcademyName.setText(lecture.getAcademy().getAcademyName());
+        holder.textAcademyName.setText(lecture.getAcademyName());
         holder.textClassDuration.setText(lecture.getTotalDate());
         holder.btnAssignment.setOnClickListener(v -> {
             AssignmentInfoActivity.start(context,lecture.getLectureSeq()+"");
         });
-        holder.btnTest.setOnClickListener(v -> {
-            TestInfoActivity.start(context,lecture.getLectureSeq()+"");
-        });
+//        holder.btnTest.setOnClickListener(v -> {
+//            TestInfoActivity.start(context,lecture,);
+//        });
         if(lecture.isExpired()){
             holder.toggleWhole.setChecked(false);
             holder.toggleBtnList.setChecked(false);
@@ -75,9 +75,10 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
             public void onResponse(Call<ArrayList<Notice>> call, Response<ArrayList<Notice>> response) {
                 if(response.code() == 200 && response.body() != null){
                     ArrayList<Notice> notices = response.body();
+                    Log.e("LectureRecyclerAdapter",notices.toString());
                     if(notices.size() >= 2){
                         holder.notice_preview.setText(notices.get(0).getTitle()+"\n"+notices.get(1).getTitle());
-                    }else if(notices.size() == 1){
+                    }else if(notices.size() == 1 && notices.get(0) != null){
                         holder.notice_preview.setText(notices.get(0).getTitle());
                     }else{
                         holder.notice_preview.setText("공지사항이 없습니다.");

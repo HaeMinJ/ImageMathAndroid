@@ -5,7 +5,6 @@ import android.util.Log;
 import com.haemin.imagemathtutor.Data.ServerFile;
 
 import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -29,14 +28,14 @@ public class NoticeEditPresenter implements NoticeEditContract.NoticeEditPresent
 
     @Override
     public void deleteFile(int fileSeq) {
-        Log.e("LOL","ClickED!");
+        Log.e("LOL", "ClickED!");
 
 
         Iterator<ServerFile> iter = files.iterator();
         while (iter.hasNext()) {
             ServerFile s = iter.next();
-            if(s.getFileSeq() == fileSeq)
-            iter.remove();
+            if (s.getFileSeq() == fileSeq)
+                iter.remove();
         }
         noticeEditView.refreshFileList(files);
     }

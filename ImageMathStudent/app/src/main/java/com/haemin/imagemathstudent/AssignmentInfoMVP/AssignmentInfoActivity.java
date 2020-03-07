@@ -3,21 +3,25 @@ package com.haemin.imagemathstudent.AssignmentInfoMVP;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
+import com.haemin.imagemathstudent.Data.ServerFile;
 import com.haemin.imagemathstudent.Data.StudentAssignment;
 import com.haemin.imagemathstudent.R;
 import com.haemin.imagemathstudent.Utils.ConfirmStarter;
 import com.haemin.imagemathstudent.View.UI.FileButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AssignmentInfoActivity extends AppCompatActivity implements AssignmentInfoContract.AssignmentInfoView {
@@ -46,11 +50,13 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
     Button btnAddSubmit;
     @BindView(R.id.recycler_submit)
     RecyclerView recyclerSubmit;
+    ImageAdapter imageAdapter;
+    ArrayList<ServerFile> imageFiles;
 
 
     public static void start(Context context, String assignmentSeq) {
         Intent starter = new Intent(context, AssignmentInfoActivity.class);
-        starter.putExtra("lectureSeq", assignmentSeq);
+        starter.putExtra("assignmentSeq", assignmentSeq);
         context.startActivity(starter);
     }
     @Override
@@ -59,10 +65,16 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
         setContentView(R.layout.activity_assignment_info);
         Intent i = getIntent();
         ConfirmStarter.checkIntent(this, i);
-        assignmentSeq = i.getStringExtra("lectureSeq");
+        assignmentSeq = i.getStringExtra("assignmentSeq");
         ButterKnife.bind(this);
         presenter = new AssignmentInfoPresenter(this);
         presenter.updateData(assignmentSeq);
+
+        imageFiles = new ArrayList<>();
+        imageAdapter = new ImageAdapter(this, imageFiles);
+
+        recyclerSubmit.setAdapter(imageAdapter);
+        recyclerSubmit.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
 
     }
 
@@ -79,7 +91,7 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
                 textSubmitState.setTextColor(getResources().getColor(R.color.etoos_color));
                 textOverlayFile.setVisibility(View.GONE);
                 btnAnswerFile.setOnClickListener(v -> {
-                    presenter.downloadFile(studentAssignment.getAssignment().getSolutionFileUrl());
+                    presenter.downloadFile(studentAssignment.getAssignment().getSolutionFile().getFileUrl());
                 });
                 break;
             case 2:
@@ -96,13 +108,16 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
         textLectureName.setText(studentAssignment.getAssignment().getLectureName());
         textAssignmentName.setText(studentAssignment.getAssignment().getTitle());
         textAssignmentNotice.setText(studentAssignment.getAssignment().getContents());
-        textEndDay.setText(studentAssignment.getAssignment().getEndDate());
-        textLectureDay.setText(studentAssignment.getAssignment().getLectureDate());
-        textUploadDay.setText(studentAssignment.getAssignment().getLectureDate());
+        textEndDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getEndDate()));
+        textLectureDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getLectureDate()));
+        textUploadDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getPostTime()));
         btnAddSubmit.setOnClickListener(v -> {
             ImagePicker.create(this)
                     .start();
         });
+        imageFiles.clear();
+        imageFiles.addAll(studentAssignment.getSubmitFiles());
+        imageAdapter.notifyDataSetChanged();
     }
 
     @Override

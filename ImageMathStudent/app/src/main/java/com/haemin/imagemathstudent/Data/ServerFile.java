@@ -19,6 +19,33 @@ public class ServerFile extends ServerData{
     String fileName;
     String fileUrl;
     String fileType;
+    String postSeq;
+    long uploadTime;
+    String userSeq;
+
+    public String getPostSeq() {
+        return postSeq;
+    }
+
+    public void setPostSeq(String postSeq) {
+        this.postSeq = postSeq;
+    }
+
+    public long getUploadTime() {
+        return uploadTime;
+    }
+
+    public void setUploadTime(long uploadTime) {
+        this.uploadTime = uploadTime;
+    }
+
+    public String getUserSeq() {
+        return userSeq;
+    }
+
+    public void setUserSeq(String userSeq) {
+        this.userSeq = userSeq;
+    }
 
     public int getFileSeq() {
         return fileSeq;

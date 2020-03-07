@@ -64,13 +64,13 @@ public class TestInfoActivity extends AppCompatActivity implements TestActivityC
 
     @Override
     public void updateView(StudentTest test) {
-        textLectureName.setText(test.getLecture().getName());
-        textTestName.setText(test.getTitle());
-        textTestNotice.setText(test.getMsg());
+        textLectureName.setText(test.getTest().getLecture().getName());
+        textTestName.setText(test.getTest().getTitle());
+        textTestNotice.setText(test.getTest().getMsg());
         textTestRank.setText(test.getRank()+"등");
         textTestScore.setText(test.getScore()+"점");
-        textUploadDay.setText(DateUtils.getRelativeTimeSpanString(test.getPostTime()));
-        textEndDay.setText(test.getEndDate());
+        textUploadDay.setText(DateUtils.getRelativeTimeSpanString(test.getTest().getPostTime()));
+        textEndDay.setText(DateUtils.getRelativeTimeSpanString(test.getTest().getEndTime()));
 
     }
 }

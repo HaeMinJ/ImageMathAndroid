@@ -5,24 +5,33 @@ import java.util.ArrayList;
 public class Notice extends ServerData{
     int noticeSeq;
     String title;
-    long uploadTime;
-    String text;
+    long postTime;
+    String contents;
+    String lectureSeq;
     ArrayList<ServerFile> files;
 
-    public long getUploadTime() {
-        return uploadTime;
+    public String getLectureSeq() {
+        return lectureSeq;
     }
 
-    public void setUploadTime(long uploadTime) {
-        this.uploadTime = uploadTime;
+    public void setLectureSeq(String lectureSeq) {
+        this.lectureSeq = lectureSeq;
     }
 
-    public String getText() {
-        return text;
+    public long getPostTime() {
+        return postTime;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setPostTime(long postTime) {
+        this.postTime = postTime;
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
     }
 
     public int getNoticeSeq() {

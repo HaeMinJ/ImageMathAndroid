@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    @BindView(R.id.btn_email_confirm)
+       @BindView(R.id.btn_email_confirm)
     Button btnEmailConfirm;
     @BindView(R.id.btn_phone_confirm)
     Button btnPhoneConfirm;
@@ -152,16 +152,17 @@ public class RegisterActivity extends AppCompatActivity {
             });
         });
 
+        /*
         btnAddLecture.setOnClickListener(v -> {
             if (!editLecture.getText().toString().equals("")) {
-                addLecture(lectureSeq, editLecture.getText().toString());
+                //addLecture(lectureSeq, editLecture.getText().toString());
                 lectureSeq = null;
                 editLecture.setText("");
             } else {
                 Toast.makeText(this, "수업을 검색하여 추가해주세요.", Toast.LENGTH_SHORT).show();
             }
         });
-
+*/
         btnRegister.setOnClickListener(v -> {
             if(isAbleToRegister()){
                 GlobalApplication.getAPIService().registerEmail(registerField).enqueue(new Callback<User>() {
@@ -189,7 +190,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         toggleGenderMale.setOnClickListener(v -> {
             if(toggleGenderMale.isChecked())
-            toggleGenderFemale.setChecked(false);
+                toggleGenderFemale.setChecked(false);
         });
         toggleGenderFemale.setOnClickListener(v -> {
             if(toggleGenderFemale.isChecked())
@@ -254,14 +255,7 @@ public class RegisterActivity extends AppCompatActivity {
         }else{
             registerField.put("schoolSeq",schoolSeq);
         }
-        if(lectureSeqs.equals("")){
-            showToast("수강중인 수업들을 추가해주세요.");
-            editLecture.requestFocus();
-            return false;
-        }else{
 
-            registerField.put("reqLectureSeqs",lectureSeqs + "/0");
-        }
         if(toggleGenderMale.isChecked()){
             registerField.put("gender","0");
         }else{
@@ -270,7 +264,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerField.put("userType","student");
         return true;
     }
-
+/*
     private void addLecture(String lectureSeq, String lectureName) {
         if (lectureSeqs.equals("")) {
             lectureSeqs = lectureSeq;
@@ -286,6 +280,7 @@ public class RegisterActivity extends AppCompatActivity {
         textView.setTextColor(Color.BLACK);
         viewHolderLecture.addView(textView);
     }
+    */
 
     private void showLectureDialog(ArrayList<Lecture> lectures) {
         ListPickerDialog<Lecture> lectureDialog = new ListPickerDialog<>(lectures, "수업을 선택해주세요.");

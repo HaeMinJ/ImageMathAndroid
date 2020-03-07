@@ -16,6 +16,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         app:layout_constraintHorizontal_weight="1"
         android:gravity="center"
@@ -28,6 +29,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         app:layout_constraintHorizontal_weight="1.75"
         android:gravity="center"
@@ -52,6 +54,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         app:layout_constraintLeft_toRightOf="@id/dummy_divide_4"
         app:layout_constraintRight_toRightOf="parent"
@@ -59,8 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="#BFBFBF"
-        android:text="세부정보"
-        />
+        android:text="세부정보" />
 
     <View
         android:layout_marginStart="14dp"
@@ -70,13 +72,15 @@
         android:layout_width="2dp"
         android:layout_height="match_parent"
         android:background="#A7A7A7" />
+
     <View
         app:layout_constraintLeft_toRightOf="@id/text_student_name"
         app:layout_constraintRight_toLeftOf="@id/text_student_seq"
         android:id="@+id/dummy_divide_2"
         android:layout_width="2dp"
         android:layout_height="match_parent"
-        android:background="#A7A7A7"/>
+        android:background="#A7A7A7" />
+
     <View
         app:layout_constraintLeft_toRightOf="@id/text_student_seq"
         app:layout_constraintRight_toLeftOf="@id/text_student_school"
@@ -84,6 +88,7 @@
         android:layout_width="2dp"
         android:layout_height="match_parent"
         android:background="#A7A7A7" />
+
     <View
         app:layout_constraintLeft_toRightOf="@id/text_student_school"
         app:layout_constraintRight_toLeftOf="@id/btn_student_info"

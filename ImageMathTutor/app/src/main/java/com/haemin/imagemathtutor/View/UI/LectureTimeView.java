@@ -29,22 +29,6 @@ public class LectureTimeView extends LinearLayout {
     @BindView(R.id.btn_delete)
     ImageButton btnDelete;
 
-    public ServerTime getServerTime(){
-        ServerTime serverTime = new ServerTime();
-        serverTime.setLectureTimeDay(editLectureTimeDay.getText().toString());
-        serverTime.setLectureTimeFirst(editTimeFirst.getText().toString());
-        serverTime.setLectureTimeSecond(editTimeSecond.getText().toString());
-        return serverTime;
-    }
-
-    public int getSeq() {
-        return seq;
-    }
-
-    public void setSeq(int seq) {
-        this.seq = seq;
-    }
-
     public LectureTimeView(Context context) {
         super(context);
         this.context = context;
@@ -71,14 +55,31 @@ public class LectureTimeView extends LinearLayout {
         getAttrs(attrs);
         init();
     }
+
+    public ServerTime getServerTime() {
+        ServerTime serverTime = new ServerTime();
+        serverTime.setLectureTimeDay(editLectureTimeDay.getText().toString());
+        serverTime.setLectureTimeFirst(editTimeFirst.getText().toString());
+        serverTime.setLectureTimeSecond(editTimeSecond.getText().toString());
+        return serverTime;
+    }
+
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
+    }
+
     private void init() {
-        View v = LayoutInflater.from(context).inflate(R.layout.time_recycler,this,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.time_recycler, this, false);
         ButterKnife.bind(this, v);
         addView(v);
 
         btnDelete.setOnClickListener(v1 -> {
-            if(onDeleteClickListener != null)
-            onDeleteClickListener.onDelete(this);
+            if (onDeleteClickListener != null)
+                onDeleteClickListener.onDelete(this);
         });
     }
 
@@ -101,7 +102,7 @@ public class LectureTimeView extends LinearLayout {
     private void getAttrs(AttributeSet attrs) {
     }
 
-    public interface OnDeleteClickListener{
+    public interface OnDeleteClickListener {
         void onDelete(LectureTimeView view);
     }
 }

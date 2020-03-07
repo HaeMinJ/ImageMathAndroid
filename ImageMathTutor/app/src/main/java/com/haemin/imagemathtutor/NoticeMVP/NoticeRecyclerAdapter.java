@@ -16,8 +16,7 @@ import com.haemin.imagemathtutor.R;
 
 import java.util.ArrayList;
 
-public class NoticeRecyclerAdapter extends RecyclerView.Adapter<NoticeRecyclerAdapter.NoticeViewHolder>
-{
+public class NoticeRecyclerAdapter extends RecyclerView.Adapter<NoticeRecyclerAdapter.NoticeViewHolder> {
     NoticeContract.NoticePresenter noticePresenter;
     Context context;
     ArrayList<Notice> notices;
@@ -27,14 +26,15 @@ public class NoticeRecyclerAdapter extends RecyclerView.Adapter<NoticeRecyclerAd
         this.context = context;
         this.notices = noticePresenter.getData();
     }
-    public void notifyData(ArrayList<Notice> notices){
+
+    public void notifyData(ArrayList<Notice> notices) {
         this.notices = notices;
     }
 
     @NonNull
     @Override
     public NoticeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v  = LayoutInflater.from(context).inflate(R.layout.recycler_notice,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.recycler_notice, parent, false);
         return new NoticeViewHolder(v);
     }
 
@@ -48,7 +48,7 @@ public class NoticeRecyclerAdapter extends RecyclerView.Adapter<NoticeRecyclerAd
         return notices.size();
     }
 
-    class NoticeViewHolder extends RecyclerView.ViewHolder{
+    class NoticeViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.btn_delete)
         ImageButton btnDelete;
         @BindView(R.id.group_file)

@@ -102,7 +102,7 @@ public class LectureInfoFragment extends Fragment {
     }
 
     private void requestAddLecture(Lecture data) {
-        GlobalApplication.getAPIService().requestAddLecture(GlobalApplication.getAccessToken(), data.getLectureSeq() + "")
+        GlobalApplication.getAPIService().requestAddLecture(GlobalApplication.getAccessToken(), data.getLectureSeq() + "", data.getName())
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
@@ -138,8 +138,10 @@ public class LectureInfoFragment extends Fragment {
                             lectures.clear();
                             lectures.addAll(response.body());
                             lectureRecyclerAdapter.notifyDataSetChanged();
+                            Log.e("LectureInfoFragment", response.body().toString());
                         } else {
                             showToast(AppString.ERROR_LOAD_LECTURE_LIST);
+                            Log.e("LectureInfoFragment",response.message());
                         }
                     }
 

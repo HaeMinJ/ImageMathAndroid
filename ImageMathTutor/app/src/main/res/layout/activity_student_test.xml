@@ -48,6 +48,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         android:layout_marginTop="24dp"
         android:background="@drawable/bg_cardview_rounded_box">
+
         <TextView
             android:id="@+id/dummy_text_test"
             android:layout_width="wrap_content"
@@ -57,7 +58,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginStart="50dp"
             android:text="시험"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <View
             android:layout_marginBottom="18dp"
             android:layout_marginTop="18dp"
@@ -66,6 +68,7 @@
             app:layout_constraintLeft_toRightOf="@id/dummy_text_test"
             android:layout_width="1dp"
             android:layout_height="match_parent" />
+
         <ImageView
             android:id="@+id/dummy_under_icon"
             android:layout_width="18dp"
@@ -74,8 +77,8 @@
             android:src="@drawable/btn_select"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            />
+            app:layout_constraintRight_toRightOf="parent" />
+
         <TextView
             android:textColor="@android:color/black"
             android:textSize="18sp"
@@ -85,9 +88,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toLeftOf="@id/dummy_under_icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/dummy_text_student_list"
         android:layout_width="wrap_content"
@@ -97,8 +100,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="46dp"
         android:layout_marginTop="50dp"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
+
     <TextView
         android:textSize="16sp"
         android:layout_marginEnd="24dp"
@@ -108,7 +111,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="평균 : 78.5"
-        android:textColor="@color/etoos_color"/>
+        android:textColor="@color/etoos_color" />
+
     <View
         android:id="@+id/dummy_text_list_divide"
         android:layout_marginTop="30dp"
@@ -116,7 +120,7 @@
         app:layout_constraintLeft_toLeftOf="@id/dummy_text_student_list"
         android:layout_width="40dp"
         android:layout_height="3dp"
-        android:background="@android:color/black"/>
+        android:background="@android:color/black" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tab_list"
@@ -183,8 +187,7 @@
             android:layout_height="match_parent"
             android:background="#BFBFBF"
             android:text="자세히\n알아보기"
-            android:textColor="@android:color/white"
-            />
+            android:textColor="@android:color/white" />
 
         <View
             android:visibility="invisible"
@@ -203,7 +206,7 @@
             android:id="@+id/dummy_divide_2"
             android:layout_width="2dp"
             android:layout_height="match_parent"
-            android:background="#A7A7A7"/>
+            android:background="#A7A7A7" />
 
         <View
             android:visibility="invisible"
@@ -228,13 +231,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#A7A7A7"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tab_list"
-        android:id="@+id/recycler_student_test"/>
+        android:id="@+id/recycler_student_test" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

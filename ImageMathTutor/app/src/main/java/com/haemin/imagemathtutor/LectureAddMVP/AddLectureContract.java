@@ -6,12 +6,15 @@ import com.haemin.imagemathtutor.Data.ServerTime;
 import java.util.ArrayList;
 
 public interface AddLectureContract {
-    interface AddLectureView{
+    interface AddLectureView {
         void showSuccess();
+
         void showErrorMsg(String msg);
     }
-    interface AddLecturePresenter{
+
+    interface AddLecturePresenter {
         void uploadLecture(Academy academy, String lectureName, ArrayList<ServerTime> serverTimes, String lectureDuration);
+
         ArrayList<Academy> getAcademyList();
     }
 }

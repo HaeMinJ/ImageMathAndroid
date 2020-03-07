@@ -40,7 +40,7 @@
             <com.haemin.imagemathtutor.View.UI.FileButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:deleteable="false"/>
+                app:deleteable="false" />
 
         </LinearLayout>
 

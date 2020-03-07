@@ -1,26 +1,41 @@
 package com.haemin.imagemathtutor;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import com.haemin.imagemathtutor.Retrofit.RetrofitInterface;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class TutorApplication extends Application {
+public class GlobalApplication extends Application {
     private static Retrofit retrofit = null;
     private static String accessToken;
+    private static Context context;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        if(context == null)
+            context = this;
+    }
 
     public static String getAccessToken() {
+        SharedPreferences pref = context.getSharedPreferences("ImageMathTutor",MODE_PRIVATE);
+        accessToken = pref.getString("accessToken", null);
         return accessToken;
     }
 
     public static void setAccessToken(String accessToken) {
-        TutorApplication.accessToken = accessToken;
+        GlobalApplication.accessToken = accessToken;
+        SharedPreferences pref = context.getSharedPreferences("ImageMathTutor",MODE_PRIVATE);
+        pref.edit().putString("accessToken",accessToken).apply();
+
     }
 
     private static Retrofit getRetrofit() {
         if(retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl("")
+                    .baseUrl("http://ec2-54-180-115-237.ap-northeast-2.compute.amazonaws.com:3000")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -28,5 +43,4 @@ public class TutorApplication extends Application {
     }
     public static RetrofitInterface getAPIService(){
         return getRetrofit().create(RetrofitInterface.class);
-    }
-}
+    }}

@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.haemin.imagemathstudent.AssignmentInfoMVP.AssignmentInfoActivity;
 import com.haemin.imagemathstudent.Data.StudentAssignment;
 import com.haemin.imagemathstudent.R;
-import com.haemin.imagemathstudent.AssignmentInfoMVP.AssignmentInfoActivity;
 
 import java.util.ArrayList;
 
@@ -29,7 +29,7 @@ public class AssignmentInsideAdapter extends RecyclerView.Adapter<AssignmentInsi
     @NonNull
     @Override
     public InsideViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.recycler_assignment_inside,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.recycler_assignment_inside, parent, false);
 
         return new InsideViewHolder(v);
     }
@@ -40,19 +40,25 @@ public class AssignmentInsideAdapter extends RecyclerView.Adapter<AssignmentInsi
         holder.textAssignmentName.setText(assignment.getAssignment().getTitle());
         holder.textLectureName.setText(assignment.getAssignment().getLectureName());
 
-        switch (assignment.getSubmitState()){
+        switch (assignment.getSubmitState()) {
             case 0:
                 holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_unsubmit));
                 break;
             case 1:
                 holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
+                break;
             case 2:
                 holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_neglect));
+                break;
             case 3:
                 holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showexception));
+                break;
+        }
+        if (assignment.getAssignment().getEndDate() > System.currentTimeMillis()) {
+            holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_neglect));
         }
         holder.itemView.setOnClickListener(v -> {
-            AssignmentInfoActivity.start(context,assignment.getAssignment().getAssignmentSeq()+"");
+            AssignmentInfoActivity.start(context, assignment.getAssignment().getAssignmentSeq() + "");
         });
     }
 
@@ -61,7 +67,7 @@ public class AssignmentInsideAdapter extends RecyclerView.Adapter<AssignmentInsi
         return assignments.size();
     }
 
-    class InsideViewHolder extends RecyclerView.ViewHolder{
+    class InsideViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.text_lecture_name)
         TextView textLectureName;
@@ -72,7 +78,7 @@ public class AssignmentInsideAdapter extends RecyclerView.Adapter<AssignmentInsi
 
         public InsideViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

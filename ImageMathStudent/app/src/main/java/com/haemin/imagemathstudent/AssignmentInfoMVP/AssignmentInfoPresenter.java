@@ -34,12 +34,14 @@ public class AssignmentInfoPresenter implements AssignmentInfoContract.Assignmen
                     infoView.updateView(response.body());
                 }else{
                     infoView.showToast("과제 정보를 불러오지 못했습니다.");
+                    Log.e("AssignmentInfoPresenter",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<StudentAssignment> call, Throwable t) {
                 infoView.showToast(AppString.ERROR_NETWORK_MESSAGE);
+                Log.e("AssignmentInfoPresenter",t.getMessage(),t);
             }
         });
 
@@ -48,13 +50,17 @@ public class AssignmentInfoPresenter implements AssignmentInfoContract.Assignmen
     @Override
     public void submitPicture(String assignmentSeq, Image imageUri) {
 
-        MultipartBody.Part part = MultipartBody.Part.createFormData("file", imageUri.getPath(), RequestBody.create(MediaType.parse("image/jpeg"), new File(imageUri.getPath())));
+        MultipartBody.Part part = MultipartBody.Part.createFormData("submitFile", imageUri.getPath(), RequestBody.create(MediaType.parse("image/png"), new File(imageUri.getPath())));
 
         GlobalApplication.getAPIService().postPicture(GlobalApplication.getAccessToken(), assignmentSeq, part).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.code() == 200){
                     infoView.showToast("이미지 등록이 완료되었습니다.");
+                    updateData(assignmentSeq);
+                }else{
+                    infoView.showToast("이미지 등록이 실패하였습니다.");
+                    Log.e("AssignmentInfoPresenter",response.message());
                 }
             }
 

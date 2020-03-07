@@ -1,8 +1,10 @@
 package com.haemin.imagemathstudent.Data;
 
+import java.util.ArrayList;
+
 public class StudentAssignment{
         String userSeq;
-        String submitFileUrl;
+        ArrayList<ServerFile> submitFiles;
         int submitState;
         Assignment assignment;
 
@@ -22,12 +24,12 @@ public class StudentAssignment{
         this.userSeq = userSeq;
     }
 
-    public String getSubmitFileUrl() {
-        return submitFileUrl;
+    public ArrayList<ServerFile> getSubmitFiles() {
+        return submitFiles;
     }
 
-    public void setSubmitFileUrl(String submitFileUrl) {
-        this.submitFileUrl = submitFileUrl;
+    public void setSubmitFiles(ArrayList<ServerFile> submitFiles) {
+        this.submitFiles = submitFiles;
     }
 
     public int getSubmitState() {

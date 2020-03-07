@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -33,10 +32,11 @@ public class TutorToolbar extends Toolbar {
         super(context, attrs, defStyleAttr);
         init(context);
     }
-    void init(Context context){
+
+    void init(Context context) {
         View toolbar = LayoutInflater.from(context).inflate(R.layout.toolbar, this, false);
         addView(toolbar);
-        ButterKnife.bind(this,toolbar);
+        ButterKnife.bind(this, toolbar);
 
         btnSetting.setOnClickListener(v -> {
 

@@ -26,7 +26,7 @@ public class NoticePresenter implements NoticeContract.NoticePresenter {
                 if(response.code() == 200 && response.body() != null){
                     noticeView.updateView(response.body());
                 }else{
-                    noticeView.showToast(AppString.ERROR_LOAD_LECTURE_LIST);
+                    noticeView.showToast(AppString.ERROR_LOAD_NOTICE_LIST);
                     Log.e("NoticePresenter",response.message());
                 }
             }

@@ -2,24 +2,21 @@ package com.haemin.imagemathtutor.NoticeMVP;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.haemin.imagemathtutor.Data.Notice;
 import com.haemin.imagemathtutor.NoticeEditMVP.NoticeEditActivity;
 import com.haemin.imagemathtutor.R;
 import com.haemin.imagemathtutor.Utils.ConfirmStarter;
-
-import java.util.ArrayList;
 
 public class NoticeActivity extends AppCompatActivity implements NoticeContract.NoticeView {
 
@@ -46,8 +43,8 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
 
     public static void start(Context context, int lectureSeq, String lectureName) {
         Intent starter = new Intent(context, NoticeActivity.class);
-        starter.putExtra("lectureSeq",lectureSeq);
-        starter.putExtra("lectureName",lectureName);
+        starter.putExtra("lectureSeq", lectureSeq);
+        starter.putExtra("lectureName", lectureName);
         context.startActivity(starter);
     }
 
@@ -58,15 +55,15 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        Intent fromOutside= getIntent();
+        Intent fromOutside = getIntent();
         ConfirmStarter.checkIntent(this, fromOutside);
 
         noticePresenter = new NoticePresenter(this);
-        recyclerAdapter = new NoticeRecyclerAdapter(noticePresenter,this);
+        recyclerAdapter = new NoticeRecyclerAdapter(noticePresenter, this);
         noticeRecycler.setAdapter(recyclerAdapter);
-        noticeRecycler.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+        noticeRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
-        lectureSeq = fromOutside.getIntExtra("lectureSeq",lectureSeq);
+        lectureSeq = fromOutside.getIntExtra("lectureSeq", lectureSeq);
         lectureName = fromOutside.getStringExtra("lectureName");
 
         noticePresenter.updateData(lectureSeq);
@@ -82,7 +79,7 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
             refreshLayout.setRefreshing(false);
         });
         btnAddNotice.setOnClickListener(v -> {
-            NoticeEditActivity.start(this,lectureSeq,lectureName);
+            NoticeEditActivity.start(this, lectureSeq, lectureName);
         });
     }
 
@@ -93,6 +90,6 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
 
     @Override
     public void showErrorMessage(String error) {
-        Toast.makeText(this,error,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 }

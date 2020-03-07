@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.Checkable;
-import android.widget.ToggleButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.haemin.imagemathtutor.R;
 
@@ -26,7 +25,6 @@ public class ToggleConstraintLayout extends ConstraintLayout implements Checkabl
     }
 
 
-
     public ToggleConstraintLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         attr = attrs;
@@ -38,20 +36,20 @@ public class ToggleConstraintLayout extends ConstraintLayout implements Checkabl
         TypedArray array = context.obtainStyledAttributes(attr, R.styleable.ToggleConstraintLayout);
         drawableOn = array.getDrawable(R.styleable.ToggleConstraintLayout_drawableOn);
         drawableOff = array.getDrawable(R.styleable.ToggleConstraintLayout_drawableOff);
-        checked = array.getBoolean(R.styleable.ToggleConstraintLayout_checked,true);
+        checked = array.getBoolean(R.styleable.ToggleConstraintLayout_checked, true);
 
-        if(checked &&drawableOn != null)
+        if (checked && drawableOn != null)
             setBackground(drawableOn);
-        else if(!checked && drawableOff != null)
+        else if (!checked && drawableOff != null)
             setBackground(drawableOff);
     }
 
     @Override
     public void setChecked(boolean checked) {
         this.checked = checked;
-        if(checked &&drawableOn != null)
+        if (checked && drawableOn != null)
             setBackground(drawableOn);
-        else if(!checked && drawableOff != null)
+        else if (!checked && drawableOff != null)
             setBackground(drawableOff);
     }
 

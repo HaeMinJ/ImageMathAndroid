@@ -1,8 +1,13 @@
 package com.haemin.imagemathtutor.Data;
 
-public class School {
+public class School extends SelectableData {
     int schoolSeq;
     String schoolName;
+
+    @Override
+    public String getListName() {
+        return schoolName;
+    }
 
     public int getSchoolSeq() {
         return schoolSeq;

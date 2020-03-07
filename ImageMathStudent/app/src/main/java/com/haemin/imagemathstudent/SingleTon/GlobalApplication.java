@@ -21,14 +21,14 @@ public class GlobalApplication extends Application {
     }
 
     public static String getAccessToken() {
-        SharedPreferences pref = context.getSharedPreferences("ImageMathStudent",MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences("ImageMathTutor",MODE_PRIVATE);
         accessToken = pref.getString("accessToken", null);
         return accessToken;
     }
 
     public static void setAccessToken(String accessToken) {
         GlobalApplication.accessToken = accessToken;
-        SharedPreferences pref = context.getSharedPreferences("ImageMathStudent",MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences("ImageMathTutor",MODE_PRIVATE);
         pref.edit().putString("accessToken",accessToken).apply();
 
     }

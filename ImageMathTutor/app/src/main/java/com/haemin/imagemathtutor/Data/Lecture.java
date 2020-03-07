@@ -2,22 +2,45 @@ package com.haemin.imagemathtutor.Data;
 
 import android.annotation.SuppressLint;
 
-public class Lecture {
-    int lectureSeq;
+public class Lecture extends SelectableData {
+    String lectureSeq;
     String time;
+    String name;
     String totalDate; // ,를 구분자로 사용함.
-    String weekDay;
-    String week;
+    //String week;
     @SuppressLint("reqStudentCnt")
     int reqStudentCount;
     String studentNum;
-    Academy academy;
+    String academyName;
+    String academySeq;
+    boolean isExpired;
 
-    public int getLectureSeq() {
+    @Override
+    public String getListName() {
+        return name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isExpired() {
+        return isExpired;
+    }
+
+    public void setExpired(boolean expired) {
+        isExpired = expired;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLectureSeq() {
         return lectureSeq;
     }
 
-    public void setLectureSeq(int lectureSeq) {
+    public void setLectureSeq(String lectureSeq) {
         this.lectureSeq = lectureSeq;
     }
 
@@ -37,14 +60,7 @@ public class Lecture {
         this.totalDate = totalDate;
     }
 
-    public String getWeekDay() {
-        return weekDay;
-    }
-
-    public void setWeekDay(String weekDay) {
-        this.weekDay = weekDay;
-    }
-
+    /*
     public String getWeek() {
         return week;
     }
@@ -52,6 +68,7 @@ public class Lecture {
     public void setWeek(String week) {
         this.week = week;
     }
+    */
 
     public int getReqStudentCount() {
         return reqStudentCount;
@@ -69,11 +86,19 @@ public class Lecture {
         this.studentNum = studentNum;
     }
 
-    public Academy getAcademy() {
-        return academy;
+    public String getAcademyName() {
+        return academyName;
     }
 
-    public void setAcademy(Academy academy) {
-        this.academy = academy;
+    public void setAcademyName(String academyName) {
+        this.academyName = academyName;
+    }
+
+    public String getAcademySeq() {
+        return academySeq;
+    }
+
+    public void setAcademySeq(String academySeq) {
+        this.academySeq = academySeq;
     }
 }

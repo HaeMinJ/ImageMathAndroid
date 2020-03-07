@@ -1,7 +1,7 @@
 package com.haemin.imagemathtutor.View.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import com.haemin.imagemathtutor.R;
 
 public class AssignmentEditActivity extends AppCompatActivity {

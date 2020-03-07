@@ -1,13 +1,30 @@
 package com.haemin.imagemathtutor.Data;
 
-public class Assignment {
+public class Assignment extends ServerData {
     int assignmentSeq;
     String title;
+    String contents;
     long postTime;
-    String endDate;
-    String lectureDate;
-    String solutionFileUrl;
-    Lecture lecture;
+    long endDate;
+    long lectureDate;
+    ServerFile solutionFile;
+    String lectureName;
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public String getLectureName() {
+        return lectureName;
+    }
+
+    public void setLectureName(String lectureName) {
+        this.lectureName = lectureName;
+    }
 
     public int getAssignmentSeq() {
         return assignmentSeq;
@@ -33,35 +50,28 @@ public class Assignment {
         this.postTime = postTime;
     }
 
-    public String getEndDate() {
+    public long getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(long endDate) {
         this.endDate = endDate;
     }
 
-    public String getLectureDate() {
+    public long getLectureDate() {
         return lectureDate;
     }
 
-    public void setLectureDate(String lectureDate) {
+    public void setLectureDate(long lectureDate) {
         this.lectureDate = lectureDate;
     }
 
-    public String getSolutionFileUrl() {
-        return solutionFileUrl;
+
+    public ServerFile getSolutionFile() {
+        return solutionFile;
     }
 
-    public void setSolutionFileUrl(String solutionFileUrl) {
-        this.solutionFileUrl = solutionFileUrl;
-    }
-
-    public Lecture getLecture() {
-        return lecture;
-    }
-
-    public void setLecture(Lecture lecture) {
-        this.lecture = lecture;
+    public void setSolutionFile(ServerFile solutionFile) {
+        this.solutionFile = solutionFile;
     }
 }

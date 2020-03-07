@@ -15,7 +15,6 @@ import com.haemin.imagemathstudent.Data.Notice;
 import com.haemin.imagemathstudent.Data.ServerFile;
 import com.haemin.imagemathstudent.R;
 import com.haemin.imagemathstudent.View.UI.FileButton;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -40,8 +39,8 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeHold
     public void onBindViewHolder(@NonNull NoticeHolder holder, int position) {
         Notice notice = notices.get(position);
         holder.textNoticeNumber.setText("NO."+notice.getNoticeSeq());
-        holder.textNoticeTime.setText(DateUtils.getRelativeTimeSpanString(notice.getUploadTime())+ " 게시");
-        holder.textNoticeText.setText(notice.getText());
+        holder.textNoticeTime.setText(DateUtils.getRelativeTimeSpanString(notice.getPostTime())+ " 게시");
+        holder.textNoticeText.setText(notice.getContents());
         holder.textNoticeTitle.setText(notice.getTitle());
         ArrayList<ServerFile> files = notice.getFiles();
         if(files != null && files.size() != 0){

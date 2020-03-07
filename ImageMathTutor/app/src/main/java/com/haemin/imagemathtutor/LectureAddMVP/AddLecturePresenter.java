@@ -12,7 +12,7 @@ public class AddLecturePresenter implements AddLectureContract.AddLecturePresent
 
     public AddLecturePresenter(AddLectureContract.AddLectureView lectureView) {
         this.lectureView = lectureView;
-        academies= new ArrayList<>();
+        academies = new ArrayList<>();
     }
 
     @Override

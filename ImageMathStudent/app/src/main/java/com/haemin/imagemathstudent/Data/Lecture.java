@@ -3,7 +3,7 @@ package com.haemin.imagemathstudent.Data;
 import android.annotation.SuppressLint;
 
 public class Lecture extends SelectableData{
-    int lectureSeq;
+    String lectureSeq;
     String time;
     String name;
     String totalDate; // ,를 구분자로 사용함.
@@ -11,7 +11,8 @@ public class Lecture extends SelectableData{
     @SuppressLint("reqStudentCnt")
     int reqStudentCount;
     String studentNum;
-    Academy academy;
+    String academyName;
+    String academySeq;
     boolean isExpired;
 
     @Override
@@ -35,11 +36,11 @@ public class Lecture extends SelectableData{
         this.name = name;
     }
 
-    public int getLectureSeq() {
+    public String getLectureSeq() {
         return lectureSeq;
     }
 
-    public void setLectureSeq(int lectureSeq) {
+    public void setLectureSeq(String lectureSeq) {
         this.lectureSeq = lectureSeq;
     }
 
@@ -85,11 +86,19 @@ public class Lecture extends SelectableData{
         this.studentNum = studentNum;
     }
 
-    public Academy getAcademy() {
-        return academy;
+    public String getAcademyName() {
+        return academyName;
     }
 
-    public void setAcademy(Academy academy) {
-        this.academy = academy;
+    public void setAcademyName(String academyName) {
+        this.academyName = academyName;
+    }
+
+    public String getAcademySeq() {
+        return academySeq;
+    }
+
+    public void setAcademySeq(String academySeq) {
+        this.academySeq = academySeq;
     }
 }

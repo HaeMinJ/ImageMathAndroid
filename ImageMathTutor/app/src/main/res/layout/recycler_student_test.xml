@@ -76,8 +76,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="1등"
-        android:textColor="@android:color/black"
-        />
+        android:textColor="@android:color/black" />
 
     <View
         android:visibility="visible"
@@ -96,7 +95,7 @@
         android:id="@+id/dummy_divide_2"
         android:layout_width="2dp"
         android:layout_height="match_parent"
-        android:background="#A7A7A7"/>
+        android:background="#A7A7A7" />
 
     <View
         android:visibility="visible"

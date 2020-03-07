@@ -67,13 +67,14 @@
             android:textColor="@android:color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dummy_group_answer_file" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/dummy_text_current_submit"
             android:text="평균 : 78.5"
             android:layout_marginEnd="24dp"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent" />
 
         <View
             android:id="@+id/dummy_info_line"
@@ -88,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tab_list"
-            android:id="@+id/recycler_student_test"/>
+            android:id="@+id/recycler_student_test" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tab_list"

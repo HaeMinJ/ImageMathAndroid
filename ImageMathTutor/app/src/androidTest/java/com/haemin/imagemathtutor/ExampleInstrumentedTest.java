@@ -2,11 +2,9 @@ package com.haemin.imagemathtutor;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
-
-
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumented test, which will execute on an Android device.

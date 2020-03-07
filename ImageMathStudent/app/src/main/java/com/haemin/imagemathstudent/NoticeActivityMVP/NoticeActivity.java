@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.haemin.imagemathstudent.Data.Lecture;
 import com.haemin.imagemathstudent.Data.Notice;
 import com.haemin.imagemathstudent.R;
@@ -35,14 +36,15 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
 
     public static void start(Context context, Lecture lecture) {
         Intent starter = new Intent(context, NoticeActivity.class);
-        starter.putExtra("lectureSeq",lecture.getLectureSeq());
         starter.putExtra("lectureName",lecture.getName());
+        starter.putExtra("lectureSeq",lecture.getLectureSeq());
         context.startActivity(starter);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
+        ButterKnife.bind(this);
         Intent fromOutside = getIntent();
         lectureSeq = fromOutside.getStringExtra("lectureSeq");
         lectureName = fromOutside.getStringExtra("lectureName");
@@ -58,6 +60,7 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
 
         refreshLayout.setOnRefreshListener(() -> {
             presenter.updateData(lectureSeq);
+            refreshLayout.setRefreshing(false);
         });
     }
 

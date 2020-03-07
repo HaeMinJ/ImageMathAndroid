@@ -4,8 +4,8 @@ public class Test extends ServerData{
     int testSeq;
     String title;
     long postTime;
-    String endDate;
-    String lectureDate;
+    long endTime;
+    long lectureTime;
     String solutionFileUrl;
     Lecture lecture;
 
@@ -33,20 +33,20 @@ public class Test extends ServerData{
         this.postTime = postTime;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public long getEndTime() {
+        return endTime;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 
-    public String getLectureDate() {
-        return lectureDate;
+    public long getLectureTime() {
+        return lectureTime;
     }
 
-    public void setLectureDate(String lectureDate) {
-        this.lectureDate = lectureDate;
+    public void setLectureTime(long lectureTime) {
+        this.lectureTime = lectureTime;
     }
 
     public String getSolutionFileUrl() {

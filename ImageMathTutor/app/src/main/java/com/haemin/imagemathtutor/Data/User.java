@@ -1,15 +1,17 @@
 package com.haemin.imagemathtutor.Data;
 
-public class User {
+public class User extends ServerData {
     int userSeq;
     String name;
     String birthday;
     String email;
     String password;
-    String lectureSeqs;
+    String lectureSeqs; // "3,5,6,~"
     String reqLectureSeqs;
     int schoolSeq;
     String phone;
+    String accessToken;
+
 
     public User(int userSeq, String name, String birthday, String email, String password, String lectureSeqs, String reqLectureSeqs, int schoolSeq, String phone) {
         this.userSeq = userSeq;
@@ -21,6 +23,14 @@ public class User {
         this.reqLectureSeqs = reqLectureSeqs;
         this.schoolSeq = schoolSeq;
         this.phone = phone;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     public int getUserSeq() {
