@@ -10,11 +10,14 @@ public interface AddLectureContract {
         void showSuccess();
 
         void showErrorMsg(String msg);
+        void showDialog(ArrayList<Academy> academies);
+
     }
 
     interface AddLecturePresenter {
         void uploadLecture(Academy academy, String lectureName, ArrayList<ServerTime> serverTimes, String lectureDuration);
 
-        ArrayList<Academy> getAcademyList();
+
+        void requestAcademyData();
     }
 }

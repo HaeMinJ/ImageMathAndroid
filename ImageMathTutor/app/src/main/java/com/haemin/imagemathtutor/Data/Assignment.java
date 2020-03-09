@@ -1,14 +1,57 @@
 package com.haemin.imagemathtutor.Data;
 
+import java.util.ArrayList;
+
 public class Assignment extends ServerData {
     int assignmentSeq;
+    int submitNum;
+    int acceptNum;
+    int studentNum;
     String title;
     String contents;
     long postTime;
-    long endDate;
-    long lectureDate;
-    ServerFile solutionFile;
+    long endTime;
+    long lectureTime;
+    ArrayList<ServerFile> solutionFiles;
     String lectureName;
+
+    public void set(Assignment assignment) {
+        this.assignmentSeq = assignment.assignmentSeq;
+        this.submitNum = assignment.submitNum;
+        this.acceptNum = assignment.acceptNum;
+        this.studentNum = assignment.studentNum;
+        this.title = assignment.title;
+        this.contents = assignment.contents;
+        this.postTime = assignment.postTime;
+        this.endTime = assignment.endTime;
+        this.lectureTime = assignment.lectureTime;
+        this.solutionFiles = assignment.solutionFiles;
+        this.lectureName = assignment.lectureName;
+    }
+
+    public int getSubmitNum() {
+        return submitNum;
+    }
+
+    public void setSubmitNum(int submitNum) {
+        this.submitNum = submitNum;
+    }
+
+    public int getAcceptNum() {
+        return acceptNum;
+    }
+
+    public void setAcceptNum(int acceptNum) {
+        this.acceptNum = acceptNum;
+    }
+
+    public int getStudentNum() {
+        return studentNum;
+    }
+
+    public void setStudentNum(int studentNum) {
+        this.studentNum = studentNum;
+    }
 
     public String getContents() {
         return contents;
@@ -50,28 +93,28 @@ public class Assignment extends ServerData {
         this.postTime = postTime;
     }
 
-    public long getEndDate() {
-        return endDate;
+    public long getEndTime() {
+        return endTime;
     }
 
-    public void setEndDate(long endDate) {
-        this.endDate = endDate;
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 
-    public long getLectureDate() {
-        return lectureDate;
+    public long getLectureTime() {
+        return lectureTime;
     }
 
-    public void setLectureDate(long lectureDate) {
-        this.lectureDate = lectureDate;
+    public void setLectureTime(long lectureTime) {
+        this.lectureTime = lectureTime;
     }
 
 
-    public ServerFile getSolutionFile() {
-        return solutionFile;
+    public ArrayList<ServerFile> getSolutionFiles() {
+        return solutionFiles;
     }
 
-    public void setSolutionFile(ServerFile solutionFile) {
-        this.solutionFile = solutionFile;
+    public void setSolutionFiles(ArrayList<ServerFile> solutionFiles) {
+        this.solutionFiles = solutionFiles;
     }
 }

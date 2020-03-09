@@ -23,8 +23,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,12 +75,12 @@ public class AssignmentFragment extends Fragment {
                     for(StudentAssignment assignment : assignments){
                         boolean hasSame = false;
                         for(Integer date : dates){
-                            if(assignment.getAssignment().getPostTime() / (1000*3600*24) == date){
+                            if(assignment.getAssignment().getEndTime() / (1000*3600*24) == date){
                                 hasSame = true;
                             }
                         }
                         if(!hasSame){
-                            dates.add((int)assignment.getAssignment().getPostTime() / (1000*3600*24));
+                            dates.add((int)assignment.getAssignment().getEndTime() / (1000*3600*24));
                         }
                     }
                     for(Integer date : dates){
@@ -93,7 +91,7 @@ public class AssignmentFragment extends Fragment {
                     }
                     for(AssignmentRecyclerAdapter.AssignmentDateHolder dateHolder : dateHolders){
                         for(StudentAssignment assignment : assignments){
-                            if((assignment.getAssignment().getPostTime() / (1000*3600*24)) == dateHolder.getDate()){
+                            if((assignment.getAssignment().getEndTime() / (1000*3600*24)) == dateHolder.getDate()){
                                 dateHolder.getAssignments().add(assignment);
                             }
                         }

@@ -6,14 +6,13 @@ import java.util.ArrayList;
 
 public interface NoticeContract {
     interface NoticeView {
-        void refreshView();
+        void refreshView(ArrayList<Notice> notices);
 
         void showErrorMessage(String error);
     }
 
     interface NoticePresenter {
-        void updateData(int lectureSeq);
+        void updateData(String lectureSeq);
 
-        ArrayList<Notice> getData();
     }
 }

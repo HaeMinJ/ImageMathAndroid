@@ -37,11 +37,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_notice_text">
 
-            <com.haemin.imagemathtutor.View.UI.FileButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:deleteable="false" />
-
         </LinearLayout>
 
         <TextView

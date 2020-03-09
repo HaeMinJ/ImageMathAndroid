@@ -3,7 +3,7 @@ package com.haemin.imagemathtutor.Data;
 import java.util.ArrayList;
 
 public class Notice extends ServerData {
-    int noticeSeq;
+    String noticeSeq;
     String title;
     long postTime;
     String contents;
@@ -34,11 +34,11 @@ public class Notice extends ServerData {
         this.contents = contents;
     }
 
-    public int getNoticeSeq() {
+    public String getNoticeSeq() {
         return noticeSeq;
     }
 
-    public void setNoticeSeq(int noticeSeq) {
+    public void setNoticeSeq(String noticeSeq) {
         this.noticeSeq = noticeSeq;
     }
 

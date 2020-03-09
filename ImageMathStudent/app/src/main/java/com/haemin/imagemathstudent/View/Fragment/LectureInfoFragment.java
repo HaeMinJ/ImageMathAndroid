@@ -109,7 +109,7 @@ public class LectureInfoFragment extends Fragment {
                         if (response.code() == 200) {
                             showToast("수업추가 요청이 완료되었습니다.\n수업이 승인될 때까지 기다려주세요.");
                         } else {
-                            showToast(response.message());
+                            showToast("이미 승인요청 중이거나 승인이 완료된 수업입니다.");
                         }
                     }
 

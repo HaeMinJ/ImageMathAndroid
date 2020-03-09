@@ -21,11 +21,13 @@ public interface RetrofitInterface {
     Call<ArrayList<Notice>> getNoticeList(@Header("x-access-token") String accessToken, @Query("lectureSeq") String lectureSeq, @Query("page") int page);
 
 
+    @FormUrlEncoded
     @POST("/notice")
-//수정필요
     Call<Notice> addNotice(@Header("x-access-token") String accessToken, @Field("title") String title, @Field("contents") String contents, @Field("lectureSeq") String lectureSeq);
     // imageFiles Parameter name : ?, normalFiles Parameter name : ?
 
+    @DELETE("/notice/delete/{noticeSeq}")
+    Call<Void> deleteNotice(@Header("x-access-token")String accessToken, @Path("noticeSeq")String noticeSeq);
     @Multipart
     @POST("/notice/{noticeSeq}")
     Call<Void> addNoticeFile(@Header("x-access-token") String accessToken, @Path("noticeSeq") String noticeSeq, @Part MultipartBody.Part noticeFile);
@@ -34,40 +36,36 @@ public interface RetrofitInterface {
 //경로바꿈 ok
     Call<ArrayList<School>> getSchoolList();
 
-    @GET("/assignment/student")
-    Call<ArrayList<StudentAssignment>> getStudentAssignmentList(@Header("x-access-token") String accessToken, @Query("page") int page);
+    @GET("/account/academy")
+    Call<ArrayList<Academy>> getAcademyList();
 
-    @GET("/assignment/student/{assignmentSeq}")
-    Call<StudentAssignment> getStudentAssignmentInfo(@Header("x-access-token") String accessToken, @Path("assignmentSeq") String assignmentSeq);
+    @GET("/account/{userSeq}")
+    Call<User> getUserInfo(@Header("x-access-token")String accessToken, @Path("userSeq")String userSeq);
+
+
+    @GET("/assignment/tutor/{assignmentSeq}")
+    Call<ArrayList<StudentAssignment>> getStudentAssignmentList(@Header("x-access-token") String accessToken,@Path("assignmentSeq")String assignmentSeq, @Query("page") int page);
 
     @GET("/assignment")
 //ok  assignmentInfo
-    Call<ArrayList<Assignment>> getAssignmentList(@Header("x-access-token") String accessToken, @Query("lectureSeq") String lectureSeq, @Query("page") int page);
+    Call<ArrayList<Assignment>> getAssignmentList(@Header("x-access-token") String accessToken, @Query("page") int page);
 
     @POST("/assignment/add")
     Call<Assignment> postAssignmentInfo(@Header("x-access-token") String accessToken, @FieldMap Map<String, String> assignmentField);
 
     @GET("/assignment/{assignmentSeq}")
 //assignment/{assignmentSeq}:1  이런식으로 경로작성 ok    내일 만들거 studentAssignment 필요함
-    Call<Assignment> getAssignmentInfo(@Path("assignmentSeq") String assignmentSeq);
+    Call<Assignment> getAssignmentInfo(@Header("x-access-token")String accessToken, @Path("assignmentSeq") String assignmentSeq);
 
-    @Multipart
-    @POST("/assignment/{assignmentSeq}")
-//이건 과제 이미지 올리는거였나? 일단 보류
-    Call<Void> postPicture(@Header("x-access-token") String accessToken, @Path("assignmentSeq") String assignmentSeq, @Part MultipartBody.Part assignmentPart);
-    // imageFile Parameter name : ?
 
     @GET("/lecture")
 //수업 리스트 출력 ok  tutor : 모든수업, student : 듣는수업
     Call<ArrayList<Lecture>> getLectureList();
 
-    @GET("/lecture/student")
-    Call<ArrayList<Lecture>> getMyLectureList(@Header("x-access-token") String accessToken, @Query("exceptExpired") boolean exceptExpired, @Query("page") int page);
-
     @FormUrlEncoded
     @POST("/lecture/add")
 //경로바꿈 ok
-    Call<ArrayList<Lecture>> addLecture(@Header("x-access-token") String accessToken, @FieldMap Map<String, String> lectureField);
+    Call<Void> addLecture(@Header("x-access-token") String accessToken, @FieldMap Map<String, String> lectureField);
 
     /*
     academySeq, name, weekDay, time, totalDate, week, studentNum, userType
@@ -79,11 +77,12 @@ public interface RetrofitInterface {
     //------------------------------------------------------------------------
     @GET("/lecture/recognition/{lectureSeq}")
 // ok mysql contain 경로바꿈 이거랑 /student/{lectureSeq}랑 구분이 안가네;;
-    ArrayList<User> getRequestUserList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
+    Call<ArrayList<User>> getRequestUserList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
 
+    @FormUrlEncoded
     @PATCH("/lecture/recognition/{lectureSeq}")
 //보류
-    void recognizeStudents(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Field("students") ArrayList<User> recognizedStudents, @Field("isAccept") boolean isAccept);
+    Call<Void> recognizeStudent(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Field("studentSeq") String studentSeq, @Field("isAccept") boolean isAccept);
 
     @GET("/lecture/student/{lectureSeq}")
 //보류  mysql contain 내일 확인바람
@@ -108,7 +107,7 @@ public interface RetrofitInterface {
 
     @GET("/test/result")
 //수정필요  testAdm score포함 accessToken -> student: 상위 10개 , tutor : 전부 다
-    Call<ArrayList<StudentTest>> getTestResults(@Header("x-access-token") String accessToken, @Query("lectureSeq") String lectureSeq, @Query("page") int page);
+    Call<ArrayList<StudentTest>> getTestResults(@Header("x-access-token") String accessToken, @Query("testSeq") String testSeq, @Query("page") int page);
 
     @POST("/test/{testSeq}")
     Call<Test> postTestWithExcel(@Header("x-access-token") String accessToken, @Path("testSeq") String testSeq, @Part MultipartBody.Part excelFile);

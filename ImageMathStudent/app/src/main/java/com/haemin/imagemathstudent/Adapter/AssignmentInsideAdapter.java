@@ -45,16 +45,16 @@ public class AssignmentInsideAdapter extends RecyclerView.Adapter<AssignmentInsi
                 holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_unsubmit));
                 break;
             case 1:
-                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
+                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showcomplete));
                 break;
             case 2:
                 holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_neglect));
                 break;
             case 3:
-                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showexception));
+                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
                 break;
         }
-        if (assignment.getAssignment().getEndDate() > System.currentTimeMillis()) {
+        if (assignment.getAssignment().getEndTime() > System.currentTimeMillis()) {
             holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_neglect));
         }
         holder.itemView.setOnClickListener(v -> {

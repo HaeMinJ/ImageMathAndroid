@@ -1,14 +1,12 @@
 package com.haemin.imagemathstudent.Data;
 
-import java.io.File;
-
 public class Assignment extends ServerData{
     int assignmentSeq;
     String title;
     String contents;
     long postTime;
-    long endDate;
-    long lectureDate;
+    long endTime;
+    long lectureTime;
     ServerFile solutionFile;
     String lectureName;
 
@@ -52,20 +50,20 @@ public class Assignment extends ServerData{
         this.postTime = postTime;
     }
 
-    public long getEndDate() {
-        return endDate;
+    public long getEndTime() {
+        return endTime;
     }
 
-    public void setEndDate(long endDate) {
-        this.endDate = endDate;
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 
-    public long getLectureDate() {
-        return lectureDate;
+    public long getLectureTime() {
+        return lectureTime;
     }
 
-    public void setLectureDate(long lectureDate) {
-        this.lectureDate = lectureDate;
+    public void setLectureTime(long lectureTime) {
+        this.lectureTime = lectureTime;
     }
 
 

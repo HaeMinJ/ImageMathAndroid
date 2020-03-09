@@ -2,7 +2,7 @@ package com.haemin.imagemathtutor.Data;
 
 public class Academy extends SelectableData {
 
-    int academySeq;
+    String academySeq;
     String academyName;
 
     @Override
@@ -10,11 +10,11 @@ public class Academy extends SelectableData {
         return academyName;
     }
 
-    public int getAcademySeq() {
+    public String getAcademySeq() {
         return academySeq;
     }
 
-    public void setAcademySeq(int academySeq) {
+    public void setAcademySeq(String academySeq) {
         this.academySeq = academySeq;
     }
 

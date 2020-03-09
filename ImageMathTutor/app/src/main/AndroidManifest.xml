@@ -11,8 +11,8 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Activity.TestInfoActivity"></activity>
-        <activity android:name=".View.Activity.AssignmentInfoActivity" />
+        <activity android:name=".TestInfoMVP.TestInfoActivity"></activity>
+        <activity android:name=".AssignmentInfoMVP.AssignmentInfoActivity" />
         <activity android:name=".View.Activity.AssignmentEditActivity" />
         <activity android:name=".View.Activity.StudentTestActivity" />
         <activity android:name=".View.Activity.StudentManageActivity" />
@@ -43,4 +43,5 @@
 
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 </manifest>

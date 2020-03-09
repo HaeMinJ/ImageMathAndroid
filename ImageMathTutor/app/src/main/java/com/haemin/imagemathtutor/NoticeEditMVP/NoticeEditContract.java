@@ -17,10 +17,10 @@ public interface NoticeEditContract {
     }
 
     interface NoticeEditPresenter {
-        void addFile(Uri uri, String fileType);
+        void addFile(String path, String fileType);
 
         void deleteFile(int fileSeq);
 
-        void uploadNotice(int lectureSeq, String name, String content);
+        void uploadNotice(String lectureSeq, String name, String content);
     }
 }

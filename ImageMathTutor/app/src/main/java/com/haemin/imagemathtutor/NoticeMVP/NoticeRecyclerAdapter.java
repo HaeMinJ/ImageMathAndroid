@@ -1,34 +1,41 @@
 package com.haemin.imagemathtutor.NoticeMVP;
 
 import android.content.Context;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.haemin.imagemathtutor.AppString;
 import com.haemin.imagemathtutor.Data.Notice;
+import com.haemin.imagemathtutor.Data.ServerFile;
+import com.haemin.imagemathtutor.GlobalApplication;
 import com.haemin.imagemathtutor.R;
+import com.haemin.imagemathtutor.View.UI.FileButton;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.ArrayList;
 
 public class NoticeRecyclerAdapter extends RecyclerView.Adapter<NoticeRecyclerAdapter.NoticeViewHolder> {
-    NoticeContract.NoticePresenter noticePresenter;
+
     Context context;
     ArrayList<Notice> notices;
+    NoticeContract.NoticePresenter presenter;
 
-    public NoticeRecyclerAdapter(NoticeContract.NoticePresenter noticePresenter, Context context) {
-        this.noticePresenter = noticePresenter;
+    public NoticeRecyclerAdapter(Context context, ArrayList<Notice> notices, NoticeContract.NoticePresenter presenter) {
         this.context = context;
-        this.notices = noticePresenter.getData();
-    }
-
-    public void notifyData(ArrayList<Notice> notices) {
         this.notices = notices;
+        this.presenter = presenter;
     }
 
     @NonNull
@@ -40,7 +47,36 @@ public class NoticeRecyclerAdapter extends RecyclerView.Adapter<NoticeRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull NoticeViewHolder holder, int position) {
+        Notice notice = notices.get(position);
+        holder.btnDelete.setOnClickListener(v -> {
+            GlobalApplication.getAPIService().deleteNotice(GlobalApplication.getAccessToken(),notice.getNoticeSeq()).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.code() == 200)presenter.updateData(notice.getLectureSeq());
+                        else Toast.makeText(context,"공지사항 삭제가 실패했습니다.\n이미 삭제된 공지일 수 있습니다.",Toast.LENGTH_SHORT).show();
+                }
 
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Log.e("NoticeRecyclerAdapter",t.getMessage(),t);
+                    Toast.makeText(context, AppString.ERROR_NETWORK_MESSAGE,Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+        if(notice.getFiles() != null){
+            Log.e("NoticeRecyclerAdapter","NOT NULL!!");
+            holder.groupFile.removeAllViews();
+            for(ServerFile serverFile : notice.getFiles()){
+                FileButton fileButton = new FileButton(context);
+                fileButton.setDeleteAble(false);
+                fileButton.setFile(serverFile);
+                holder.groupFile.addView(fileButton);
+            }
+        }
+        holder.textNoticeTime.setText(DateUtils.getRelativeTimeSpanString(notice.getPostTime()));
+        holder.textNoticeNumber.setText(notice.getNoticeSeq());
+        holder.textNoticeTitle.setText(notice.getTitle());
+        holder.textNoticeText.setText(notice.getContents());
     }
 
     @Override

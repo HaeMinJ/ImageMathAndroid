@@ -2,6 +2,7 @@ package com.haemin.imagemathstudent.AssignmentInfoMVP;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -22,7 +23,6 @@ import com.haemin.imagemathstudent.Utils.ConfirmStarter;
 import com.haemin.imagemathstudent.View.UI.FileButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AssignmentInfoActivity extends AppCompatActivity implements AssignmentInfoContract.AssignmentInfoView {
 
@@ -88,7 +88,7 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
                 break;
             case 1:
                 textSubmitState.setText("제출");
-                textSubmitState.setTextColor(getResources().getColor(R.color.etoos_color));
+                textSubmitState.setTextColor(Color.YELLOW);
                 textOverlayFile.setVisibility(View.GONE);
                 btnAnswerFile.setOnClickListener(v -> {
                     presenter.downloadFile(studentAssignment.getAssignment().getSolutionFile().getFileUrl());
@@ -100,16 +100,16 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
                 textOverlayFile.setVisibility(View.VISIBLE);
                 break;
             case 3:
-                textSubmitState.setText("예외");
-                textSubmitState.setTextColor(getResources().getColor(android.R.color.darker_gray));
+                textSubmitState.setText("통과");
+                textSubmitState.setTextColor(getResources().getColor(R.color.etoos_color));
                 textOverlayFile.setVisibility(View.VISIBLE);
                 break;
         }
         textLectureName.setText(studentAssignment.getAssignment().getLectureName());
         textAssignmentName.setText(studentAssignment.getAssignment().getTitle());
         textAssignmentNotice.setText(studentAssignment.getAssignment().getContents());
-        textEndDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getEndDate()));
-        textLectureDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getLectureDate()));
+        textEndDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getEndTime()));
+        textLectureDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getLectureTime()));
         textUploadDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getPostTime()));
         btnAddSubmit.setOnClickListener(v -> {
             ImagePicker.create(this)

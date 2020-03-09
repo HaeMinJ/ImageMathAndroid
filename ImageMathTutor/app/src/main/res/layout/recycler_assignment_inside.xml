@@ -5,8 +5,10 @@
     android:layout_height="140dp"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     app:cardCornerRadius="14dp"
-    app:cardElevation="0dp">
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,6 +37,13 @@
             app:layout_constraintLeft_toRightOf="@id/icon_status"
             app:layout_constraintTop_toTopOf="@id/icon_status" />
 
+        <TextView
+            android:id="@+id/text_assignment_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=": NEW SIX START 216p - 237p"
+            app:layout_constraintLeft_toLeftOf="@id/text_lecture_name"
+            app:layout_constraintTop_toBottomOf="@id/text_lecture_name"/>
         <TextView
             android:id="@+id/text_assignment_submit_num"
             android:layout_width="wrap_content"

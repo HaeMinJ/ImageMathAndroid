@@ -14,9 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.haemin.imagemathtutor.Data.Notice;
 import com.haemin.imagemathtutor.NoticeEditMVP.NoticeEditActivity;
 import com.haemin.imagemathtutor.R;
 import com.haemin.imagemathtutor.Utils.ConfirmStarter;
+
+import java.util.ArrayList;
 
 public class NoticeActivity extends AppCompatActivity implements NoticeContract.NoticeView {
 
@@ -38,10 +41,11 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
     NoticeRecyclerAdapter recyclerAdapter;
     NoticeContract.NoticePresenter noticePresenter;
 
-    int lectureSeq;
+    String lectureSeq;
     String lectureName;
+    ArrayList<Notice> notices;
 
-    public static void start(Context context, int lectureSeq, String lectureName) {
+    public static void start(Context context, String lectureSeq, String lectureName) {
         Intent starter = new Intent(context, NoticeActivity.class);
         starter.putExtra("lectureSeq", lectureSeq);
         starter.putExtra("lectureName", lectureName);
@@ -54,28 +58,34 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
         setContentView(R.layout.activity_notice);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        notices = new ArrayList<>();
 
         Intent fromOutside = getIntent();
         ConfirmStarter.checkIntent(this, fromOutside);
 
         noticePresenter = new NoticePresenter(this);
-        recyclerAdapter = new NoticeRecyclerAdapter(noticePresenter, this);
+        recyclerAdapter = new NoticeRecyclerAdapter(this, notices,noticePresenter);
         noticeRecycler.setAdapter(recyclerAdapter);
         noticeRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
-        lectureSeq = fromOutside.getIntExtra("lectureSeq", lectureSeq);
+        lectureSeq = fromOutside.getStringExtra("lectureSeq");
         lectureName = fromOutside.getStringExtra("lectureName");
+
+        bindListeners();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         noticePresenter.updateData(lectureSeq);
         textLectureName.setText(lectureName);
 
-        bindListeners();
     }
 
     private void bindListeners() {
         refreshLayout.setOnRefreshListener(() -> {
             noticePresenter.updateData(lectureSeq);
-            refreshView();
             refreshLayout.setRefreshing(false);
         });
         btnAddNotice.setOnClickListener(v -> {
@@ -84,7 +94,9 @@ public class NoticeActivity extends AppCompatActivity implements NoticeContract.
     }
 
     @Override
-    public void refreshView() {
+    public void refreshView(ArrayList<Notice> notices) {
+        this.notices.clear();
+        this.notices.addAll(notices);
         recyclerAdapter.notifyDataSetChanged();
     }
 

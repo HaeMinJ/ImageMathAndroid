@@ -1,7 +1,7 @@
 package com.haemin.imagemathtutor.Data;
 
 public class User extends ServerData {
-    int userSeq;
+    String userSeq;
     String name;
     String birthday;
     String email;
@@ -11,18 +11,15 @@ public class User extends ServerData {
     int schoolSeq;
     String phone;
     String accessToken;
+    boolean isChecked = false;
 
 
-    public User(int userSeq, String name, String birthday, String email, String password, String lectureSeqs, String reqLectureSeqs, int schoolSeq, String phone) {
-        this.userSeq = userSeq;
-        this.name = name;
-        this.birthday = birthday;
-        this.email = email;
-        this.password = password;
-        this.lectureSeqs = lectureSeqs;
-        this.reqLectureSeqs = reqLectureSeqs;
-        this.schoolSeq = schoolSeq;
-        this.phone = phone;
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 
     public String getAccessToken() {
@@ -33,11 +30,11 @@ public class User extends ServerData {
         this.accessToken = accessToken;
     }
 
-    public int getUserSeq() {
+    public String getUserSeq() {
         return userSeq;
     }
 
-    public void setUserSeq(int userSeq) {
+    public void setUserSeq(String userSeq) {
         this.userSeq = userSeq;
     }
 

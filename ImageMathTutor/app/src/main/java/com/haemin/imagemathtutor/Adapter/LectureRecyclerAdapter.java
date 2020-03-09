@@ -47,10 +47,11 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
 
     @Override
     public void onBindViewHolder(@NonNull LectureViewHolder holder, int position) {
-        holder.btnNoticeGroup.setOnClickListener(v -> {
-            NoticeActivity.start(context, 0, "종로 이투스 수학(가) 반");
-        });
+
         Lecture lecture = lectures.get(position);
+        holder.btnNoticeGroup.setOnClickListener(v -> {
+            NoticeActivity.start(context, lecture.getLectureSeq(), lecture.getName());
+        });
         if(lecture.isExpired()){
             holder.toggleWhole.setChecked(false);
             holder.toggleBtnList.setChecked(false);
@@ -96,7 +97,7 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
                     }
                 });
         holder.btnAssignment.setOnClickListener(v -> {
-            AssignmentInfoActivity.start(context,lecture);
+           // AssignmentInfoActivity.start(context,lecture);
         });
         holder.btnTest.setOnClickListener(v -> {
             StudentTestActivity.start(context,lecture);

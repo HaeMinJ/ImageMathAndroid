@@ -1,5 +1,6 @@
 package com.haemin.imagemathtutor.View.Activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.haemin.imagemathtutor.AppString;
 import com.haemin.imagemathtutor.Data.User;
 import com.haemin.imagemathtutor.GlobalApplication;
@@ -15,6 +18,8 @@ import com.haemin.imagemathtutor.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.ArrayList;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -32,9 +37,25 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        hide();
+        TedPermission.with(this)
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        hide();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                        finish();
+                    }
+                })
+                .setRationaleMessage("앱을 이용하기 위해서는 메모리 사용 권한이 필요합니다.")
+                .setDeniedMessage("권한 설정에 동의하셔야 앱을 이용할 수 있습니다.\n하지만 [설정] > [권한] 에서 권한을 허용할 수 있어요.")
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .check();
 
         setContentView(R.layout.activity_splash);
+
     }
 
     private void autoLoginProcess() {

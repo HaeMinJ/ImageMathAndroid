@@ -56,30 +56,33 @@ public class AddLectureActivity extends AppCompatActivity implements AddLectureC
         btnUploadLecture.setOnClickListener(v -> {
             if (academy == null) {
                 Toast.makeText(this, "학원을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                return;
             } else if (editAcademy.getText().toString().equals("")) {
                 Toast.makeText(this, "수업 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
-            } else if (serverTimes.size() == 0) {
-                Toast.makeText(this, "수업 시간을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                return;
             }
             for (LectureTimeView timeView : lectureTimeViews) {
                 serverTimes.add(timeView.getServerTime());
             }
-            presenter.uploadLecture(academy, editLectureName.getText().toString(), serverTimes,
-                    editDurationFirst.getText().toString() + "~" + editDurationSecond.getText().toString());
+            if (serverTimes.size() == 0) {
+                Toast.makeText(this, "수업 시간을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            }else{
+
+                presenter.uploadLecture(academy, editLectureName.getText().toString(), serverTimes,
+                        editDurationFirst.getText().toString() + "~" + editDurationSecond.getText().toString());
+
+            }
         });
 
         btnAddTime.setOnClickListener(v -> {
             LectureTimeView lectureTimeView = new LectureTimeView(this);
-            lectureTimeView.setOnDeleteClickListener(new LectureTimeView.OnDeleteClickListener() {
-                @Override
-                public void onDelete(LectureTimeView view) {
-                    Iterator<LectureTimeView> iter = lectureTimeViews.iterator();
-                    while (iter.hasNext()) {
-                        LectureTimeView timeView = iter.next();
-                        if (timeView.getSeq() == view.getSeq()) {
-                            holderLectureTime.removeView(timeView);
-                            iter.remove();
-                        }
+            lectureTimeView.setOnDeleteClickListener(view -> {
+                Iterator<LectureTimeView> iter = lectureTimeViews.iterator();
+                while (iter.hasNext()) {
+                    LectureTimeView timeView = iter.next();
+                    if (timeView.getSeq() == view.getSeq()) {
+                        holderLectureTime.removeView(timeView);
+                        iter.remove();
                     }
                 }
             });
@@ -88,12 +91,17 @@ public class AddLectureActivity extends AppCompatActivity implements AddLectureC
             holderLectureTime.addView(lectureTimeView);
         });
         editAcademy.setOnClickListener(v -> {
-            AcademyPicker academyPicker = new AcademyPicker(presenter.getAcademyList());
-            academyPicker.show(getSupportFragmentManager(), "TAG");
-            academyPicker.setOnItemClickListener(academy1 -> {
-                academy = academy1;
-                editAcademy.setText(academy.getAcademyName());
-            });
+            presenter.requestAcademyData();
+        });
+    }
+
+    @Override
+    public void showDialog(ArrayList<Academy> academies) {
+        AcademyPicker academyPicker = new AcademyPicker(academies);
+        academyPicker.show(getSupportFragmentManager(), "TAG");
+        academyPicker.setOnItemClickListener(academy1 -> {
+            academy = academy1;
+            editAcademy.setText(academy.getAcademyName());
         });
     }
 
