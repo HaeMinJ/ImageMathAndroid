@@ -7,6 +7,15 @@ public class StudentAssignment {
     ArrayList<ServerFile> submitFiles;
     int submitState;
     Assignment assignment;
+    String assignmentSeq;
+
+    public String getAssignmentSeq() {
+        return assignmentSeq;
+    }
+
+    public void setAssignmentSeq(String assignmentSeq) {
+        this.assignmentSeq = assignmentSeq;
+    }
 
     public Assignment getAssignment() {
         return assignment;

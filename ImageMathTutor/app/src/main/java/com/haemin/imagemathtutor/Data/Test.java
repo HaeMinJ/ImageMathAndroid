@@ -1,13 +1,50 @@
 package com.haemin.imagemathtutor.Data;
 
+import java.util.ArrayList;
+
 public class Test extends ServerData{
     int testSeq;
     String title;
     long postTime;
     long endTime;
     long lectureTime;
-    String solutionFileUrl;
-    Lecture lecture;
+    ArrayList<ServerFile> solutionFiles;
+    int averageScore;
+    int studentNum;
+    String contents;
+    String lectureName;
+
+    public String getLectureName() {
+        return lectureName;
+    }
+
+    public void setLectureName(String lectureName) {
+        this.lectureName = lectureName;
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public int getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(int averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public int getStudentNum() {
+        return studentNum;
+    }
+
+    public void setStudentNum(int studentNum) {
+        this.studentNum = studentNum;
+    }
 
     public int getTestSeq() {
         return testSeq;
@@ -49,19 +86,11 @@ public class Test extends ServerData{
         this.lectureTime = lectureTime;
     }
 
-    public String getSolutionFileUrl() {
-        return solutionFileUrl;
+    public ArrayList<ServerFile> getSolutionFiles() {
+        return solutionFiles;
     }
 
-    public void setSolutionFileUrl(String solutionFileUrl) {
-        this.solutionFileUrl = solutionFileUrl;
-    }
-
-    public Lecture getLecture() {
-        return lecture;
-    }
-
-    public void setLecture(Lecture lecture) {
-        this.lecture = lecture;
+    public void setSolutionFiles(ArrayList<ServerFile> solutionFiles) {
+        this.solutionFiles = solutionFiles;
     }
 }

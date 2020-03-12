@@ -53,7 +53,9 @@ public class AssignmentFragment extends Fragment {
         dateHolders  = new ArrayList<>();
         assignmentRecyclerAdapter  = new AssignmentRecyclerAdapter(getContext(),dateHolders);
         recyclerView.setAdapter(assignmentRecyclerAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        LinearLayoutManager li = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+        li.setAutoMeasureEnabled(true);
+        recyclerView.setLayoutManager(li);
         refresh();
         refreshLayout.setOnRefreshListener(() -> {
             refresh();
@@ -75,23 +77,23 @@ public class AssignmentFragment extends Fragment {
                     for(StudentAssignment assignment : assignments){
                         boolean hasSame = false;
                         for(Integer date : dates){
-                            if(assignment.getAssignment().getEndTime() / (1000*3600*24) == date){
+                            if(((int)(assignment.getAssignment().getEndTime() / (1000*3600*24))) == date){
                                 hasSame = true;
                             }
                         }
                         if(!hasSame){
-                            dates.add((int)assignment.getAssignment().getEndTime() / (1000*3600*24));
+                            dates.add((int)(assignment.getAssignment().getEndTime() / (1000*3600*24)));
                         }
                     }
                     for(Integer date : dates){
                         AssignmentRecyclerAdapter.AssignmentDateHolder dateHolder = new AssignmentRecyclerAdapter.AssignmentDateHolder();
-                        dateHolder.setDate(date);
+                        dateHolder.setDate((long)date * 1000 * 3600 *24);
                         dateHolder.setAssignments(new ArrayList<>());
                         dateHolders.add(dateHolder);
                     }
                     for(AssignmentRecyclerAdapter.AssignmentDateHolder dateHolder : dateHolders){
                         for(StudentAssignment assignment : assignments){
-                            if((assignment.getAssignment().getEndTime() / (1000*3600*24)) == dateHolder.getDate()){
+                            if(((int)(assignment.getAssignment().getEndTime() / (1000*3600*24))) == ((int)(dateHolder.getDate() / (1000*3600*24)))){
                                 dateHolder.getAssignments().add(assignment);
                             }
                         }

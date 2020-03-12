@@ -42,7 +42,8 @@ public interface RetrofitInterface {
     @GET("/account/{userSeq}")
     Call<User> getUserInfo(@Header("x-access-token")String accessToken, @Path("userSeq")String userSeq);
 
-
+    @GET("/assignment/tutor/submit/{assignmentSeq}")
+    Call<ArrayList<ServerFile>> getAssignmentSubmitFiles(@Header("x-access-token")String accessToken,@Path("assignmentSeq")String assignmentSeq,@Query("userSeq") String userSeq);
     @GET("/assignment/tutor/{assignmentSeq}")
     Call<ArrayList<StudentAssignment>> getStudentAssignmentList(@Header("x-access-token") String accessToken,@Path("assignmentSeq")String assignmentSeq, @Query("page") int page);
 
@@ -50,8 +51,13 @@ public interface RetrofitInterface {
 //ok  assignmentInfo
     Call<ArrayList<Assignment>> getAssignmentList(@Header("x-access-token") String accessToken, @Query("page") int page);
 
+    @FormUrlEncoded
     @POST("/assignment/add")
     Call<Assignment> postAssignmentInfo(@Header("x-access-token") String accessToken, @FieldMap Map<String, String> assignmentField);
+
+    @Multipart
+    @POST("/assignment/add/answerFile/{assignmentSeq}")
+    Call<Void> uploadAssignmentAnswer(@Header("x-access-token")String accessToken,@Path("assignmentSeq")String assignmentSeq, @Part MultipartBody.Part part);
 
     @GET("/assignment/{assignmentSeq}")
 //assignment/{assignmentSeq}:1  이런식으로 경로작성 ok    내일 만들거 studentAssignment 필요함
@@ -109,7 +115,16 @@ public interface RetrofitInterface {
 //수정필요  testAdm score포함 accessToken -> student: 상위 10개 , tutor : 전부 다
     Call<ArrayList<StudentTest>> getTestResults(@Header("x-access-token") String accessToken, @Query("testSeq") String testSeq, @Query("page") int page);
 
-    @POST("/test/{testSeq}")
+    @FormUrlEncoded
+    @POST("/test/add")
+    Call<Test> addTestInfo(@Header("x-access-token")String accessToken,@FieldMap HashMap<String,String> testField);
+
+    @Multipart
+    @POST("/test/answer/{testSeq}")
+    Call<Test> addTestAnswerFile(@Header("x-access-token")String accessToken,@Path("testSeq") String testSeq, @Part MultipartBody.Part answerFile);
+
+    @Multipart
+    @POST("/test/excel/{testSeq}")
     Call<Test> postTestWithExcel(@Header("x-access-token") String accessToken, @Path("testSeq") String testSeq, @Part MultipartBody.Part excelFile);
 
     @FormUrlEncoded

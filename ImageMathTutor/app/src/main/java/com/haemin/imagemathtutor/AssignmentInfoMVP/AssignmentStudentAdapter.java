@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.haemin.imagemathtutor.AppString;
 import com.haemin.imagemathtutor.Data.Assignment;
+import com.haemin.imagemathtutor.Data.ServerFile;
 import com.haemin.imagemathtutor.Data.StudentAssignment;
 import com.haemin.imagemathtutor.Data.User;
 import com.haemin.imagemathtutor.GlobalApplication;
@@ -67,17 +68,34 @@ public class AssignmentStudentAdapter extends RecyclerView.Adapter<AssignmentStu
                 holder.textAuthStatus.setTextColor(context.getResources().getColor(R.color.etoos_color));
                 break;
         }
-        if((assignment.getSubmitState() == 1 || assignment.getSubmitState() == 3) && assignment.getSubmitFiles() != null){
-            ImagePopup imagePopup = new ImagePopup(context);
-            imagePopup.setBackgroundColor(Color.BLACK);  // Optional
-            imagePopup.setFullScreen(false); // Optional
-            imagePopup.setHideCloseIcon(false);  // Optional
-            imagePopup.setImageOnClickClose(false);  // Optional
-            imagePopup.initiatePopupWithGlide(assignment.getSubmitFiles().get(0).getFileUrl());
+        if((assignment.getSubmitState() == 1 || assignment.getSubmitState() == 3)){
+            GlobalApplication.getAPIService().getAssignmentSubmitFiles(GlobalApplication.getAccessToken(),assignment.getAssignmentSeq()+"",assignment.getUserSeq()).enqueue(new Callback<ArrayList<ServerFile>>() {
+                @Override
+                public void onResponse(Call<ArrayList<ServerFile>> call, Response<ArrayList<ServerFile>> response) {
+                    if(response.code() == 200 && response.body() != null){
+                        assignment.getSubmitFiles().addAll(response.body());
+                        ImagePopup imagePopup = new ImagePopup(context);
+                        imagePopup.setBackgroundColor(Color.BLACK);  // Optional
+                        imagePopup.setFullScreen(false); // Optional
+                        imagePopup.setHideCloseIcon(false);  // Optional
+                        imagePopup.setImageOnClickClose(false);  // Optional
+                        imagePopup.initiatePopupWithGlide(assignment.getSubmitFiles().get(0).getFileUrl());
 
-            holder.textCheckSubmit.setOnClickListener(v -> {
-                imagePopup.viewPopup();
-                });
+                        holder.textCheckSubmit.setOnClickListener(v -> {
+                            imagePopup.viewPopup();
+                        });
+                    }else{
+                        Toast.makeText(context,"제출된 과제정보를 불러올 수 없습니다.",Toast.LENGTH_SHORT).show();
+                        Log.e("AssignmentStudentAdp",response.message());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<ServerFile>> call, Throwable t) {
+                    Log.e("AssignmentStudentAdp",t.getMessage(),t);
+                }
+            });
+
         }else{
             holder.textCheckSubmit.setOnClickListener(v -> {
                 Toast.makeText(context,"학생이 과제를 제출하지 않았습니다.",Toast.LENGTH_SHORT).show();

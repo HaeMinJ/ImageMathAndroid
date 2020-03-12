@@ -18,7 +18,6 @@ import com.haemin.imagemathtutor.Data.ServerFile;
 import com.haemin.imagemathtutor.Data.StudentAssignment;
 import com.haemin.imagemathtutor.R;
 import com.haemin.imagemathtutor.Utils.ConfirmStarter;
-import com.haemin.imagemathtutor.View.Activity.AssignmentEditActivity;
 import com.haemin.imagemathtutor.View.UI.FileButton;
 
 import java.util.ArrayList;

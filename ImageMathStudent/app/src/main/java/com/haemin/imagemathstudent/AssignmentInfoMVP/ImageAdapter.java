@@ -1,7 +1,9 @@
 package com.haemin.imagemathstudent.AssignmentInfoMVP;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.haemin.imagemathstudent.Data.ServerFile;
 import com.haemin.imagemathstudent.R;
 
@@ -44,6 +47,17 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageHolder>
                 .load(image.getFileUrl())
                 .placeholder(R.drawable.e_mgt02)
                 .into(holder.submitImage);
+
+        ImagePopup imagePopup = new ImagePopup(context);
+        imagePopup.setBackgroundColor(Color.BLACK);  // Optional
+        imagePopup.setFullScreen(false); // Optional
+        imagePopup.setHideCloseIcon(false);  // Optional
+        imagePopup.setImageOnClickClose(false);  // Optional
+        imagePopup.initiatePopupWithGlide(image.getFileUrl());
+
+        holder.itemView.setOnClickListener(v -> {
+            imagePopup.viewPopup();
+        });
     }
 
     @Override

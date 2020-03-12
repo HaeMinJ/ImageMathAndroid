@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".View.Activity.AssignmentEditActivity">
+    tools:context=".AssignmentEditMVP.AssignmentEditActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -344,10 +344,11 @@
                 android:layout_height="3dp"
                 android:layout_marginTop="28dp"
                 android:background="@color/edit_disabled"
-                app:layout_constraintTop_toBottomOf="@id/btn_answer_file" />
+                app:layout_constraintTop_toBottomOf="@id/group_file" />
 
-            <com.haemin.imagemathtutor.View.UI.FileButton
-                android:id="@+id/btn_answer_file"
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/group_file"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"

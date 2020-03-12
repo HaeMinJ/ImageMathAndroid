@@ -1,4 +1,4 @@
-package com.haemin.imagemathtutor.View.Activity;
+package com.haemin.imagemathtutor.AssignmentEditMVP;
 
 import android.content.Context;
 import android.content.Intent;

@@ -43,7 +43,7 @@
             android:layout_height="14dp"
             android:layout_marginEnd="8dp"
             android:padding="2dp"
-            android:src="@drawable/img_showsubmit"
+            android:src="@drawable/img_showcomplete"
             app:layout_constraintTop_toTopOf="@id/dummy_text_unsubmit"
             app:layout_constraintBottom_toBottomOf="@id/dummy_text_unsubmit"
             app:layout_constraintRight_toLeftOf="@id/dummy_text_closed"/>
@@ -89,7 +89,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:padding="2dp"
-            android:src="@drawable/img_showexception"
+            android:src="@drawable/img_showsubmit"
             app:layout_constraintBottom_toBottomOf="@id/dummy_text_unsubmit"
             app:layout_constraintRight_toLeftOf="@id/dummy_text_unsubmit"
             app:layout_constraintTop_toTopOf="@id/dummy_text_unsubmit" />
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:text="예외"
+            android:text="통과"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".View.Activity.TestInfoActivity">
+    tools:context=".TestInfoMVP.TestInfoActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -69,6 +69,7 @@
             app:layout_constraintTop_toBottomOf="@id/dummy_group_answer_file" />
 
         <TextView
+            android:id="@+id/text_test_average"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/dummy_text_current_submit"
@@ -352,13 +353,13 @@
                 android:layout_height="3dp"
                 android:layout_marginTop="28dp"
                 android:background="@color/edit_disabled"
-                app:layout_constraintTop_toBottomOf="@id/btn_answer_file" />
+                app:layout_constraintTop_toBottomOf="@id/group_file" />
 
-            <com.haemin.imagemathtutor.View.UI.FileButton
-                android:id="@+id/btn_answer_file"
+            <LinearLayout
+                android:id="@+id/group_file"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:deleteable="false"
+                android:orientation="vertical"
                 android:layout_marginTop="18dp"
                 app:layout_constraintTop_toBottomOf="@id/dummy_text_answer" />
         </androidx.constraintlayout.widget.ConstraintLayout>

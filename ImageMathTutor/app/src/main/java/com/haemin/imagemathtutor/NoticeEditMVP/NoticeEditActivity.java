@@ -236,8 +236,8 @@ public class NoticeEditActivity extends AppCompatActivity implements NoticeEditC
 
             FileButton button = new FileButton(this);
             button.setFile(file);
-            button.setOnDeleteClickListener(file1 -> {
-                noticeEditPresenter.deleteFile(file.getFileSeq());
+            button.setOnDeleteClickListener((fileButton, file1) ->{
+                noticeEditPresenter.deleteFile(file1.getFileSeq());
             });
             button.setDeleteAble(true);
             holderFileGroup.addView(button);

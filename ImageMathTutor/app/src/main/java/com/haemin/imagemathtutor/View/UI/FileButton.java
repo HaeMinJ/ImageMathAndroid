@@ -27,6 +27,8 @@ public class FileButton extends RelativeLayout {
 
     public void setOnDeleteClickListener(OnDeleteClickListener onDeleteClickListener) {
         this.onDeleteClickListener = onDeleteClickListener;
+        if(onDeleteClickListener != null)
+            btnDeleteFile.setOnClickListener(v1 -> onDeleteClickListener.onDeleteClick(this, file));
     }
 
     public void setFile(ServerFile file) {
@@ -38,8 +40,6 @@ public class FileButton extends RelativeLayout {
         isDeleteAble = deleteAble;
         if(isDeleteAble){
             btnDeleteFile.setVisibility(VISIBLE);
-            if(onDeleteClickListener != null)
-                btnDeleteFile.setOnClickListener(v1 -> onDeleteClickListener.onDeleteClick(file));
         }else{
             btnDeleteFile.setVisibility(GONE);
         }
@@ -82,7 +82,7 @@ public class FileButton extends RelativeLayout {
         ButterKnife.bind(this,v);
     }
     public interface OnDeleteClickListener{
-        void onDeleteClick(ServerFile file);
+        void onDeleteClick(FileButton fileButton, ServerFile file);
     }
 
 }

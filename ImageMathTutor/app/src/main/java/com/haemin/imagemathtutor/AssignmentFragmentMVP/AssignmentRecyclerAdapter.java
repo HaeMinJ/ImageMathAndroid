@@ -42,6 +42,8 @@ public class AssignmentRecyclerAdapter  extends RecyclerView.Adapter<AssignmentR
         AssignmentDateHolder dateHolder = dateHolders.get(position);
         AssignmentInsideAdapter insideAdapter = new AssignmentInsideAdapter(context,dateHolder.getAssignments());
         holder.insideRecycler.setLayoutManager(new LinearLayoutManager(context,RecyclerView.VERTICAL,false));
+//        holder.insideRecycler.setNestedScrollingEnabled(false);
+//        holder.insideRecycler.setHasFixedSize(false);
         holder.insideRecycler.setAdapter(insideAdapter);
 
         long dateTime = dateHolder.getDate();
@@ -53,6 +55,11 @@ public class AssignmentRecyclerAdapter  extends RecyclerView.Adapter<AssignmentR
         holder.textAssignmentDay.setText(time);
 
     }
+    void notifyData(){
+        super.notifyDataSetChanged();
+
+    }
+
 
     @Override
     public int getItemCount() {
