@@ -2,7 +2,7 @@ package com.haemin.imagemathstudent.Data;
 
 import java.util.ArrayList;
 
-public class StudentAssignment{
+public class StudentAssignment extends Assignment{
         String userSeq;
         ArrayList<ServerFile> submitFiles;
         int submitState;

@@ -8,17 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/text_lecture_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
-            android:text="종로 이투스 수(가) 심화반"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -57,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:text="12.5 수(가) 심화반 과제 수정"
+                android:text="과제 등록"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="24dp"
-                android:text="등록일"
+                android:text="해당하는 수업"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -112,10 +101,10 @@
                 app:layout_constraintTop_toBottomOf="@id/dummy_text_end_day" />
 
             <TextView
-                android:id="@+id/text_upload_day"
+                android:id="@+id/text_assignment_lecture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2019.11.28 토"
+                android:text="클릭해서 선택하기"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintRight_toRightOf="parent"
@@ -125,7 +114,7 @@
                 android:id="@+id/text_end_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2019.12.17 화"
+                android:text="클릭해서 선택하기"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintRight_toRightOf="parent"
@@ -135,7 +124,7 @@
                 android:id="@+id/text_lecture_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2019.12.10 화"
+                android:text="클릭해서 선택하기"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintRight_toRightOf="parent"
@@ -175,7 +164,7 @@
             android:layout_marginTop="14dp"
             android:background="@color/edit_bg"
             android:gravity="center_vertical"
-            android:hint="과제이름 수정"
+            android:hint="과제 이름"
             android:inputType="text"
             android:maxLength="40"
             android:paddingStart="14dp"
@@ -190,9 +179,9 @@
             android:layout_marginStart="48dp"
             android:layout_marginTop="40dp"
             android:background="@color/edit_bg"
+            android:inputType="textMultiLine"
             android:padding="18dp"
-            android:hint="과제이름 수정"
-            android:inputType="text"
+            android:hint="과제 공지사항"
             android:maxLength="40"
             android:gravity="top"
             android:paddingStart="14dp"
@@ -217,6 +206,16 @@
                 android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/btn_add_file"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/img_edit"
+                app:layout_constraintTop_toTopOf="@id/dummy_text_answer"
+                app:layout_constraintBottom_toBottomOf="@id/dummy_text_answer"
+                app:layout_constraintLeft_toRightOf="@id/dummy_text_answer"
+                android:layout_marginStart="18dp"
+                android:elevation="0dp"/>
 
             <View
                 android:id="@+id/dummy_line_divide_1"
@@ -241,252 +240,5 @@
                 android:layout_marginTop="18dp"
                 app:layout_constraintTop_toBottomOf="@id/dummy_text_answer" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/dummy_text_current_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="18dp"
-        android:text="제출현황"
-        android:textColor="@android:color/black"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dummy_group_answer_file" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tab_list"
-        android:id="@+id/recycler_student_assignment" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tab_list"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/dummy_group_status">
-
-
-        <TextView
-            app:layout_constraintHorizontal_weight="0.75"
-            android:id="@+id/toggle_check_student"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:gravity="center"
-            android:text="인증"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/dummy_divide_1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_student_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="상태"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_weight="0.75"
-            app:layout_constraintLeft_toRightOf="@id/dummy_divide_1"
-            app:layout_constraintRight_toLeftOf="@id/dummy_divide_2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_student_seq"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="이름"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_weight="1.25"
-            app:layout_constraintLeft_toRightOf="@id/dummy_divide_2"
-            app:layout_constraintRight_toLeftOf="@id/dummy_divide_3"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_student_school"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="성적"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@id/dummy_divide_3"
-            app:layout_constraintRight_toLeftOf="@id/dummy_divide_4"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/btn_student_info"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="등수"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            app:layout_constraintHorizontal_weight="0.75"
-            app:layout_constraintLeft_toRightOf="@id/dummy_divide_4"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <View
-            android:id="@+id/dummy_divide_1"
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:background="#A7A7A7"
-            android:visibility="invisible"
-            app:layout_constraintLeft_toRightOf="@id/toggle_check_student"
-            app:layout_constraintRight_toLeftOf="@id/text_student_name" />
-
-        <View
-            android:id="@+id/dummy_divide_2"
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="#A7A7A7"
-            android:visibility="invisible"
-            app:layout_constraintLeft_toRightOf="@id/text_student_name"
-            app:layout_constraintRight_toLeftOf="@id/text_student_seq" />
-
-        <View
-            android:id="@+id/dummy_divide_3"
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="#A7A7A7"
-            android:visibility="invisible"
-            app:layout_constraintLeft_toRightOf="@id/text_student_seq"
-            app:layout_constraintRight_toLeftOf="@id/text_student_school" />
-
-        <View
-            android:id="@+id/dummy_divide_4"
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="#A7A7A7"
-            android:visibility="invisible"
-            app:layout_constraintLeft_toRightOf="@id/text_student_school"
-            app:layout_constraintRight_toLeftOf="@id/btn_student_info" />
-
-        <View
-            android:id="@+id/dummy_divide_under"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#A7A7A7"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/dummy_group_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:layout_marginTop="14dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dummy_text_current_submit">
-
-        <ImageView
-            android:id="@+id/dummy_icon_complete"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginEnd="8dp"
-            android:padding="2dp"
-            android:src="@drawable/icon_unsubmit"
-            app:layout_constraintBottom_toBottomOf="@id/dummy_text_unsubmit"
-            app:layout_constraintRight_toLeftOf="@id/dummy_text_unsubmit"
-            app:layout_constraintTop_toTopOf="@id/dummy_text_unsubmit" />
-
-        <ImageView
-            android:id="@+id/dummy_icon_submit"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginEnd="8dp"
-            android:padding="2dp"
-            android:src="@drawable/img_showsubmit"
-            app:layout_constraintBottom_toBottomOf="@id/dummy_text_unsubmit"
-            app:layout_constraintRight_toLeftOf="@id/dummy_text_submit"
-            app:layout_constraintTop_toTopOf="@id/dummy_text_unsubmit" />
-
-
-        <ImageView
-            android:id="@+id/dummy_icon_neglect"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:padding="2dp"
-            android:src="@drawable/icon_neglect"
-            app:layout_constraintBottom_toBottomOf="@id/dummy_text_unsubmit"
-            app:layout_constraintRight_toLeftOf="@id/dummy_text_neglect"
-            app:layout_constraintTop_toTopOf="@id/dummy_text_unsubmit" />
-
-
-        <ImageView
-            android:id="@+id/dummy_icon_exception"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginEnd="8dp"
-            android:padding="2dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_showexception"
-            app:layout_constraintBottom_toBottomOf="@id/dummy_text_unsubmit"
-            app:layout_constraintRight_toLeftOf="@id/dummy_text_exception"
-            app:layout_constraintTop_toTopOf="@id/dummy_text_unsubmit" />
-
-
-        <TextView
-            android:id="@+id/dummy_text_unsubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="미제출"
-            android:textColor="@android:color/black"
-            android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="@id/dummy_text_unsubmit"
-            app:layout_constraintRight_toLeftOf="@id/dummy_icon_submit"
-            app:layout_constraintTop_toTopOf="@id/dummy_text_unsubmit" />
-
-        <TextView
-            android:id="@+id/dummy_text_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="제출"
-            android:textColor="@android:color/black"
-            android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="@id/dummy_text_unsubmit"
-            app:layout_constraintRight_toLeftOf="@id/dummy_icon_neglect"
-            app:layout_constraintTop_toTopOf="@id/dummy_text_unsubmit" />
-
-        <TextView
-            android:id="@+id/dummy_text_neglect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="불성실"
-            android:textColor="@android:color/black"
-            android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="@id/dummy_text_unsubmit"
-            app:layout_constraintRight_toLeftOf="@id/dummy_icon_exception"
-            app:layout_constraintTop_toTopOf="@id/dummy_text_unsubmit" />
-
-        <TextView
-            android:id="@+id/dummy_text_exception"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="예외"
-            android:textColor="@android:color/black"
-            android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="@id/dummy_text_unsubmit"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/dummy_text_unsubmit" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

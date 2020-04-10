@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.text_find_pw)
     TextView textFindPW;
     @BindView(R.id.toggle_save_email)
-    ToggleButton toggleSaveEmail;
+    CheckBox toggleSaveEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

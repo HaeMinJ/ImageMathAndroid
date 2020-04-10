@@ -69,9 +69,9 @@ public class RegisterActivity extends AppCompatActivity {
     TextView textPwReConfirm;
 
     @BindView(R.id.toggle_gender_female)
-    ToggleButton toggleGenderFemale;
+    CheckBox toggleGenderFemale;
     @BindView(R.id.toggle_gender_male)
-    ToggleButton toggleGenderMale;
+    CheckBox toggleGenderMale;
 
     boolean isRecognized = false;
     String schoolSeq = "";
@@ -246,13 +246,7 @@ public class RegisterActivity extends AppCompatActivity {
         }else{
             registerField.put("phone",editPhone.getText().toString());
         }
-        if(editSchool.getText().toString().equals("")){
-            showToast("학교를 입력해주세요.");
-            editSchool.requestFocus();
-            return false;
-        }else{
-            registerField.put("schoolSeq",schoolSeq);
-        }
+            registerField.put("schoolName","조교");
 
         if(toggleGenderMale.isChecked()){
             registerField.put("gender","0");

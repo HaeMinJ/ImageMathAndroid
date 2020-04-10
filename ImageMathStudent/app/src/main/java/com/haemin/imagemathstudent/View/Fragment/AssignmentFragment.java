@@ -77,12 +77,12 @@ public class AssignmentFragment extends Fragment {
                     for(StudentAssignment assignment : assignments){
                         boolean hasSame = false;
                         for(Integer date : dates){
-                            if(((int)(assignment.getAssignment().getEndTime() / (1000*3600*24))) == date){
+                            if(((int)(assignment.getEndTime() / (1000*3600*24))) == date){
                                 hasSame = true;
                             }
                         }
                         if(!hasSame){
-                            dates.add((int)(assignment.getAssignment().getEndTime() / (1000*3600*24)));
+                            dates.add((int)(assignment.getEndTime() / (1000*3600*24)));
                         }
                     }
                     for(Integer date : dates){
@@ -93,7 +93,7 @@ public class AssignmentFragment extends Fragment {
                     }
                     for(AssignmentRecyclerAdapter.AssignmentDateHolder dateHolder : dateHolders){
                         for(StudentAssignment assignment : assignments){
-                            if(((int)(assignment.getAssignment().getEndTime() / (1000*3600*24))) == ((int)(dateHolder.getDate() / (1000*3600*24)))){
+                            if(((int)(assignment.getEndTime() / (1000*3600*24))) == ((int)(dateHolder.getDate() / (1000*3600*24)))){
                                 dateHolder.getAssignments().add(assignment);
                             }
                         }

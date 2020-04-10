@@ -80,6 +80,7 @@
 
             <TextView
                 android:id="@+id/dummy_text_end_day"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -116,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:text="클릭해서 선택하기"
                 android:textColor="@android:color/black"
+                android:visibility="gone"
                 android:textSize="12sp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/dummy_text_end_day" />
@@ -252,6 +254,20 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dummy_group_answer_file" />
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_test_xls_num"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintRight_toLeftOf="@id/btn_test_excel"
+            android:background="@color/edit_bg"
+            android:hint="20"
+            android:maxLength="3"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/btn_test_excel"
+            app:layout_constraintTop_toTopOf="@id/btn_test_excel"/>
         <Button
             android:id="@+id/btn_test_excel"
             android:layout_width="wrap_content"
@@ -261,10 +277,18 @@
             android:layout_marginEnd="24dp"
             app:layout_constraintRight_toRightOf="parent" />
 
+        <com.haemin.imagemathtutor.View.UI.FileButton
+            android:layout_marginTop="14dp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/btn_test_excel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_excel_file"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/tab_list"
             android:id="@+id/recycler_student_test" />
 
@@ -273,6 +297,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="24dp"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/dummy_group_status">
 
 
@@ -306,7 +331,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_student_seq"
+                android:id="@+id/text_student_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -362,7 +387,7 @@
                 android:background="#A7A7A7"
                 android:visibility="invisible"
                 app:layout_constraintLeft_toRightOf="@id/text_student_name"
-                app:layout_constraintRight_toLeftOf="@id/text_student_seq" />
+                app:layout_constraintRight_toLeftOf="@id/text_student_code" />
 
             <View
                 android:id="@+id/dummy_divide_3"
@@ -370,7 +395,7 @@
                 android:layout_height="match_parent"
                 android:background="#A7A7A7"
                 android:visibility="invisible"
-                app:layout_constraintLeft_toRightOf="@id/text_student_seq"
+                app:layout_constraintLeft_toRightOf="@id/text_student_code"
                 app:layout_constraintRight_toLeftOf="@id/text_student_school" />
 
             <View
@@ -395,6 +420,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="14dp"
+            android:visibility="gone"
             android:layout_marginTop="14dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_test_excel">

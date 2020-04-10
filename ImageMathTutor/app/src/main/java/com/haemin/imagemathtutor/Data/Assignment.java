@@ -3,7 +3,8 @@ package com.haemin.imagemathtutor.Data;
 import java.util.ArrayList;
 
 public class Assignment extends ServerData {
-    int assignmentSeq;
+    String assignmentSeq;
+    String lectureSeq;
     int submitNum;
     int acceptNum;
     int studentNum;
@@ -12,7 +13,7 @@ public class Assignment extends ServerData {
     long postTime;
     long endTime;
     long lectureTime;
-    ArrayList<ServerFile> solutionFiles;
+    ArrayList<ServerFile> answerFiles;
     String lectureName;
 
     public void set(Assignment assignment) {
@@ -25,8 +26,16 @@ public class Assignment extends ServerData {
         this.postTime = assignment.postTime;
         this.endTime = assignment.endTime;
         this.lectureTime = assignment.lectureTime;
-        this.solutionFiles = assignment.solutionFiles;
+        this.answerFiles = assignment.answerFiles;
         this.lectureName = assignment.lectureName;
+    }
+
+    public String getLectureSeq() {
+        return lectureSeq;
+    }
+
+    public void setLectureSeq(String lectureSeq) {
+        this.lectureSeq = lectureSeq;
     }
 
     public int getSubmitNum() {
@@ -69,11 +78,11 @@ public class Assignment extends ServerData {
         this.lectureName = lectureName;
     }
 
-    public int getAssignmentSeq() {
+    public String getAssignmentSeq() {
         return assignmentSeq;
     }
 
-    public void setAssignmentSeq(int assignmentSeq) {
+    public void setAssignmentSeq(String assignmentSeq) {
         this.assignmentSeq = assignmentSeq;
     }
 
@@ -110,11 +119,11 @@ public class Assignment extends ServerData {
     }
 
 
-    public ArrayList<ServerFile> getSolutionFiles() {
-        return solutionFiles;
+    public ArrayList<ServerFile> getAnswerFiles() {
+        return answerFiles;
     }
 
-    public void setSolutionFiles(ArrayList<ServerFile> solutionFiles) {
-        this.solutionFiles = solutionFiles;
+    public void setAnswerFiles(ArrayList<ServerFile> answerFiles) {
+        this.answerFiles = answerFiles;
     }
 }

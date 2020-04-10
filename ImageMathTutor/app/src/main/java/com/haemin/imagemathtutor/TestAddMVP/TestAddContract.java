@@ -14,12 +14,13 @@ public interface TestAddContract {
         void showToast(String text);
         void showSuccess(String text);
         void showLectureDialog(ArrayList<Lecture> lectures);
+        int getXlsNum();
+        String getLectureSeq();
 
 
     }
     interface TestAddPresenter{
         void uploadTest(HashMap<String, String> testMap, ArrayList<ServerFile> answerFiles,ServerFile xlsFile);
         void requestLectureData();
-
     }
 }

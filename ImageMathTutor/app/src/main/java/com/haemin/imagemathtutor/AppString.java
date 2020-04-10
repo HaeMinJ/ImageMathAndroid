@@ -15,6 +15,9 @@ public class AppString {
     public static final String ERROR_ADD_ASSIGNMENT = "과제를 정상적으로 등록하지 못했습니다.";
     public static final String ERROR_ADD_TEST = "테스트를 정상적으로 등록하지 못했습니다.";
 
+    public static final String ERROR_DELETE_FILE = "파일을 정상적으로 등록하지 못했습니다.";
+    public static final String ERROR_DELETE_USER = "학생을 정상적으로 삭제하지 못했습니다.";
+
     public static final String ERROR_LOAD_NOTICE_LIST = "공지사항을 정상적으로 불러오지 못했습니다.";
     public static final String ERROR_LOAD_ASSIGNMENT_LIST = "과제 목록을 정상적으로 불러오지 못했습니다.";
     public static final String ERROR_LOAD_TEST_LIST = "시험 목록을 정상적으로 불러오지 못했습니다.";

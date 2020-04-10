@@ -2,27 +2,27 @@ package com.haemin.imagemathtutor.Data;
 
 import java.util.ArrayList;
 
-public class StudentAssignment {
+public class StudentAssignment extends Assignment{
     String userSeq;
     ArrayList<ServerFile> submitFiles;
     int submitState;
-    Assignment assignment;
-    String assignmentSeq;
+    String assignmentAdmSeq;
+    long uploadTime;
 
-    public String getAssignmentSeq() {
-        return assignmentSeq;
+    public long getUploadTime() {
+        return uploadTime;
     }
 
-    public void setAssignmentSeq(String assignmentSeq) {
-        this.assignmentSeq = assignmentSeq;
+    public void setUploadTime(long uploadTime) {
+        this.uploadTime = uploadTime;
     }
 
-    public Assignment getAssignment() {
-        return assignment;
+    public String getAssignmentAdmSeq() {
+        return assignmentAdmSeq;
     }
 
-    public void setAssignment(Assignment assignment) {
-        this.assignment = assignment;
+    public void setAssignmentAdmSeq(String assignmentAdmSeq) {
+        this.assignmentAdmSeq = assignmentAdmSeq;
     }
 
     public String getUserSeq() {

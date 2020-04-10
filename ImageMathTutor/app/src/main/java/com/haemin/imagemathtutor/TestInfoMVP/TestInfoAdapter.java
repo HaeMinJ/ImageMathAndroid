@@ -38,8 +38,8 @@ public class TestInfoAdapter extends  RecyclerView.Adapter<TestInfoAdapter.TestI
         StudentTest studentTest = studentTests.get(position);
         holder.textAuthStatus.setText("제출");
         holder.textStudentName.setText(studentTest.getUserName());
-        holder.textStudentScore.setText(studentTest.getScore());
-        holder.textRank.setText(studentTest.getRank());
+        holder.textStudentScore.setText(studentTest.getScore()+"점");
+        holder.textRank.setText(studentTest.getRank()+"등");
     }
 
     @Override
@@ -57,7 +57,7 @@ public class TestInfoAdapter extends  RecyclerView.Adapter<TestInfoAdapter.TestI
         TextView textStudentName;
         @BindView(R.id.text_student_score)
         TextView textStudentScore;
-        @BindView(R.id.text_check_submit)
+        @BindView(R.id.text_rank)
         TextView textRank;
 
         public TestInfoHolder(@NonNull View itemView) {

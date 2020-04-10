@@ -14,9 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.haemin.imagemathtutor.AssignmentInfoMVP.AssignmentInfoActivity;
 import com.haemin.imagemathtutor.Data.Assignment;
 import com.haemin.imagemathtutor.R;
-import com.haemin.imagemathtutor.AssignmentInfoMVP.AssignmentInfoActivity;
 
 import java.util.ArrayList;
 
@@ -44,31 +44,19 @@ public class AssignmentInsideAdapter extends RecyclerView.Adapter<AssignmentInsi
         holder.textAssignmentName.setText(assignment.getTitle());
         holder.textLectureName.setText(assignment.getLectureName());
 
-        switch (assignment.getCode()) {
-            case 0:
-                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_neglect));
-                break;
-            case 1:
-                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
-                break;
-            case 2:
-                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showcomplete));
-                break;
-            case 3:
-                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showexception));
-                break;
-        }
+        holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
+
         if (assignment.getEndTime() > System.currentTimeMillis()) {
             holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showcomplete));
         }
         holder.itemView.setOnClickListener(v -> {
-            AssignmentInfoActivity.start(context,assignment);
+            AssignmentInfoActivity.start(context, assignment);
         });
-        final SpannableStringBuilder sp = new SpannableStringBuilder(assignment.getSubmitNum()+"/"+assignment.getStudentNum());
+        final SpannableStringBuilder sp = new SpannableStringBuilder(assignment.getSubmitNum() + "/" + assignment.getStudentNum());
 //sp.setSpan(new ForegroundColorSpan(Color.rgb(255, 255, 255)), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.etoos_color)), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.etoos_color)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.textAssignmentSubmitNum.setText(sp);
-        holder.textStudentNum.setText(assignment.getStudentNum()+"명");
+        holder.textStudentNum.setText(assignment.getStudentNum() + "명");
         holder.textUploadDay.setText(DateUtils.getRelativeTimeSpanString(assignment.getPostTime()));
         holder.textEndDay.setText(DateUtils.getRelativeTimeSpanString(assignment.getEndTime()));
     }

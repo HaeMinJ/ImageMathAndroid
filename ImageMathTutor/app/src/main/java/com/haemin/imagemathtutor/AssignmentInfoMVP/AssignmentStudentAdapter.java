@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +22,7 @@ import com.haemin.imagemathtutor.Data.StudentAssignment;
 import com.haemin.imagemathtutor.Data.User;
 import com.haemin.imagemathtutor.GlobalApplication;
 import com.haemin.imagemathtutor.R;
+import com.haemin.imagemathtutor.View.UI.ImagePopupDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,11 +33,13 @@ public class AssignmentStudentAdapter extends RecyclerView.Adapter<AssignmentStu
     Context context;
     ArrayList<StudentAssignment> studentAssignments;
     Assignment mainAssignment;
+    AssignmentInfoContract.AssignmentInfoPresenter presenter;
 
-    public AssignmentStudentAdapter(Context context, ArrayList<StudentAssignment> studentAssignments, Assignment assignment) {
+    public AssignmentStudentAdapter(Context context, ArrayList<StudentAssignment> studentAssignments, Assignment assignment, AssignmentInfoContract.AssignmentInfoPresenter presenter) {
         this.context = context;
         this.studentAssignments = studentAssignments;
         mainAssignment = assignment;
+        this.presenter = presenter;
     }
 
     @NonNull
@@ -52,40 +56,42 @@ public class AssignmentStudentAdapter extends RecyclerView.Adapter<AssignmentStu
         switch (assignment.getSubmitState()){
             case 0:
                 holder.textAuthStatus.setText("미제출");
-                holder.textAuthStatus.setTextColor(context.getResources().getColor(android.R.color.black));
+                holder.imageAuthStatus.setImageDrawable(context.getDrawable(R.drawable.img_showunsubmit));
                 break;
             case 1:
                 holder.textAuthStatus.setText("제출");
-                holder.textAuthStatus.setTextColor(context.getResources().getColor(R.color.yellow));
+                holder.imageAuthStatus.setImageDrawable(context.getDrawable(R.drawable.img_showcomplete));
 
                 break;
             case 2:
-                holder.textAuthStatus.setText("불성실");
-                holder.textAuthStatus.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+                holder.textAuthStatus.setText("A등급");
+                holder.imageAuthStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
                 break;
             case 3:
-                holder.textAuthStatus.setText("통과");
-                holder.textAuthStatus.setTextColor(context.getResources().getColor(R.color.etoos_color));
+                holder.textAuthStatus.setText("B등급");
+                holder.imageAuthStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
+                break;
+            case 4:
+                holder.textAuthStatus.setText("C등급");
+                holder.imageAuthStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
+                break;
+            case 5:
+                holder.textAuthStatus.setText("불성실");
+                holder.imageAuthStatus.setImageDrawable(context.getDrawable(R.drawable.img_showneglect));
                 break;
         }
-        if((assignment.getSubmitState() == 1 || assignment.getSubmitState() == 3)){
+        if(assignment.getSubmitState() != 0){
             GlobalApplication.getAPIService().getAssignmentSubmitFiles(GlobalApplication.getAccessToken(),assignment.getAssignmentSeq()+"",assignment.getUserSeq()).enqueue(new Callback<ArrayList<ServerFile>>() {
                 @Override
                 public void onResponse(Call<ArrayList<ServerFile>> call, Response<ArrayList<ServerFile>> response) {
                     if(response.code() == 200 && response.body() != null){
                         assignment.getSubmitFiles().addAll(response.body());
-                        ImagePopup imagePopup = new ImagePopup(context);
-                        imagePopup.setBackgroundColor(Color.BLACK);  // Optional
-                        imagePopup.setFullScreen(false); // Optional
-                        imagePopup.setHideCloseIcon(false);  // Optional
-                        imagePopup.setImageOnClickClose(false);  // Optional
-                        imagePopup.initiatePopupWithGlide(assignment.getSubmitFiles().get(0).getFileUrl());
-
+                        ImagePopupDialog imagePopupDialog = new ImagePopupDialog(assignment.getAssignmentSeq()+"", assignment.getAssignmentAdmSeq(),response.body(), presenter);
                         holder.textCheckSubmit.setOnClickListener(v -> {
-                            imagePopup.viewPopup();
+                            imagePopupDialog.show(((AppCompatActivity)context).getSupportFragmentManager(),"IMAGE_POPUP");
                         });
                     }else{
-                        Toast.makeText(context,"제출된 과제정보를 불러올 수 없습니다.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"학생이 과제를 제출하지 않았습니다.",Toast.LENGTH_SHORT).show();
                         Log.e("AssignmentStudentAdp",response.message());
                     }
                 }
@@ -93,6 +99,7 @@ public class AssignmentStudentAdapter extends RecyclerView.Adapter<AssignmentStu
                 @Override
                 public void onFailure(Call<ArrayList<ServerFile>> call, Throwable t) {
                     Log.e("AssignmentStudentAdp",t.getMessage(),t);
+                    Toast.makeText(context,"학생이 과제를 제출하지 않았습니다.",Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -139,7 +146,7 @@ public class AssignmentStudentAdapter extends RecyclerView.Adapter<AssignmentStu
         ImageView imageAuthStatus;
         @BindView(R.id.text_student_name)
         TextView textStudentName;
-        @BindView(R.id.text_student_seq)
+        @BindView(R.id.text_student_code)
         TextView textStudentSeq;
         @BindView(R.id.text_check_submit)
         TextView textCheckSubmit;

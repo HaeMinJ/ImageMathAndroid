@@ -10,12 +10,17 @@ public class User extends ServerData{
     String password;
     String lectureSeqs; // "3,5,6,~"
     String reqLectureSeqs;
-    int schoolSeq;
+    String schoolName;
     String phone;
     String accessToken;
 
+    public String getSchoolName() {
+        return schoolName;
+    }
 
-
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
 
     public User(int userSeq, String name, String birthday, String email, String password, String lectureSeqs, String reqLectureSeqs, int schoolSeq, String phone) {
         this.userSeq = userSeq;
@@ -25,7 +30,6 @@ public class User extends ServerData{
         this.password = password;
         this.lectureSeqs = lectureSeqs;
         this.reqLectureSeqs = reqLectureSeqs;
-        this.schoolSeq = schoolSeq;
         this.phone = phone;
     }
 
@@ -93,13 +97,7 @@ public class User extends ServerData{
         this.reqLectureSeqs = reqLectureSeqs;
     }
 
-    public int getSchoolSeq() {
-        return schoolSeq;
-    }
 
-    public void setSchoolSeq(int schoolSeq) {
-        this.schoolSeq = schoolSeq;
-    }
 
     public String getPhone() {
         return phone;

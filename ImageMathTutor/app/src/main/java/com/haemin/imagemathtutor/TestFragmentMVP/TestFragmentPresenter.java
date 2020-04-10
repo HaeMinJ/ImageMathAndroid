@@ -48,7 +48,7 @@ public class TestFragmentPresenter implements TestFragmentContract.TestFragmentP
                 .enqueue(new Callback<ArrayList<Test>>() {
                     @Override
                     public void onResponse(Call<ArrayList<Test>> call, Response<ArrayList<Test>> response) {
-                        if(response.code() == 200 && response.body() != null ){
+                        if(response.code() == 200 && response.body() != null && response.body().size() != 0){
                             if(response.body().get(0) == null){
                                 testView.showToast("시험 목록이 비었습니다.");
                             }else{

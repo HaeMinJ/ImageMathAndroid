@@ -1,8 +1,8 @@
 package com.haemin.imagemathstudent.AssignmentInfoMVP;
 
 import android.util.Log;
-import android.widget.Toast;
 import com.esafirm.imagepicker.model.Image;
+import com.haemin.imagemathstudent.Data.Assignment;
 import com.haemin.imagemathstudent.Data.StudentAssignment;
 import com.haemin.imagemathstudent.SingleTon.AppString;
 import com.haemin.imagemathstudent.SingleTon.GlobalApplication;
@@ -73,7 +73,22 @@ public class AssignmentInfoPresenter implements AssignmentInfoContract.Assignmen
     }
 
     @Override
-    public void downloadFile(String url) {
+    public void getAnswerFilesInfo(String assignmentSeq) {
+        GlobalApplication.getAPIService().getAssignmentInfo(GlobalApplication.getAccessToken(),assignmentSeq).enqueue(new Callback<Assignment>() {
+            @Override
+            public void onResponse(Call<Assignment> call, Response<Assignment> response) {
+                if(response.code() == 200 && response.body() != null){
+                    infoView.updateAnswerView(response.body().getAnswerFiles());
+                }else{
+                    Log.e("AssignmentInfoPresenter",response.message());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Assignment> call, Throwable t) {
+                infoView.showToast(AppString.ERROR_NETWORK_MESSAGE);
+                Log.e("AssignmentInfoPresenter",t.getMessage(),t);
+            }
+        });
     }
 }

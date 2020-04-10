@@ -44,9 +44,15 @@ public interface RetrofitInterface {
 
     @GET("/assignment/tutor/submit/{assignmentSeq}")
     Call<ArrayList<ServerFile>> getAssignmentSubmitFiles(@Header("x-access-token")String accessToken,@Path("assignmentSeq")String assignmentSeq,@Query("userSeq") String userSeq);
+
     @GET("/assignment/tutor/{assignmentSeq}")
     Call<ArrayList<StudentAssignment>> getStudentAssignmentList(@Header("x-access-token") String accessToken,@Path("assignmentSeq")String assignmentSeq, @Query("page") int page);
 
+    @GET("/assignment/tutor/sub/byStudent")
+    Call<ArrayList<StudentAssignment>> getStudentSubmitAssignmentList(@Header("x-access-token")String accessToken,@Query("userSeq") String userSeq);
+
+    @DELETE("/assignment/delete/answerFile/{fileSeq}")
+    Call<Void> deleteAnswerFile(@Header("x-access-token")String accessToken, @Path("fileSeq")String fileSeq);
     @GET("/assignment")
 //ok  assignmentInfo
     Call<ArrayList<Assignment>> getAssignmentList(@Header("x-access-token") String accessToken, @Query("page") int page);
@@ -54,6 +60,10 @@ public interface RetrofitInterface {
     @FormUrlEncoded
     @POST("/assignment/add")
     Call<Assignment> postAssignmentInfo(@Header("x-access-token") String accessToken, @FieldMap Map<String, String> assignmentField);
+
+    @FormUrlEncoded
+    @POST("/assignment/edit")
+    Call<Assignment> editAssignmentInfo(@Header("x-access-token") String accessToken, @FieldMap Map<String, String> assignmentField);
 
     @Multipart
     @POST("/assignment/add/answerFile/{assignmentSeq}")
@@ -63,6 +73,9 @@ public interface RetrofitInterface {
 //assignment/{assignmentSeq}:1  이런식으로 경로작성 ok    내일 만들거 studentAssignment 필요함
     Call<Assignment> getAssignmentInfo(@Header("x-access-token")String accessToken, @Path("assignmentSeq") String assignmentSeq);
 
+    @FormUrlEncoded
+    @PATCH("/assignment/assignmentAdm/{assignmentAdmSeq}")
+    Call<Void> setAssignmentAdmStatus(@Header("x-access-token")String accessToken, @Path("assignmentAdmSeq") String assignmentAdmSeq, @Field("submitState")int submitState);
 
     @GET("/lecture")
 //수업 리스트 출력 ok  tutor : 모든수업, student : 듣는수업
@@ -73,6 +86,8 @@ public interface RetrofitInterface {
 //경로바꿈 ok
     Call<Void> addLecture(@Header("x-access-token") String accessToken, @FieldMap Map<String, String> lectureField);
 
+    @GET("/lecture/tutor")
+    Call<ArrayList<Lecture>> getStudentLectureList(@Header("x-access-token")String accessToken,@Query("userSeq")String userSeq);
     /*
     academySeq, name, weekDay, time, totalDate, week, studentNum, userType
      */
@@ -92,7 +107,10 @@ public interface RetrofitInterface {
 
     @GET("/lecture/student/{lectureSeq}")
 //보류  mysql contain 내일 확인바람
-    ArrayList<User> getStudentList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq);
+    Call<ArrayList<User>> getStudentList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq);
+
+    @DELETE("/lecture/student/{lectureSeq}/{userSeq}")
+    Call<Void> deleteStudent(@Header("x-access-token")String accessToken, @Path("lectureSeq")String lectureSeq, @Path("userSeq") String userSeq);
 
     @GET("/test/student/{lectureSeq}")
 //보류 testAdm userSeq, lectureSeq 해당 데이터리스트
@@ -121,11 +139,11 @@ public interface RetrofitInterface {
 
     @Multipart
     @POST("/test/answer/{testSeq}")
-    Call<Test> addTestAnswerFile(@Header("x-access-token")String accessToken,@Path("testSeq") String testSeq, @Part MultipartBody.Part answerFile);
+    Call<Void> addTestAnswerFile(@Header("x-access-token")String accessToken,@Path("testSeq") String testSeq, @Part MultipartBody.Part answerFile);
 
     @Multipart
-    @POST("/test/excel/{testSeq}")
-    Call<Test> postTestWithExcel(@Header("x-access-token") String accessToken, @Path("testSeq") String testSeq, @Part MultipartBody.Part excelFile);
+    @POST("/test/tutor/uploadXls/{testSeq}")
+    Call<Void> postTestWithExcel(@Header("x-access-token") String accessToken, @Path("testSeq") String testSeq,@Part("xlsLength")int xlsLength, @Part("lectureSeq")String lectureSeq,@Part MultipartBody.Part excelFile);
 
     @FormUrlEncoded
     @POST("/auth/register")

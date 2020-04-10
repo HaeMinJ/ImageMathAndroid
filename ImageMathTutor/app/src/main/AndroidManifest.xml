@@ -11,14 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AssignmentAddMVP.AssignmentAddActivity"></activity>
+        <activity android:name=".StudentInfoMVP.StudentInfoActivity"></activity>
+        <activity android:name=".AssignmentAddMVP.AssignmentAddActivity" />
         <activity android:name=".TestAddMVP.TestAddActivity" />
         <activity android:name=".TestEditMVP.TestEditActivity" />
         <activity android:name=".TestInfoMVP.TestInfoActivity" />
         <activity android:name=".AssignmentInfoMVP.AssignmentInfoActivity" />
         <activity android:name=".AssignmentEditMVP.AssignmentEditActivity" />
         <activity android:name=".View.Activity.StudentTestActivity" />
-        <activity android:name=".View.Activity.StudentManageActivity" />
+        <activity android:name=".StudentManageMVP.StudentManageActivity" />
         <activity android:name=".View.Activity.RecognitionActivity" />
         <activity android:name=".LectureAddMVP.AddLectureActivity" />
         <activity android:name=".NoticeEditMVP.NoticeEditActivity" />
@@ -44,8 +45,8 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

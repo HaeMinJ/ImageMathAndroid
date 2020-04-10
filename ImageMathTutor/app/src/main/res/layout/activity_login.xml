@@ -74,14 +74,14 @@
 
     <ImageView
         android:id="@+id/etoos_logo"
-        android:layout_width="180dp"
+        android:layout_width="60dp"
         android:layout_height="0dp"
-        android:layout_marginTop="40dp"
         android:src="@drawable/logo_etoos"
         app:layout_constraintDimensionRatio="315:74"
+        android:layout_marginBottom="24dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_find_pw" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/text_register"
@@ -120,16 +120,23 @@
         app:layout_constraintRight_toLeftOf="@id/text_find_pw"
         app:layout_constraintTop_toTopOf="@id/dummy_line" />
 
-    <ToggleButton
+    <CheckBox
         android:id="@+id/toggle_save_email"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="14dp"
-        android:textOff="이메일 저장하기"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_pw" />
 
+    <TextView
+        android:layout_marginStart="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/toggle_save_email"
+        app:layout_constraintTop_toTopOf="@id/toggle_save_email"
+        app:layout_constraintBottom_toBottomOf="@id/toggle_save_email"
+        android:text="이메일 저장하기"/>
     <View
         android:id="@+id/dummy_line"
         android:layout_width="0dp"

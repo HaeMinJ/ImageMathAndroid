@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +17,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
+import com.haemin.imagemathstudent.Data.Assignment;
 import com.haemin.imagemathstudent.Data.ServerFile;
 import com.haemin.imagemathstudent.Data.StudentAssignment;
 import com.haemin.imagemathstudent.R;
+import com.haemin.imagemathstudent.SingleTon.GlobalApplication;
 import com.haemin.imagemathstudent.Utils.ConfirmStarter;
 import com.haemin.imagemathstudent.View.UI.FileButton;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.ArrayList;
 
@@ -39,7 +45,7 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
     @BindView(R.id.text_overlay_file)
     TextView textOverlayFile;
     @BindView(R.id.btn_answer_file)
-    FileButton btnAnswerFile;
+    LinearLayout groupFile;
     @BindView(R.id.text_upload_day)
     TextView textUploadDay;
     @BindView(R.id.text_end_day)
@@ -50,6 +56,7 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
     Button btnAddSubmit;
     @BindView(R.id.recycler_submit)
     RecyclerView recyclerSubmit;
+
     ImageAdapter imageAdapter;
     ArrayList<ServerFile> imageFiles;
 
@@ -80,6 +87,8 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
 
     @Override
     public void updateView(StudentAssignment studentAssignment) {
+
+
         switch (studentAssignment.getSubmitState()){
             case 0:
                 textSubmitState.setText("미제출");
@@ -89,28 +98,40 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
             case 1:
                 textSubmitState.setText("제출");
                 textSubmitState.setTextColor(Color.YELLOW);
-                textOverlayFile.setVisibility(View.GONE);
-                btnAnswerFile.setOnClickListener(v -> {
-                    presenter.downloadFile(studentAssignment.getAssignment().getSolutionFile().getFileUrl());
-                });
+                textOverlayFile.setVisibility(View.VISIBLE);
                 break;
             case 2:
+                textSubmitState.setText("A등급");
+                textSubmitState.setTextColor(getResources().getColor(R.color.etoos_color));
+                textOverlayFile.setVisibility(View.GONE);
+                presenter.getAnswerFilesInfo(assignmentSeq);
+                break;
+            case 3:
+                textSubmitState.setText("B등급");
+                textSubmitState.setTextColor(getResources().getColor(R.color.etoos_color));
+                textOverlayFile.setVisibility(View.GONE);
+                presenter.getAnswerFilesInfo(assignmentSeq);
+                break;
+
+            case 4:
+                textSubmitState.setText("C등급");
+                textSubmitState.setTextColor(getResources().getColor(R.color.etoos_color));
+                textOverlayFile.setVisibility(View.GONE);
+                presenter.getAnswerFilesInfo(assignmentSeq);
+                break;
+
+            case 5:
                 textSubmitState.setText("불성실");
                 textSubmitState.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
                 textOverlayFile.setVisibility(View.VISIBLE);
                 break;
-            case 3:
-                textSubmitState.setText("통과");
-                textSubmitState.setTextColor(getResources().getColor(R.color.etoos_color));
-                textOverlayFile.setVisibility(View.VISIBLE);
-                break;
         }
-        textLectureName.setText(studentAssignment.getAssignment().getLectureName());
-        textAssignmentName.setText(studentAssignment.getAssignment().getTitle());
-        textAssignmentNotice.setText(studentAssignment.getAssignment().getContents());
-        textEndDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getEndTime()));
-        textLectureDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getLectureTime()));
-        textUploadDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getAssignment().getPostTime()));
+        textLectureName.setText(studentAssignment.getLectureName());
+        textAssignmentName.setText(studentAssignment.getTitle());
+        textAssignmentNotice.setText(studentAssignment.getContents());
+        textEndDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getEndTime()));
+        textLectureDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getLectureTime()));
+        textUploadDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getPostTime()));
         btnAddSubmit.setOnClickListener(v -> {
             ImagePicker.create(this)
                     .start();
@@ -118,6 +139,23 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
         imageFiles.clear();
         imageFiles.addAll(studentAssignment.getSubmitFiles());
         imageAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void updateAnswerView(ArrayList<ServerFile> answerFiles) {
+
+        if(answerFiles != null){
+            groupFile.removeAllViews();
+            for(ServerFile serverFile : answerFiles){
+                FileButton fileButton = new FileButton(this);
+                fileButton.setFile(serverFile);
+                fileButton.setDeleteAble(false);
+                groupFile.addView(fileButton);
+            }
+        }else{
+            Toast.makeText(this,"해설지가 존재하지 않습니다.\n관련 조교에게 문의해주세요.",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

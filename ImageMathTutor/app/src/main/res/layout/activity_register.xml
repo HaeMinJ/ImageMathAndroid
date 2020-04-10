@@ -88,6 +88,7 @@
             app:layout_constraintTop_toBottomOf="@id/viewholder_lecture" />
 
         <Button
+            android:visibility="invisible"
             android:id="@+id/btn_search_school"
             android:layout_width="70dp"
             android:layout_height="50dp"
@@ -308,6 +309,7 @@
             app:layout_constraintTop_toBottomOf="@+id/dummy_text_lecture" />
 
         <EditText
+            android:visibility="invisible"
             android:id="@+id/edit_school"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -568,6 +570,7 @@
             app:layout_constraintTop_toBottomOf="@id/edit_code" />
 
         <TextView
+            android:visibility="invisible"
             android:id="@+id/dummy_text_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -581,30 +584,22 @@
             app:layout_constraintTop_toBottomOf="@id/btn_add_lecture" />
 
 
-        <ToggleButton
+        <CheckBox
             android:id="@+id/toggle_gender_male"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_marginTop="14dp"
-            android:background="@drawable/checkbox_toggle"
             android:checked="false"
-            android:text=""
-            android:textOff=""
-            android:textOn=""
             app:layout_constraintLeft_toLeftOf="@id/dummy_text_gender"
             app:layout_constraintTop_toBottomOf="@id/dummy_text_gender" />
 
-        <ToggleButton
+        <CheckBox
             android:id="@+id/toggle_gender_female"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_marginLeft="140dp"
             android:layout_marginTop="14dp"
-            android:background="@drawable/checkbox_toggle"
             android:checked="false"
-            android:text=""
-            android:textOff=""
-            android:textOn=""
             app:layout_constraintLeft_toRightOf="@id/dummy_text_gender_male"
             app:layout_constraintTop_toBottomOf="@id/dummy_text_gender" />
 

@@ -37,8 +37,8 @@ public class AssignmentInsideAdapter extends RecyclerView.Adapter<AssignmentInsi
     @Override
     public void onBindViewHolder(@NonNull InsideViewHolder holder, int position) {
         StudentAssignment assignment = assignments.get(position);
-        holder.textAssignmentName.setText(assignment.getAssignment().getTitle());
-        holder.textLectureName.setText(assignment.getAssignment().getLectureName());
+        holder.textAssignmentName.setText(assignment.getTitle());
+        holder.textLectureName.setText(assignment.getLectureName());
 
         switch (assignment.getSubmitState()) {
             case 0:
@@ -48,17 +48,23 @@ public class AssignmentInsideAdapter extends RecyclerView.Adapter<AssignmentInsi
                 holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showcomplete));
                 break;
             case 2:
-                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_neglect));
+                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
                 break;
             case 3:
                 holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
                 break;
+            case 4:
+                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.img_showsubmit));
+                break;
+            case 5:
+                holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_neglect));
+                break;
         }
-        if (assignment.getAssignment().getEndTime() > System.currentTimeMillis()) {
+        if (assignment.getEndTime() > System.currentTimeMillis()) {
             holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_neglect));
         }
         holder.itemView.setOnClickListener(v -> {
-            AssignmentInfoActivity.start(context, assignment.getAssignment().getAssignmentSeq() + "");
+            AssignmentInfoActivity.start(context, assignment.getAssignmentSeq() + "");
         });
     }
 

@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface RetrofitInterface {
-
     @GET("/alarm")
 //userSeq로 LectureSeqs찾고 해당 알람리스트 출력 수정필요
     Call<ArrayList<Alarm>> getAlarmList(@Header("x-access-token") String accessToken);
@@ -21,7 +20,11 @@ public interface RetrofitInterface {
     Call<ArrayList<Notice>> getNoticeList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
 
 
-//경로바꿈 ok
+    @GET("/assignment/{assignmentSeq}")
+//assignment/{assignmentSeq}:1  이런식으로 경로작성 ok    내일 만들거 studentAssignment 필요함
+    Call<Assignment> getAssignmentInfo(@Header("x-access-token")String accessToken, @Path("assignmentSeq") String assignmentSeq);
+
+    //경로바꿈 ok
     @GET("/account/school")
     Call<ArrayList<School>> getSchoolList();
 

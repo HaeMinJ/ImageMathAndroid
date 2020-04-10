@@ -8,7 +8,7 @@ public class Test extends ServerData{
     long postTime;
     long endTime;
     long lectureTime;
-    ArrayList<ServerFile> solutionFiles;
+    ArrayList<ServerFile> answerFiles;
     int averageScore;
     int studentNum;
     String contents;
@@ -86,11 +86,11 @@ public class Test extends ServerData{
         this.lectureTime = lectureTime;
     }
 
-    public ArrayList<ServerFile> getSolutionFiles() {
-        return solutionFiles;
+    public ArrayList<ServerFile> getAnswerFiles() {
+        return answerFiles;
     }
 
-    public void setSolutionFiles(ArrayList<ServerFile> solutionFiles) {
-        this.solutionFiles = solutionFiles;
+    public void setAnswerFiles(ArrayList<ServerFile> answerFiles) {
+        this.answerFiles = answerFiles;
     }
 }

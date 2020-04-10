@@ -31,13 +31,12 @@
         app:layout_constraintLeft_toRightOf="@+id/toggle_except_expire"
         app:layout_constraintTop_toTopOf="@id/toggle_except_expire" />
 
-    <ToggleButton
+    <CheckBox
         android:id="@+id/toggle_except_expire"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginTop="14dp"
-        android:background="@drawable/checkbox_toggle"
         android:elevation="0dp"
         android:text="@null"
         android:textOff="@null"

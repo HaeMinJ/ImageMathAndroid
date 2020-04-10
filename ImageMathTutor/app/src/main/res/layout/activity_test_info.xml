@@ -130,7 +130,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_student_seq"
+                android:id="@+id/text_student_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -186,7 +186,7 @@
                 android:background="#A7A7A7"
                 android:visibility="invisible"
                 app:layout_constraintLeft_toRightOf="@id/text_student_name"
-                app:layout_constraintRight_toLeftOf="@id/text_student_seq" />
+                app:layout_constraintRight_toLeftOf="@id/text_student_code" />
 
             <View
                 android:id="@+id/dummy_divide_3"
@@ -194,7 +194,7 @@
                 android:layout_height="match_parent"
                 android:background="#A7A7A7"
                 android:visibility="invisible"
-                app:layout_constraintLeft_toRightOf="@id/text_student_seq"
+                app:layout_constraintLeft_toRightOf="@id/text_student_code"
                 app:layout_constraintRight_toLeftOf="@id/text_student_school" />
 
             <View

@@ -8,11 +8,49 @@ public class User extends ServerData {
     String password;
     String lectureSeqs; // "3,5,6,~"
     String reqLectureSeqs;
-    int schoolSeq;
+    String schoolName;
     String phone;
     String accessToken;
+    String studentCode;
+    long registerTime;
+    int gender;
+    public static final int GENDER_MALE = 0;
+
+    public static final int GENDER_FEMALE = 1;
+
     boolean isChecked = false;
 
+    public long getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(long registerTime) {
+        this.registerTime = registerTime;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public String getStudentCode() {
+        return studentCode;
+    }
+
+    public void setStudentCode(String studentCode) {
+        this.studentCode = studentCode;
+    }
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
 
     public boolean isChecked() {
         return isChecked;
@@ -86,13 +124,6 @@ public class User extends ServerData {
         this.reqLectureSeqs = reqLectureSeqs;
     }
 
-    public int getSchoolSeq() {
-        return schoolSeq;
-    }
-
-    public void setSchoolSeq(int schoolSeq) {
-        this.schoolSeq = schoolSeq;
-    }
 
     public String getPhone() {
         return phone;

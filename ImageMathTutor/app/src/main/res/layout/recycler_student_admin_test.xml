@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="#BFBFBF"
         android:text="세부정보"
-        app:layout_constraintLeft_toRightOf="@id/dummy_divide_4"
+        app:layout_constraintLeft_toRightOf="@id/dummy_divide_3"
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
@@ -42,7 +42,7 @@
 
     <TextView
         android:textColor="@android:color/black"
-        android:id="@+id/text_student_seq"
+        android:id="@+id/text_student_score"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -52,20 +52,6 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@id/dummy_divide_2"
         app:layout_constraintRight_toLeftOf="@id/dummy_divide_3"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:textColor="@android:color/black"
-        android:id="@+id/text_student_school"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="0"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintLeft_toRightOf="@id/dummy_divide_3"
-        app:layout_constraintRight_toLeftOf="@id/dummy_divide_4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -85,7 +71,7 @@
         android:background="#A7A7A7"
         android:visibility="visible"
         app:layout_constraintLeft_toRightOf="@id/text_student_name"
-        app:layout_constraintRight_toLeftOf="@id/text_student_seq" />
+        app:layout_constraintRight_toLeftOf="@id/text_student_score" />
 
     <View
         android:id="@+id/dummy_divide_3"
@@ -93,16 +79,7 @@
         android:layout_height="match_parent"
         android:background="#A7A7A7"
         android:visibility="visible"
-        app:layout_constraintLeft_toRightOf="@id/text_student_seq"
-        app:layout_constraintRight_toLeftOf="@id/text_student_school" />
-
-    <View
-        android:id="@+id/dummy_divide_4"
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="#A7A7A7"
-        android:visibility="visible"
-        app:layout_constraintLeft_toRightOf="@id/text_student_school"
+        app:layout_constraintLeft_toRightOf="@id/text_student_score"
         app:layout_constraintRight_toLeftOf="@id/btn_student_info" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

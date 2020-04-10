@@ -67,7 +67,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:layout_marginStart="14dp"
-            android:id="@+id/text_average_rank"
+            android:id="@+id/text_recent_my_score"
             android:textSize="18sp"
             android:paddingTop="24dp"
             android:gravity="center_horizontal"
@@ -76,29 +76,28 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toLeftOf="@id/text_average_score"
             app:layout_constraintDimensionRatio="238:190"
-            android:background="@drawable/box_showavgrank"
-            android:text="9등"
+            android:background="@drawable/box_showrecentscore"
+            android:text="0등"
             android:layout_width="0dp"
             android:layout_height="0dp"/>
-
         <TextView
             android:id="@+id/text_average_score"
             android:textSize="18sp"
             android:paddingTop="24dp"
             android:gravity="center_horizontal"
             android:textColor="@android:color/white"
-            app:layout_constraintLeft_toRightOf="@id/text_average_rank"
-            app:layout_constraintRight_toLeftOf="@+id/text_recent_score"
+            app:layout_constraintLeft_toRightOf="@id/text_recent_my_score"
+            app:layout_constraintRight_toLeftOf="@+id/text_recent_rank"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintDimensionRatio="238:190"
-            android:background="@drawable/box_showavgrank"
-            android:text="9등"
+            android:background="@drawable/box_showavgscore"
+            android:text="0등"
             android:layout_width="0dp"
             android:layout_height="0dp"/>
 
         <TextView
             android:layout_marginEnd="14dp"
-            android:id="@+id/text_recent_score"
+            android:id="@+id/text_recent_rank"
             android:textSize="18sp"
             android:paddingTop="24dp"
             android:gravity="center_horizontal"
@@ -108,7 +107,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintDimensionRatio="238:190"
             android:background="@drawable/box_showrecentscore"
-            android:text="87점"
+            android:text="0점"
             android:layout_width="0dp"
             android:layout_height="0dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

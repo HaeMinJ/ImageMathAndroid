@@ -19,6 +19,7 @@
         <ImageButton
             android:id="@+id/btn_notification"
             android:layout_width="36dp"
+            android:visibility="gone"
             android:layout_height="36dp"
             android:layout_marginEnd="14dp"
             android:background="?attr/selectableItemBackground"

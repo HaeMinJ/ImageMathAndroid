@@ -36,7 +36,7 @@ public class RecognitionActivity extends AppCompatActivity {
     @BindView(R.id.text_lecture_name)
     TextView textLectureName;
     @BindView(R.id.toggle_check_all_student)
-    ToggleButton toggleCheckAll;
+    CheckBox toggleCheckAll;
     @BindView(R.id.btn_delete)
     ImageButton btnDelete;
     @BindView(R.id.recycler_recognition)

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import androidx.fragment.app.Fragment;
@@ -36,7 +37,7 @@ public class LectureInfoFragment extends Fragment {
     @BindView(R.id.btn_add_lecture)
     Button btnAddLecture;
     @BindView(R.id.toggle_except_expire)
-    ToggleButton toggleExceptExpire;
+    CheckBox toggleExceptExpire;
     @BindView(R.id.recycler_lecture)
     RecyclerView recyclerLecture;
 

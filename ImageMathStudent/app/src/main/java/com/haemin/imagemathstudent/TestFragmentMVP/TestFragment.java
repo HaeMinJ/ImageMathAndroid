@@ -35,11 +35,11 @@ public class TestFragment extends Fragment implements TestFragmentContract.TestF
     TextView textLectureName;
     @BindView(R.id.test_chart)
     LineChart testChart;
-    @BindView(R.id.text_average_rank)
+    @BindView(R.id.text_recent_my_score)
     TextView textAverageRank;
     @BindView(R.id.text_average_score)
     TextView textAverageScore;
-    @BindView(R.id.text_recent_score)
+    @BindView(R.id.text_recent_rank)
     TextView textRecentScore;
     @BindView(R.id.recycler_test)
     RecyclerView recyclerView;

@@ -1,13 +1,15 @@
 package com.haemin.imagemathstudent.Data;
 
+import java.util.ArrayList;
+
 public class Assignment extends ServerData{
-    int assignmentSeq;
+    String assignmentSeq;
     String title;
     String contents;
     long postTime;
     long endTime;
     long lectureTime;
-    ServerFile solutionFile;
+    ArrayList<ServerFile> answerFiles;
     String lectureName;
 
     public String getContents() {
@@ -26,11 +28,11 @@ public class Assignment extends ServerData{
         this.lectureName = lectureName;
     }
 
-    public int getAssignmentSeq() {
+    public String getAssignmentSeq() {
         return assignmentSeq;
     }
 
-    public void setAssignmentSeq(int assignmentSeq) {
+    public void setAssignmentSeq(String assignmentSeq) {
         this.assignmentSeq = assignmentSeq;
     }
 
@@ -67,11 +69,11 @@ public class Assignment extends ServerData{
     }
 
 
-    public ServerFile getSolutionFile() {
-        return solutionFile;
+    public ArrayList<ServerFile> getAnswerFiles() {
+        return answerFiles;
     }
 
-    public void setSolutionFile(ServerFile solutionFile) {
-        this.solutionFile = solutionFile;
+    public void setAnswerFiles(ArrayList<ServerFile> answerFiles) {
+        this.answerFiles = answerFiles;
     }
 }

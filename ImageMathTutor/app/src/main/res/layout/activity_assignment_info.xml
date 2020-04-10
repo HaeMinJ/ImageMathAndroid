@@ -93,7 +93,7 @@
 
             <TextView
                 app:layout_constraintHorizontal_weight="0.75"
-                android:id="@+id/toggle_check_student"
+                android:id="@+id/dummy_text_check_student"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
@@ -107,7 +107,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_student_name"
+                android:id="@+id/dummy_text_student_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -121,7 +121,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_student_seq"
+                android:id="@+id/dummy_text_student_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -135,7 +135,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_student_school"
+                android:id="@+id/dummy_text_student_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -149,11 +149,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/btn_student_info"
+                android:id="@+id/dummy_text_show_submit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="불성실\n횟수"
+                android:text="제출 보기"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintHorizontal_weight="0.75"
@@ -167,8 +167,8 @@
                 android:layout_marginStart="0dp"
                 android:background="#A7A7A7"
                 android:visibility="invisible"
-                app:layout_constraintLeft_toRightOf="@id/toggle_check_student"
-                app:layout_constraintRight_toLeftOf="@id/text_student_name" />
+                app:layout_constraintLeft_toRightOf="@id/dummy_text_check_student"
+                app:layout_constraintRight_toLeftOf="@id/dummy_text_student_status" />
 
             <View
                 android:id="@+id/dummy_divide_2"
@@ -176,8 +176,8 @@
                 android:layout_height="match_parent"
                 android:background="#A7A7A7"
                 android:visibility="invisible"
-                app:layout_constraintLeft_toRightOf="@id/text_student_name"
-                app:layout_constraintRight_toLeftOf="@id/text_student_seq" />
+                app:layout_constraintLeft_toRightOf="@id/dummy_text_student_status"
+                app:layout_constraintRight_toLeftOf="@id/dummy_text_student_name" />
 
             <View
                 android:id="@+id/dummy_divide_3"
@@ -185,8 +185,8 @@
                 android:layout_height="match_parent"
                 android:background="#A7A7A7"
                 android:visibility="invisible"
-                app:layout_constraintLeft_toRightOf="@id/text_student_seq"
-                app:layout_constraintRight_toLeftOf="@id/text_student_school" />
+                app:layout_constraintLeft_toRightOf="@id/dummy_text_student_name"
+                app:layout_constraintRight_toLeftOf="@id/dummy_text_student_code" />
 
             <View
                 android:id="@+id/dummy_divide_4"
@@ -194,8 +194,8 @@
                 android:layout_height="match_parent"
                 android:background="#A7A7A7"
                 android:visibility="invisible"
-                app:layout_constraintLeft_toRightOf="@id/text_student_school"
-                app:layout_constraintRight_toLeftOf="@id/btn_student_info" />
+                app:layout_constraintLeft_toRightOf="@id/dummy_text_student_code"
+                app:layout_constraintRight_toLeftOf="@id/dummy_text_show_submit" />
 
             <View
                 android:id="@+id/dummy_divide_under"

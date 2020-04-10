@@ -158,7 +158,7 @@
             android:gravity="center"
             app:layout_constraintLeft_toRightOf="@id/dummy_divide_2"
             app:layout_constraintRight_toLeftOf="@id/dummy_divide_3"
-            android:id="@+id/text_student_seq"
+            android:id="@+id/text_student_code"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="테스트\n점수"
@@ -202,7 +202,7 @@
         <View
             android:visibility="invisible"
             app:layout_constraintLeft_toRightOf="@id/text_student_name"
-            app:layout_constraintRight_toLeftOf="@id/text_student_seq"
+            app:layout_constraintRight_toLeftOf="@id/text_student_code"
             android:id="@+id/dummy_divide_2"
             android:layout_width="2dp"
             android:layout_height="match_parent"
@@ -210,7 +210,7 @@
 
         <View
             android:visibility="invisible"
-            app:layout_constraintLeft_toRightOf="@id/text_student_seq"
+            app:layout_constraintLeft_toRightOf="@id/text_student_code"
             app:layout_constraintRight_toLeftOf="@id/text_student_school"
             android:id="@+id/dummy_divide_3"
             android:layout_width="2dp"

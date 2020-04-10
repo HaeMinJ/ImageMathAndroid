@@ -5,10 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -57,8 +54,8 @@ public class RecognitionAdapter extends RecyclerView.Adapter<RecognitionAdapter.
                         if(response.code() == 200 && response.body() != null){
                             User user = response.body();
                             holder.textStudentName.setText(user.getName());
-                            holder.textStudentSeq.setText(user.getUserSeq());
-                            holder.textStudentSchool.setText(user.getSchoolSeq()+"");
+                            holder.textStudentCode.setText(user.getStudentCode());
+                            holder.textStudentSchool.setText(user.getSchoolName()+"");
                         }else{
                             Toast.makeText(context,"학생정보를 불러오는데에 실패했습니다.",Toast.LENGTH_SHORT).show();
                             Log.e("RecognitionAdapter",response.message());
@@ -81,14 +78,14 @@ public class RecognitionAdapter extends RecyclerView.Adapter<RecognitionAdapter.
 
         @BindView(R.id.btn_student_info)
         Button btnStudentInfo;
-        @BindView(R.id.text_student_seq)
-        TextView textStudentSeq;
+        @BindView(R.id.text_student_code)
+        TextView textStudentCode;
         @BindView(R.id.text_student_school)
         TextView textStudentSchool;
         @BindView(R.id.text_student_name)
         TextView textStudentName;
         @BindView(R.id.toggle_check_student)
-        ToggleButton toggleButton;
+        CheckBox toggleButton;
 
         public RecognitionViewHolder(@NonNull View itemView) {
             super(itemView);

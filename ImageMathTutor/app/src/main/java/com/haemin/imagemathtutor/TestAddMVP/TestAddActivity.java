@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ import com.haemin.imagemathtutor.R;
 import com.haemin.imagemathtutor.View.UI.FileButton;
 import com.haemin.imagemathtutor.View.UI.ListPickerDialog;
 
+import java.io.File;
 import java.util.*;
 
 import static com.haemin.imagemathtutor.NoticeEditMVP.NoticeEditActivity.getPath;
@@ -42,6 +44,8 @@ public class TestAddActivity extends AppCompatActivity implements TestAddContrac
     TextInputEditText editTestName;
     @BindView(R.id.edit_test_contents)
     TextInputEditText editTestContents;
+    @BindView(R.id.edit_test_xls_num)
+    TextInputEditText editTestXlsNum;
     @BindView(R.id.btn_add_file)
     Button btnAddFile;
     @BindView(R.id.group_file)
@@ -50,10 +54,12 @@ public class TestAddActivity extends AppCompatActivity implements TestAddContrac
     Button btnTestExcel;
     @BindView(R.id.recycler_student_test)
     RecyclerView recyclerStudentTest;
+    @BindView(R.id.btn_excel_file)
+    FileButton btnExcelFile;
 
     TestAddPresenter presenter;
     Lecture lecture;
-    HashMap<String,String> testField;
+    HashMap<String, String> testField;
     long endTime = 0;
     long lectureTime = 0;
     long postTime = 0;
@@ -84,7 +90,7 @@ public class TestAddActivity extends AppCompatActivity implements TestAddContrac
         {
             btnBack.setOnClickListener(v -> finish());
             btnEditComplete.setOnClickListener(v -> {
-                if(checkData()) presenter.uploadTest(testField,answerFiles,excelFile);
+                if (checkData()) presenter.uploadTest(testField, answerFiles, excelFile);
             });
             textTestLecture.setOnClickListener(v -> {
                 presenter.requestLectureData();
@@ -110,6 +116,16 @@ public class TestAddActivity extends AppCompatActivity implements TestAddContrac
 
         }
     }
+
+    @Override
+    public int getXlsNum() {
+        if (editTestXlsNum.getText().toString().equals("")) {
+            return 0;
+        } else {
+            return Integer.parseInt(editTestXlsNum.getText().toString());
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent resultData) {
@@ -122,18 +138,19 @@ public class TestAddActivity extends AppCompatActivity implements TestAddContrac
                 uri = resultData.getData();
                 ServerFile answerFile = new ServerFile();
                 {
+                    File file = new File(getPath(this, uri) + "");
                     answerFile.setFileSeq(answerFiles.size());
                     answerFile.setFileUrl(getPath(this, uri));
                     answerFile.setFileType(ServerFile.FILE_TYPE_NORMAL);
+                    answerFile.setFileName(file.getName() + "");
                     answerFiles.add(answerFile);
                 }
 
                 FileButton fileButton = new FileButton(this);
-                fileButton.setDeleteAble(true);
                 fileButton.setFile(answerFile);
                 fileButton.setOnDeleteClickListener((fileButton1, file) -> {
                     Iterator<ServerFile> iter = answerFiles.iterator();
-                    Log.e("TestAddActivity","DeleteButton Clicked!");
+                    Log.e("TestAddActivity", "DeleteButton Clicked!");
                     while (iter.hasNext()) {
                         ServerFile serverFile = iter.next();
                         if (serverFile.getFileSeq() == file.getFileSeq()) {
@@ -151,49 +168,57 @@ public class TestAddActivity extends AppCompatActivity implements TestAddContrac
             Uri uri = null;
             if (resultData != null) {
                 uri = resultData.getData();
+                File file = new File(getPath(this, uri) + "");
                 excelFile = new ServerFile();
-                excelFile.setFileUrl(getPath(this,uri));
+                excelFile.setFileUrl(getPath(this, uri));
                 excelFile.setFileType(ServerFile.FILE_TYPE_NORMAL);
+                excelFile.setFileName(file.getName() + "");
             }
+            btnExcelFile.setFile(excelFile);
+            btnExcelFile.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public String getLectureSeq() {
+
+        return lecture.getLectureSeq();
     }
 
     private boolean checkData() {
         String testName = editTestName.getText().toString();
         String testContents = editTestContents.getText().toString();
-        if(testName.equals("")){
+        if (testName.equals("")) {
             showToast("테스트 이름을 입력해주세요.");
             return false;
-        }else{
-            testField.put("title",testName);
+        } else {
+            testField.put("title", testName);
         }
-        if(testContents.equals("")){
+        if (testContents.equals("")) {
             showToast("테스트 내용을 입력해주세요.");
             return false;
-        }else{
-            testField.put("contents",testContents);
+        } else {
+            testField.put("contents", testContents);
         }
-        if(lecture == null){
+        if (lecture == null) {
             showToast("수업을 선택해주세요.");
             return false;
-        }else{
-            testField.put("lectureSeq",lecture.getLectureSeq());
-            testField.put("lectureName",lecture.getName());
+        } else {
+            testField.put("lectureSeq", lecture.getLectureSeq());
+            testField.put("lectureName", lecture.getName());
         }
-        if(lectureTime == 0){
+        if (lectureTime == 0) {
             showToast("수업이 진행된 시간을 선택해주세요.");
             return false;
-        }else{
-            testField.put("lectureTime",lectureTime+"");
+        } else {
+            testField.put("lectureTime", lectureTime + "");
         }
-        if(endTime == 0){
-            showToast("테스트 종료 시간을 선택해주세요.");
-            return false;
-        }else{
-            testField.put("endTime",endTime+"");
-        }
+
         postTime = System.currentTimeMillis();
-        testField.put("postTime",postTime+"");
+        endTime = System.currentTimeMillis();
+        testField.put("endTime", endTime + "");
+        testField.put("postTime", postTime + "");
+
         return true;
 
     }
@@ -217,44 +242,46 @@ public class TestAddActivity extends AppCompatActivity implements TestAddContrac
             textTestLecture.setText(data.getName());
             lectureListPickerDialog.dismiss();
         });
-        lectureListPickerDialog.show(getSupportFragmentManager(),"aewf");
+        lectureListPickerDialog.show(getSupportFragmentManager(), "aewf");
     }
+
     void showDate(int mode) {
         Calendar combinedCal = new GregorianCalendar();
         combinedCal.setTime(new Date(System.currentTimeMillis()));
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                if(mode == 0){
+                if (mode == 0) {
                     lectureCalendar.set(Calendar.YEAR, year);
                     lectureCalendar.set(Calendar.MONTH, month);
-                    lectureCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth -1);
+                    lectureCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth - 1);
 
-                }else{
+                } else {
                     endCalendar.set(Calendar.YEAR, year);
                     endCalendar.set(Calendar.MONTH, month);
-                    endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth -1);
+                    endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth - 1);
                 }
                 showTime(mode);
             }
-        },combinedCal.get(Calendar.YEAR), combinedCal.get(Calendar.MONTH), combinedCal.get(Calendar.DAY_OF_MONTH));
+        }, combinedCal.get(Calendar.YEAR), combinedCal.get(Calendar.MONTH), combinedCal.get(Calendar.DAY_OF_MONTH));
 
         datePickerDialog.setMessage("시간을 선택해주세요.");
         datePickerDialog.show();
     }
+
     void showTime(int mode) {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                if(mode == 0){
-                    lectureCalendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                    lectureCalendar.set(Calendar.MINUTE,minute);
+                if (mode == 0) {
+                    lectureCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    lectureCalendar.set(Calendar.MINUTE, minute);
                     lectureTime = lectureCalendar.getTimeInMillis();
                     textLectureDay.setText(DateUtils.getRelativeTimeSpanString(lectureTime));
-                }else{
-                    endCalendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                    endCalendar.set(Calendar.MINUTE,minute);
+                } else {
+                    endCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    endCalendar.set(Calendar.MINUTE, minute);
                     endTime = endCalendar.getTimeInMillis();
                     textEndDay.setText(DateUtils.getRelativeTimeSpanString(endTime));
                 }

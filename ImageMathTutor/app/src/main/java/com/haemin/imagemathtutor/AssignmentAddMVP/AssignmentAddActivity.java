@@ -18,6 +18,7 @@ import com.haemin.imagemathtutor.R;
 import com.haemin.imagemathtutor.View.UI.FileButton;
 import com.haemin.imagemathtutor.View.UI.ListPickerDialog;
 
+import java.io.File;
 import java.util.*;
 
 import static com.haemin.imagemathtutor.NoticeEditMVP.NoticeEditActivity.getPath;
@@ -194,15 +195,16 @@ public class AssignmentAddActivity extends AppCompatActivity implements Assignme
 
                 ServerFile answerFile = new ServerFile();
                 {
+                    File file = new File(getPath(this,uri)+"");
                     answerFile.setFileSeq(answerFiles.size());
                     answerFile.setFileUrl(getPath(this, uri));
                     answerFile.setFileType(ServerFile.FILE_TYPE_NORMAL);
+                    answerFile.setFileName(file.getName()+"");
                     answerFiles.add(answerFile);
                 }
 
                 FileButton fileButton = new FileButton(this);
-                fileButton.setDeleteAble(true);
-                fileButton.setFile(answerFile);
+                 fileButton.setFile(answerFile);
                 fileButton.setOnDeleteClickListener((fileButton1, file) ->{
                     Iterator<ServerFile> iter = answerFiles.iterator();
                     while (iter.hasNext()) {
@@ -214,6 +216,7 @@ public class AssignmentAddActivity extends AppCompatActivity implements Assignme
                     }
 
                 });
+
                 groupFile.addView(fileButton);
             }
         }

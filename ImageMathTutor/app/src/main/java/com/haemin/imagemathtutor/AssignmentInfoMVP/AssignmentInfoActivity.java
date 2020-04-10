@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.haemin.imagemathtutor.AssignmentEditMVP.AssignmentEditActivity;
 import com.haemin.imagemathtutor.Data.Assignment;
 import com.haemin.imagemathtutor.Data.ServerFile;
 import com.haemin.imagemathtutor.Data.StudentAssignment;
@@ -68,14 +69,13 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
             presenter = new AssignmentInfoPresenter(this);
             students = new ArrayList<>();
             mainAssignment = new Assignment();
-            studentAdapter = new AssignmentStudentAdapter(this,students, mainAssignment);
+            studentAdapter = new AssignmentStudentAdapter(this,students, mainAssignment, presenter);
         }
 
         {
             ButterKnife.bind(this);
             btnEditAssignment.setOnClickListener(v -> {
-                //AssignmentEditActivity.start(this, assignmentSeq);
-                showToast("준비중인 기능입니다.\n과제 수정은 관련 조교에게 문의해주세요.");
+                AssignmentEditActivity.start(this, assignmentSeq);
             });
             recyclerAssignment.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
             recyclerAssignment.setAdapter(studentAdapter);
@@ -100,15 +100,16 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
         textUploadDay.setText(DateUtils.getRelativeTimeSpanString(assignment.getPostTime()));
         textEndDay.setText(DateUtils.getRelativeTimeSpanString(assignment.getEndTime()));
         textLectureDay.setText(DateUtils.getRelativeTimeSpanString(assignment.getLectureTime()));
-        if(assignment.getSolutionFiles() != null){
-            for(ServerFile serverFile : assignment.getSolutionFiles()){
+        if(assignment.getAnswerFiles() != null){
+            groupFile.removeAllViews();
+            for(ServerFile serverFile : assignment.getAnswerFiles()){
                 FileButton fileButton = new FileButton(this);
                 fileButton.setFile(serverFile);
                 fileButton.setDeleteAble(false);
                 groupFile.addView(fileButton);
             }
         }else{
-            Toast.makeText(this,"해설지가 존재하지 않습니다.\n관련 조교에게 문의해주세요.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"해설지가 존재하지 않습니다.\n새로 등록해주세요.",Toast.LENGTH_SHORT).show();
         }
     }
 

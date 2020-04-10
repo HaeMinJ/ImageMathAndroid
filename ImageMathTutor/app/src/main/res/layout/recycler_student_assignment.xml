@@ -56,7 +56,7 @@
         app:layout_constraintHorizontal_weight="1"
         android:gravity="center"
         app:layout_constraintRight_toLeftOf="@id/dummy_divide_4"
-        android:id="@+id/text_student_seq"
+        android:id="@+id/text_student_code"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="0005"
@@ -101,7 +101,7 @@
     <View
         android:visibility="visible"
         app:layout_constraintLeft_toRightOf="@id/text_student_name"
-        app:layout_constraintRight_toLeftOf="@id/text_student_seq"
+        app:layout_constraintRight_toLeftOf="@id/text_student_code"
         android:id="@+id/dummy_divide_3"
         android:layout_width="2dp"
         android:layout_height="match_parent"
@@ -109,7 +109,7 @@
 
     <View
         android:visibility="visible"
-        app:layout_constraintLeft_toRightOf="@id/text_student_seq"
+        app:layout_constraintLeft_toRightOf="@id/text_student_code"
         app:layout_constraintRight_toLeftOf="@id/text_check_submit"
         android:id="@+id/dummy_divide_4"
         android:layout_width="2dp"

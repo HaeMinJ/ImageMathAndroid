@@ -1,11 +1,9 @@
 package com.haemin.imagemathstudent.View.RegisterProcess;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -23,11 +21,10 @@ import retrofit2.Response;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-       @BindView(R.id.btn_email_confirm)
+    @BindView(R.id.btn_email_confirm)
     Button btnEmailConfirm;
     @BindView(R.id.btn_phone_confirm)
     Button btnPhoneConfirm;
@@ -64,6 +61,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editLecture;
     @BindView(R.id.edit_school)
     EditText editSchool;
+    @BindView(R.id.edit_student_code)
+    EditText editStudentCode;
 
     @BindView(R.id.btn_back)
     ImageButton btnBack;
@@ -73,15 +72,15 @@ public class RegisterActivity extends AppCompatActivity {
     TextView textPwReConfirm;
 
     @BindView(R.id.toggle_gender_female)
-    ToggleButton toggleGenderFemale;
+    CheckBox toggleGenderFemale;
     @BindView(R.id.toggle_gender_male)
-    ToggleButton toggleGenderMale;
+    CheckBox toggleGenderMale;
 
     boolean isRecognized = false;
     String schoolSeq = "";
     String lectureSeq = "";
     String lectureSeqs = "";
-    HashMap<String,String> registerField;
+    HashMap<String, String> registerField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,17 +163,17 @@ public class RegisterActivity extends AppCompatActivity {
         });
 */
         btnRegister.setOnClickListener(v -> {
-            if(isAbleToRegister()){
+            if (isAbleToRegister()) {
                 GlobalApplication.getAPIService().registerEmail(registerField).enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.code() == 200 && response.body() != null){
+                        if (response.code() == 200 && response.body() != null) {
                             User user = response.body();
                             GlobalApplication.setAccessToken(user.getAccessToken());
                             showToast(AppString.SUCCESS_REGISTER);
                             startActivity(new Intent(RegisterActivity.this, RegisterSuccessActivity.class));
                             finish();
-                        }else{
+                        } else {
                             showToast(response.message());
                         }
                     }
@@ -182,86 +181,93 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         showToast(AppString.ERROR_NETWORK_MESSAGE);
-                        Log.e("RegisterActivity",t.getMessage(),t);
+                        Log.e("RegisterActivity", t.getMessage(), t);
                     }
                 });
             }
         });
 
         toggleGenderMale.setOnClickListener(v -> {
-            if(toggleGenderMale.isChecked())
+            if (toggleGenderMale.isChecked())
                 toggleGenderFemale.setChecked(false);
         });
         toggleGenderFemale.setOnClickListener(v -> {
-            if(toggleGenderFemale.isChecked())
+            if (toggleGenderFemale.isChecked())
                 toggleGenderMale.setChecked(false);
         });
 
     }
 
     private boolean isAbleToRegister() {
-        if(editName.getText().toString().equals("")){
+        if (editName.getText().toString().equals("")) {
             showToast("이름을 입력해주세요.");
             editName.requestFocus();
             return false;
-        }else{
-            registerField.put("name",editName.getText().toString());
+        } else {
+            registerField.put("name", editName.getText().toString());
         }
-        if(editBirthYear.getText().toString().equals("") || editBirthMonth.getText().toString().equals("") || editBirthDay.getText().toString().equals("")){
+        if (editBirthYear.getText().toString().equals("") || editBirthMonth.getText().toString().equals("") || editBirthDay.getText().toString().equals("")) {
             showToast("생년월일을 입력해주세요.");
             editBirthYear.requestFocus();
             return false;
-        }else{
-            registerField.put("birthday",editBirthYear.getText().toString()+editBirthMonth.getText().toString()+editBirthDay.getText().toString());
+        } else {
+            registerField.put("birthday", editBirthYear.getText().toString() + editBirthMonth.getText().toString() + editBirthDay.getText().toString());
         }
-        if(editEmail.getText().toString().equals("")){
+        if (editEmail.getText().toString().equals("")) {
             showToast("이메일을 입력해주세요.");
             editEmail.requestFocus();
             return false;
-        }else{
-            registerField.put("email",editEmail.getText().toString());
+        } else {
+            registerField.put("email", editEmail.getText().toString());
         }
-        if(editPw.getText().toString().equals("")){
+        if (editPw.getText().toString().equals("")) {
             showToast("비밀번호를 입력해주세요.");
             editPw.requestFocus();
             return false;
-        }else if(!editPw.getText().toString().equals(editPwRe.getText().toString())){
+        } else if (!editPw.getText().toString().equals(editPwRe.getText().toString())) {
             showToast("비밀번호와 비밀번호 확인이 다릅니다.");
             editPwRe.requestFocus();
             textPwReConfirm.setVisibility(View.VISIBLE);
             return false;
-        }else if(editPw.getText().toString().equals(editPwRe.getText().toString())){
+        } else if (editPw.getText().toString().equals(editPwRe.getText().toString())) {
             textPwReConfirm.setVisibility(View.INVISIBLE);
-            registerField.put("password",editPw.getText().toString());
-        }else{
-            registerField.put("password",editPw.getText().toString());
+            registerField.put("password", editPw.getText().toString());
+        } else {
+            registerField.put("password", editPw.getText().toString());
         }
-        if(editPhone.getText().toString().equals("")){
+        if (editPhone.getText().toString().equals("")) {
             showToast("휴대폰 번호를 입력해주세요.");
             editPhone.requestFocus();
             return false;
         }
-        if(!isRecognized){
+        if (!isRecognized) {
             showToast("휴대폰 인증을 완료해주세요.");
             editPhone.requestFocus();
             return false;
-        }else{
-            registerField.put("phone",editPhone.getText().toString());
+        } else {
+            registerField.put("phone", editPhone.getText().toString());
         }
-        if(editSchool.getText().toString().equals("")){
+        if (editSchool.getText().toString().equals("")) {
             showToast("학교를 입력해주세요.");
             editSchool.requestFocus();
             return false;
-        }else{
-            registerField.put("schoolSeq",schoolSeq);
+        } else {
+            registerField.put("schoolName", editSchool.getText().toString());
         }
 
-        if(toggleGenderMale.isChecked()){
-            registerField.put("gender","0");
-        }else{
-            registerField.put("gender","1");
+        if (toggleGenderMale.isChecked()) {
+            registerField.put("gender", "0");
+        } else {
+            registerField.put("gender", "1");
         }
-        registerField.put("userType","student");
+        registerField.put("userType", "student");
+        if(editStudentCode.getText().toString().equals("")){
+            showToast("학생코드를 입력해주세요.");
+            editStudentCode.requestFocus();
+            return false;
+        }else{
+            registerField.put("studentCode",editStudentCode.getText().toString());
+        }
         return true;
     }
 /*

@@ -95,9 +95,9 @@ public class TestInfoActivity extends AppCompatActivity implements TestInfoContr
         textUploadDay.setText(DateUtils.getRelativeTimeSpanString(test.getPostTime()));
         textLectureDay.setText(DateUtils.getRelativeTimeSpanString(test.getLectureTime()));
         textEndDay.setText(DateUtils.getRelativeTimeSpanString(test.getEndTime()));
-        if(test.getSolutionFiles() != null){
+        if(test.getAnswerFiles() != null){
 
-            for(ServerFile serverFile : test.getSolutionFiles()){
+            for(ServerFile serverFile : test.getAnswerFiles()){
                 FileButton fileButton = new FileButton(this);
                 fileButton.setFile(serverFile);
                 fileButton.setDeleteAble(false);

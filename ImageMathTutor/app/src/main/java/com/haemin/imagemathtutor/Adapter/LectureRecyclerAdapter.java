@@ -13,12 +13,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.haemin.imagemathtutor.AppString;
 import com.haemin.imagemathtutor.Data.Lecture;
 import com.haemin.imagemathtutor.Data.Notice;
 import com.haemin.imagemathtutor.GlobalApplication;
 import com.haemin.imagemathtutor.NoticeMVP.NoticeActivity;
 import com.haemin.imagemathtutor.R;
+import com.haemin.imagemathtutor.StudentManageMVP.StudentManageActivity;
 import com.haemin.imagemathtutor.View.Activity.*;
 import com.haemin.imagemathtutor.View.UI.ToggleConstraintLayout;
 import retrofit2.Call;
@@ -92,7 +92,7 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
 
                     @Override
                     public void onFailure(Call<ArrayList<Notice>> call, Throwable t) {
-                        showToast(AppString.ERROR_NETWORK_MESSAGE);
+                        //showToast(AppString.ERROR_NETWORK_MESSAGE);
                         Log.e("LectureRecyclerAdapter",t.getMessage(),t);
                     }
                 });
