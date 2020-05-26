@@ -71,7 +71,7 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         holder.textAcademyName.setText(lecture.getAcademyName());
         holder.textClassDuration.setText(lecture.getTotalDate());
 
-        GlobalApplication.getAPIService().getNoticeList(GlobalApplication.getAccessToken(),lecture.getLectureSeq()+"",1)
+        GlobalApplication.getAPIService().getNoticeList(GlobalApplication.getAccessToken(),lecture.getLectureSeq()+"")
                 .enqueue(new Callback<ArrayList<Notice>>() {
                     @Override
                     public void onResponse(Call<ArrayList<Notice>> call, Response<ArrayList<Notice>> response) {

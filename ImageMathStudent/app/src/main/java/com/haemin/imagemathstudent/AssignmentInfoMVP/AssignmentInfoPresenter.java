@@ -56,10 +56,10 @@ public class AssignmentInfoPresenter implements AssignmentInfoContract.Assignmen
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.code() == 200){
-                    infoView.showToast("이미지 등록이 완료되었습니다.");
+                    infoView.showToast("과제 제출이 완료되었습니다.");
                     updateData(assignmentSeq);
                 }else{
-                    infoView.showToast("이미지 등록이 실패하였습니다.");
+                    infoView.showToast("과제 제출이 실패하였습니다.\n파일 크기가 10MB를 넘지 않는지 확인해주세요.");
                     Log.e("AssignmentInfoPresenter",response.message());
                 }
             }

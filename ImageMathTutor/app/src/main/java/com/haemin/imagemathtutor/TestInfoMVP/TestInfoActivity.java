@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +50,8 @@ public class TestInfoActivity extends AppCompatActivity implements TestInfoContr
     TextView textEndDay;
     @BindView(R.id.text_lecture_day)
     TextView textLectureDay;
+    @BindView(R.id.btn_delete)
+    TextView btnDelete;
 
     public static void start(Context context, Test test) {
         Intent starter = new Intent(context, TestInfoActivity.class);
@@ -104,6 +107,23 @@ public class TestInfoActivity extends AppCompatActivity implements TestInfoContr
                 groupFile.addView(fileButton);
             }
         }
+        {
+            btnDelete.setOnClickListener(v -> {
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setCancelable(true)
+                        .setMessage("정말로 삭제하시겠습니까?")
+                        .setNegativeButton("취소", (dialog1, which) -> {dialog1.dismiss();})
+                        .setPositiveButton("확인",(dialog1, which) -> {presenter.deleteTestInfo(testSeq);})
+                        .create();
+                dialog.show();
+            });
+        }
+    }
+
+    @Override
+    public void showDeleteSuccess() {
+        Toast.makeText(this,"테스트 삭제가 완료되었습니다.",Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

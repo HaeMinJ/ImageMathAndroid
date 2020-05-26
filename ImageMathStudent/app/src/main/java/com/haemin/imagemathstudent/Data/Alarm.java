@@ -4,9 +4,9 @@ import android.text.format.DateUtils;
 
 public class Alarm extends ServerData{
     String title;
-    String text;
+    String content;
     String type;
-    long time;
+    long postTime;
 
     public String getTitle() {
         return title;
@@ -16,12 +16,12 @@ public class Alarm extends ServerData{
         this.title = title;
     }
 
-    public String getText() {
-        return text;
+    public String getContent() {
+        return content;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getType() {
@@ -32,11 +32,11 @@ public class Alarm extends ServerData{
         this.type = type;
     }
 
-    public String getTime() {
-        return DateUtils.getRelativeTimeSpanString(time,System.currentTimeMillis(),3000,DateUtils.FORMAT_ABBREV_ALL).toString();
+    public long getPostTime() {
+        return postTime;
     }
 
-    public void setTime(long time) {
-        this.time = time;
+    public void setPostTime(long postTime) {
+        this.postTime = postTime;
     }
 }

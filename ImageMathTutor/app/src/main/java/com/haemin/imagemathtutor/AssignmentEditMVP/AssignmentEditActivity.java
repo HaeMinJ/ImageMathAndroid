@@ -171,12 +171,12 @@ public class AssignmentEditActivity extends AppCompatActivity implements Assignm
                 if (mode == 0) {
                     lectureCalendar.set(Calendar.YEAR, year);
                     lectureCalendar.set(Calendar.MONTH, month);
-                    lectureCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth - 1);
+                    lectureCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                 } else {
                     endCalendar.set(Calendar.YEAR, year);
                     endCalendar.set(Calendar.MONTH, month);
-                    endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth - 1);
+                    endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 }
                 showTime(mode);
             }

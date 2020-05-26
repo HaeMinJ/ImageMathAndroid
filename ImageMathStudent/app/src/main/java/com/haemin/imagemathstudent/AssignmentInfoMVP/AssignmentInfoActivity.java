@@ -17,16 +17,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
-import com.haemin.imagemathstudent.Data.Assignment;
 import com.haemin.imagemathstudent.Data.ServerFile;
 import com.haemin.imagemathstudent.Data.StudentAssignment;
 import com.haemin.imagemathstudent.R;
-import com.haemin.imagemathstudent.SingleTon.GlobalApplication;
 import com.haemin.imagemathstudent.Utils.ConfirmStarter;
 import com.haemin.imagemathstudent.View.UI.FileButton;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import java.util.ArrayList;
 
@@ -66,6 +61,7 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
         starter.putExtra("assignmentSeq", assignmentSeq);
         context.startActivity(starter);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +77,7 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
         imageAdapter = new ImageAdapter(this, imageFiles);
 
         recyclerSubmit.setAdapter(imageAdapter);
-        recyclerSubmit.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        recyclerSubmit.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
     }
 
@@ -89,7 +85,7 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
     public void updateView(StudentAssignment studentAssignment) {
 
 
-        switch (studentAssignment.getSubmitState()){
+        switch (studentAssignment.getSubmitState()) {
             case 0:
                 textSubmitState.setText("미제출");
                 textSubmitState.setTextColor(getResources().getColor(android.R.color.black));
@@ -126,6 +122,11 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
                 textOverlayFile.setVisibility(View.VISIBLE);
                 break;
         }
+        if (studentAssignment.getEndTime() < System.currentTimeMillis()) {
+            textSubmitState.setText("불성실");
+            textSubmitState.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            textOverlayFile.setVisibility(View.VISIBLE);
+        }
         textLectureName.setText(studentAssignment.getLectureName());
         textAssignmentName.setText(studentAssignment.getTitle());
         textAssignmentNotice.setText(studentAssignment.getContents());
@@ -145,22 +146,22 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
     @Override
     public void updateAnswerView(ArrayList<ServerFile> answerFiles) {
 
-        if(answerFiles != null){
+        if (answerFiles != null) {
             groupFile.removeAllViews();
-            for(ServerFile serverFile : answerFiles){
+            for (ServerFile serverFile : answerFiles) {
                 FileButton fileButton = new FileButton(this);
                 fileButton.setFile(serverFile);
                 fileButton.setDeleteAble(false);
                 groupFile.addView(fileButton);
             }
-        }else{
-            Toast.makeText(this,"해설지가 존재하지 않습니다.\n관련 조교에게 문의해주세요.",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "해설지가 존재하지 않습니다.\n관련 조교에게 문의해주세요.", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void showToast(String text) {
-        Toast.makeText(this,text,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -172,6 +173,4 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-
 }

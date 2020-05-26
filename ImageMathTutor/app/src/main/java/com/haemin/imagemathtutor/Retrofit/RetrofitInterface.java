@@ -12,14 +12,33 @@ import java.util.Map;
 
 public interface RetrofitInterface {
 
-    @GET("/alarm")
-//userSeq로 LectureSeqs찾고 해당 알람리스트 출력 수정필요
-    Call<ArrayList<Alarm>> getAlarmList(@Header("x-access-token") String accessToken);
+    @GET("/qna/question")
+    Call<ArrayList<Question>> getQuestionList(@Header("x-access-token")String accessToken);
+
+    @GET("/qna/question/file/{questionSeq}")
+    Call<ArrayList<ServerFile>> getQuestionFileList(@Header("x-access-token")String accessToken, @Path("questionSeq") String questionSeq);
+
+    @GET("/qna/answer/{questionSeq}")
+    Call<ArrayList<Answer>> getAnswerList(@Header("x-access-token")String accessToken,@Path("questionSeq") String questionSeq);
+
+    @GET("qna/answer/file/{answerSeq}")
+    Call<ArrayList<ServerFile>> getAnswerFileList(@Header("x-access-token")String accessToken, @Path("answerSeq") String answerSeq);
+
+    @FormUrlEncoded
+    @POST("/qna/answer")
+    Call<Answer> writeAnswer(@Header("x-access-token")String accessToken, @Field("title")String title, @Field("contents")String contents, @Field("questionSeq")String questionSeq);
+
+    @Multipart
+    @POST("/qna/editAnswer/{answerSeq}")
+    Call<Void> addAnswerFile(@Header("x-access-token") String accessToken, @Path("answerSeq") String answerSeq, @Part MultipartBody.Part answerFile);
+
 
     @GET("/notice")
 //수업에 해당하는 공지 출력 ok page구현
-    Call<ArrayList<Notice>> getNoticeList(@Header("x-access-token") String accessToken, @Query("lectureSeq") String lectureSeq, @Query("page") int page);
+    Call<ArrayList<Notice>> getNoticeList(@Header("x-access-token") String accessToken, @Query("lectureSeq") String lectureSeq);
 
+    @GET("/notice/file")
+    Call<ArrayList<ServerFile>> getNoticeFileList(@Header("x-access-token")String accessToken, @Query("noticeSeq") String noticeSeq);
 
     @FormUrlEncoded
     @POST("/notice")
@@ -76,6 +95,9 @@ public interface RetrofitInterface {
     @FormUrlEncoded
     @PATCH("/assignment/assignmentAdm/{assignmentAdmSeq}")
     Call<Void> setAssignmentAdmStatus(@Header("x-access-token")String accessToken, @Path("assignmentAdmSeq") String assignmentAdmSeq, @Field("submitState")int submitState);
+
+    @DELETE("/assignment/{assignmentSeq}")
+    Call<Void> deleteAssignmentInfo(@Header("x-access-token")String accessToken, @Path("assignmentSeq")String assignmentSeq);
 
     @GET("/lecture")
 //수업 리스트 출력 ok  tutor : 모든수업, student : 듣는수업
@@ -144,6 +166,10 @@ public interface RetrofitInterface {
     @Multipart
     @POST("/test/tutor/uploadXls/{testSeq}")
     Call<Void> postTestWithExcel(@Header("x-access-token") String accessToken, @Path("testSeq") String testSeq,@Part("xlsLength")int xlsLength, @Part("lectureSeq")String lectureSeq,@Part MultipartBody.Part excelFile);
+
+
+    @DELETE("/test/{testSeq}")
+    Call<Void> deleteTestInfo(@Header("x-access-token")String accessToken, @Path("testSeq")String testSeq);
 
     @FormUrlEncoded
     @POST("/auth/register")

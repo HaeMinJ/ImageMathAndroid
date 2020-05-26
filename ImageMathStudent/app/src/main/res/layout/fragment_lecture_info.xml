@@ -7,6 +7,19 @@
     android:elevation="0dp"
     tools:context=".View.Fragment.LectureInfoFragment">
 
+    <TextView
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/text_no_lecture_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="수강중인 수업이 없습니다.\n\n우측 상단의 추가하기를 눌러 신청해주세요."
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
     <Button
         android:id="@+id/btn_add_lecture"
         android:layout_width="90dp"

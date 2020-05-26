@@ -1,5 +1,7 @@
 package com.haemin.imagemathstudent.View.Activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +9,9 @@ import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.haemin.imagemathstudent.Data.User;
 import com.haemin.imagemathstudent.R;
 import com.haemin.imagemathstudent.SingleTon.AppString;
@@ -32,10 +37,35 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GoogleApiAvailability apiAvailability = new GoogleApiAvailability();
+        apiAvailability.makeGooglePlayServicesAvailable(this);
 
-        hide();
+        TedPermission.with(this)
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+
+                        hide();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                        finish();
+                    }
+                })
+                .setRationaleMessage("앱을 이용하기 위해서는 메모리 사용 권한이 필요합니다.")
+                .setDeniedMessage("권한 설정에 동의하셔야 앱을 이용할 수 있습니다.\n하지만 [설정] > [권한] 에서 권한을 허용할 수 있어요.")
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .check();
 
         setContentView(R.layout.activity_splash);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GoogleApiAvailability apiAvailability = new GoogleApiAvailability();
+        apiAvailability.makeGooglePlayServicesAvailable(this);
     }
 
     private void autoLoginProcess() {

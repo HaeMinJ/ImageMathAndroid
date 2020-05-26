@@ -20,7 +20,6 @@ import com.haemin.imagemathstudent.SingleTon.AppString;
 import com.haemin.imagemathstudent.SingleTon.GlobalApplication;
 import com.haemin.imagemathstudent.AssignmentInfoMVP.AssignmentInfoActivity;
 import com.haemin.imagemathstudent.NoticeActivityMVP.NoticeActivity;
-import com.haemin.imagemathstudent.TestActivityMVP.TestInfoActivity;
 import com.haemin.imagemathstudent.View.UI.ToggleConstraintLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,7 +74,6 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
             public void onResponse(Call<ArrayList<Notice>> call, Response<ArrayList<Notice>> response) {
                 if(response.code() == 200 && response.body() != null){
                     ArrayList<Notice> notices = response.body();
-                    Log.e("LectureRecyclerAdapter",notices.toString());
                     if(notices.size() >= 2){
                         holder.notice_preview.setText(notices.get(0).getTitle()+"\n"+notices.get(1).getTitle());
                     }else if(notices.size() == 1 && notices.get(0) != null){

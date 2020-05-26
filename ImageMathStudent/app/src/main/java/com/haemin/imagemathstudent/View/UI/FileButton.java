@@ -4,14 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
+import androidx.appcompat.app.AlertDialog;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.bumptech.glide.Glide;
 import com.haemin.imagemathstudent.Data.ServerFile;
 import com.haemin.imagemathstudent.R;
 
@@ -34,15 +36,19 @@ public class FileButton extends RelativeLayout implements View.OnClickListener {
         if(file == null){
             return;
         }
-        if(file.getFileUrl() == null || file.getFileUrl().equals("")){
+        if (file.getFileUrl() == null || file.getFileUrl().equals("")) {
             return;
         }
-        if(isDeleteAble)
-            return;
-        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getFileUrl()));
-        context.startActivity(i);
-        Toast.makeText(context,"파일 다운로드를 위해 브라우저로 이동합니다.\n크롬 브라우저를 선택해주세요.",Toast.LENGTH_SHORT).show();
-
+        String url = file.getFileUrl();
+        String type = url.substring(url.length() - 3);
+        Log.e("TEST",type);
+        if(type.equals("jpg") || type.equals("png") ){
+            showImageDialog(url);
+        }else {
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(file.getFileUrl()));
+            context.startActivity(i);
+            Toast.makeText(context, "파일 다운로드를 위해 브라우저로 이동합니다.\n크롬 브라우저를 선택해주세요.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void setOnDeleteClickListener(OnDeleteClickListener onDeleteClickListener) {
@@ -102,6 +108,31 @@ public class FileButton extends RelativeLayout implements View.OnClickListener {
         setOnClickListener(this);
         ButterKnife.bind(this,v);
     }
+
+    public void showImageDialog(String url){
+
+        AlertDialog.Builder builder;
+        AlertDialog alertDialog;
+
+        FrameLayout frameLayout = new FrameLayout(context);
+
+        ImageView image = new ImageView(context);
+        image.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(context,300),dpToPx(context,500)));
+        frameLayout.addView(image);
+        Glide.with(context)
+                .load(url)
+                .into(image);
+
+        builder = new AlertDialog.Builder(context);
+        builder.setView(frameLayout);
+        alertDialog = builder.create();
+        alertDialog.show();
+    }
+    public int dpToPx(Context context, float dp){
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, dm);
+    }
+
     public interface OnDeleteClickListener{
         void onDeleteClick(FileButton fileButton, ServerFile file);
     }

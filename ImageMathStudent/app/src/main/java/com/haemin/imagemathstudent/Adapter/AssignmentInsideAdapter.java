@@ -60,7 +60,7 @@ public class AssignmentInsideAdapter extends RecyclerView.Adapter<AssignmentInsi
                 holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_neglect));
                 break;
         }
-        if (assignment.getEndTime() > System.currentTimeMillis()) {
+        if (assignment.getEndTime() < System.currentTimeMillis()) {
             holder.imageStatus.setImageDrawable(context.getDrawable(R.drawable.icon_neglect));
         }
         holder.itemView.setOnClickListener(v -> {

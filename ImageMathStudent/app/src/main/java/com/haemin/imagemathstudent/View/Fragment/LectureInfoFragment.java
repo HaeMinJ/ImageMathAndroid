@@ -6,10 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Toast;
-import android.widget.ToggleButton;
+import android.widget.*;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +42,8 @@ public class LectureInfoFragment extends Fragment {
     LectureRecyclerAdapter lectureRecyclerAdapter;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.text_no_lecture_data)
+    TextView textNoLecture;
 
     int page = 1;
 
@@ -126,8 +125,7 @@ public class LectureInfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-
+        refresh(toggleExceptExpire.isChecked());
     }
 
     private void refresh(boolean exceptExpired) {
@@ -136,10 +134,16 @@ public class LectureInfoFragment extends Fragment {
                     @Override
                     public void onResponse(Call<ArrayList<Lecture>> call, Response<ArrayList<Lecture>> response) {
                         if (response.code() == 200 && response.body() != null) {
-                            lectures.clear();
-                            lectures.addAll(response.body());
-                            lectureRecyclerAdapter.notifyDataSetChanged();
-                            Log.e("LectureInfoFragment", response.body().toString());
+
+                            if(response.body().size() !=0) {
+                                textNoLecture.setVisibility(View.GONE);
+                                lectures.clear();
+                                lectures.addAll(response.body());
+                                lectureRecyclerAdapter.notifyDataSetChanged();
+                                Log.e("LectureInfoFragment", response.body().toString());
+                            }else{
+                                textNoLecture.setVisibility(View.VISIBLE);
+                            }
                         } else {
                             showToast(AppString.ERROR_LOAD_LECTURE_LIST);
                             Log.e("LectureInfoFragment",response.message());

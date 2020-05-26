@@ -10,9 +10,11 @@ public interface TestInfoContract {
         void showToast(String text);
         void updateTestInfo(Test test);
         void updateRecycler(ArrayList<StudentTest> studentTests);
+        void showDeleteSuccess();
     }
     interface TestInfoPresenter{
         void requestTestInfo(String testSeq);
         void requestStudentList(String testSeq);
+        void deleteTestInfo(String testSeq);
     }
 }

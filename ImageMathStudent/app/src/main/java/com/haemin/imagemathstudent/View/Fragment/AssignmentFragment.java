@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +34,8 @@ public class AssignmentFragment extends Fragment {
     RecyclerView recyclerView;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.text_no_assignment_data)
+    TextView textNoAssignment;
 
 
 
@@ -64,6 +67,12 @@ public class AssignmentFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh();
+    }
+
     public void refresh(){
         GlobalApplication.getAPIService().getStudentAssignmentList(GlobalApplication.getAccessToken(),0)
         .enqueue(new Callback<ArrayList<StudentAssignment>>() {
@@ -71,34 +80,41 @@ public class AssignmentFragment extends Fragment {
             public void onResponse(Call<ArrayList<StudentAssignment>> call, Response<ArrayList<StudentAssignment>> response) {
                 if(response.code() == 200 && response.body() != null){
 
+
                     ArrayList<StudentAssignment> assignments = response.body();
-                    ArrayList<Integer> dates = new ArrayList<>();
-                    dateHolders.clear();
-                    for(StudentAssignment assignment : assignments){
-                        boolean hasSame = false;
-                        for(Integer date : dates){
-                            if(((int)(assignment.getEndTime() / (1000*3600*24))) == date){
-                                hasSame = true;
+
+                    if(assignments.size() != 0) {
+                        textNoAssignment.setVisibility(View.GONE);
+                        ArrayList<Integer> dates = new ArrayList<>();
+                        dateHolders.clear();
+                        for (StudentAssignment assignment : assignments) {
+                            boolean hasSame = false;
+                            for (Integer date : dates) {
+                                if ((int) (assignment.getEndTime() / (1000 * 3600 * 24)) == date) {
+                                    hasSame = true;
+                                }
+                            }
+                            if (!hasSame) {
+                                dates.add((int) (assignment.getEndTime() / (1000 * 3600 * 24)));
                             }
                         }
-                        if(!hasSame){
-                            dates.add((int)(assignment.getEndTime() / (1000*3600*24)));
+                        for (Integer date : dates) {
+                            AssignmentRecyclerAdapter.AssignmentDateHolder dateHolder = new AssignmentRecyclerAdapter.AssignmentDateHolder();
+                            dateHolder.setDate((long) date * 1000 * 3600 * 24);
+                            dateHolder.setAssignments(new ArrayList<>());
+                            dateHolders.add(dateHolder);
                         }
-                    }
-                    for(Integer date : dates){
-                        AssignmentRecyclerAdapter.AssignmentDateHolder dateHolder = new AssignmentRecyclerAdapter.AssignmentDateHolder();
-                        dateHolder.setDate((long)date * 1000 * 3600 *24);
-                        dateHolder.setAssignments(new ArrayList<>());
-                        dateHolders.add(dateHolder);
-                    }
-                    for(AssignmentRecyclerAdapter.AssignmentDateHolder dateHolder : dateHolders){
-                        for(StudentAssignment assignment : assignments){
-                            if(((int)(assignment.getEndTime() / (1000*3600*24))) == ((int)(dateHolder.getDate() / (1000*3600*24)))){
-                                dateHolder.getAssignments().add(assignment);
+                        for (AssignmentRecyclerAdapter.AssignmentDateHolder dateHolder : dateHolders) {
+                            for (StudentAssignment assignment : assignments) {
+                                if ((((int) (assignment.getEndTime() / (1000 * 3600 * 24)))) == ( dateHolder.getDate() / (1000 * 3600 * 24))) {
+                                    dateHolder.getAssignments().add(assignment);
+                                }
                             }
                         }
+                        assignmentRecyclerAdapter.notifyDataSetChanged();
+                    }else{
+                        textNoAssignment.setVisibility(View.VISIBLE);
                     }
-                    assignmentRecyclerAdapter.notifyDataSetChanged();
                 }else{
                     showToast(AppString.ERROR_LOAD_LECTURE_LIST);
                 }

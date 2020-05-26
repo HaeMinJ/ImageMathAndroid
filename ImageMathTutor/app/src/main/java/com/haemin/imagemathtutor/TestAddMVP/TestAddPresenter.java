@@ -31,7 +31,7 @@ public class TestAddPresenter implements TestAddContract.TestAddPresenter {
             @Override
             public void onResponse(Call<Test> call, Response<Test> response) {
                 if(response.code() == 200){
-                    //view.showSuccess("테스트 업로드가 성공적으로 완료되었습니다.");
+                    view.showSuccess("테스트 업로드가 성공적으로 완료되었습니다.");
                     for (ServerFile answerFile :
                             answerFiles) {
                         uploadAnswerFile(response.body().getTestSeq()+"", answerFile);

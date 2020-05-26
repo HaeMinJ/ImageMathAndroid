@@ -146,6 +146,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="28dp"
             android:layout_marginRight="28dp"
+            android:visibility="gone"
             app:drawableOff="@drawable/btn_task_off"
             app:drawableOn="@drawable/btn_task_on"
             app:layout_constraintBottom_toTopOf="@+id/btn_notice_group"

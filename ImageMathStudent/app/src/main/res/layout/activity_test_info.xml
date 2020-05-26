@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".TestActivityMVP.TestInfoActivity">
+    tools:context=".TestInfoMVP.TestInfoActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -135,13 +135,13 @@
                 android:layout_height="3dp"
                 android:layout_marginTop="28dp"
                 android:background="@color/edit_disabled"
-                app:layout_constraintTop_toBottomOf="@id/btn_answer_file" />
+                app:layout_constraintTop_toBottomOf="@id/group_file" />
 
-            <com.haemin.imagemathstudent.View.UI.FileButton
-                android:id="@+id/btn_answer_file"
+            <LinearLayout
+                android:id="@+id/group_file"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:deleteable="false"
+                android:orientation="vertical"
                 android:layout_marginTop="18dp"
                 app:layout_constraintTop_toBottomOf="@id/dummy_text_answer" />
 
@@ -169,18 +169,6 @@
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/dummy_text_end_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="제출 마감일"
-                android:textColor="@android:color/black"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toLeftOf="@id/dummy_text_upload_day"
-                app:layout_constraintTop_toBottomOf="@id/dummy_text_upload_day" />
-
             <TextView
                 android:id="@+id/dummy_text_lecture_day"
                 android:layout_width="wrap_content"
@@ -190,7 +178,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="@id/dummy_text_upload_day"
-                app:layout_constraintTop_toBottomOf="@id/dummy_text_end_day" />
+                app:layout_constraintTop_toBottomOf="@id/dummy_text_upload_day" />
 
             <TextView
                 android:id="@+id/text_upload_day"
@@ -201,16 +189,6 @@
                 android:textSize="12sp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/dummy_text_upload_day" />
-
-            <TextView
-                android:id="@+id/text_end_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2019.12.17 화"
-                android:textColor="@android:color/black"
-                android:textSize="12sp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/dummy_text_end_day" />
 
             <TextView
                 android:id="@+id/text_lecture_day"

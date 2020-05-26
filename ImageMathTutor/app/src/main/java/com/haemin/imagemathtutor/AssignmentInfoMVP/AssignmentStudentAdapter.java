@@ -84,14 +84,16 @@ public class AssignmentStudentAdapter extends RecyclerView.Adapter<AssignmentStu
             GlobalApplication.getAPIService().getAssignmentSubmitFiles(GlobalApplication.getAccessToken(),assignment.getAssignmentSeq()+"",assignment.getUserSeq()).enqueue(new Callback<ArrayList<ServerFile>>() {
                 @Override
                 public void onResponse(Call<ArrayList<ServerFile>> call, Response<ArrayList<ServerFile>> response) {
-                    if(response.code() == 200 && response.body() != null){
+                    if(response.code() == 200 && response.body() != null && assignment.getSubmitFiles() != null){
                         assignment.getSubmitFiles().addAll(response.body());
                         ImagePopupDialog imagePopupDialog = new ImagePopupDialog(assignment.getAssignmentSeq()+"", assignment.getAssignmentAdmSeq(),response.body(), presenter);
                         holder.textCheckSubmit.setOnClickListener(v -> {
                             imagePopupDialog.show(((AppCompatActivity)context).getSupportFragmentManager(),"IMAGE_POPUP");
                         });
                     }else{
-                        Toast.makeText(context,"학생이 과제를 제출하지 않았습니다.",Toast.LENGTH_SHORT).show();
+                        holder.textCheckSubmit.setOnClickListener(v -> {
+                            Toast.makeText(context,"학생이 과제를 제출하지 않았습니다.",Toast.LENGTH_SHORT).show();
+                        });
                         Log.e("AssignmentStudentAdp",response.message());
                     }
                 }
@@ -99,7 +101,9 @@ public class AssignmentStudentAdapter extends RecyclerView.Adapter<AssignmentStu
                 @Override
                 public void onFailure(Call<ArrayList<ServerFile>> call, Throwable t) {
                     Log.e("AssignmentStudentAdp",t.getMessage(),t);
-                    Toast.makeText(context,"학생이 과제를 제출하지 않았습니다.",Toast.LENGTH_SHORT).show();
+                    holder.textCheckSubmit.setOnClickListener(v -> {
+                        Toast.makeText(context,"학생이 과제를 제출하지 않았습니다.",Toast.LENGTH_SHORT).show();
+                    });
                 }
             });
 

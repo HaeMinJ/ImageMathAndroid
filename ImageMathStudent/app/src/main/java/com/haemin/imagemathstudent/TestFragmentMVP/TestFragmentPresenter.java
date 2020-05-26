@@ -24,51 +24,56 @@ public class TestFragmentPresenter implements TestFragmentContract.TestFragmentP
                 .enqueue(new Callback<ArrayList<StudentTest>>() {
                     @Override
                     public void onResponse(Call<ArrayList<StudentTest>> call, Response<ArrayList<StudentTest>> response) {
-                        if(response.code() == 200 && response.body() != null){
+                        if (response.code() == 200 && response.body() != null) {
                             ArrayList<StudentTest> tests = response.body();
 
-                            testFragmentView.updateChart(tests);
-                            testFragmentView.updateRecycler(tests);
+                            if (tests.size() != 0) {
+                                testFragmentView.showHasData();
+                                testFragmentView.updateChart(tests);
+                                testFragmentView.updateRecycler(tests);
 
-                            int sumScore = 0;
-                            int sumRank = 0;
+                                int sumScore = 0;
+                                int sumRank = 0;
 
-                            for(StudentTest test : tests){
-                                sumRank+=test.getRank();
-                                sumScore+=test.getScore();
+                                for (StudentTest test : tests) {
+                                    sumRank += test.getRank();
+                                    sumScore += test.getScore();
+                                }
+                                testFragmentView.updateAverages("" +  tests.get(tests.size() - 1).getRank(), "" + sumScore / tests.size(), "" + tests.get(tests.size() - 1).getScore());
+                            } else {
+                                testFragmentView.showNoData();
                             }
-                            testFragmentView.updateAverages(""+sumRank / tests.size(), ""+sumScore / tests.size() ,""+tests.get(tests.size() - 1).getScore());
-                        }else{
+                        } else {
                             testFragmentView.showToast(AppString.ERROR_LOAD_TEST_LIST);
-                            Log.e("TestFragmentPresenter",response.message());
+                            Log.e("TestFragmentPresenter", response.message());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<StudentTest>> call, Throwable t) {
                         testFragmentView.showToast(AppString.ERROR_NETWORK_MESSAGE);
-                        Log.e("TestFragmentPresenter",t.getMessage(),t);
+                        Log.e("TestFragmentPresenter", t.getMessage(), t);
                     }
                 });
     }
 
     @Override
     public void requestLecturePick() {
-        GlobalApplication.getAPIService().getMyLectureList(GlobalApplication.getAccessToken(),false,0)
+        GlobalApplication.getAPIService().getMyLectureList(GlobalApplication.getAccessToken(), false, 0)
                 .enqueue(new Callback<ArrayList<Lecture>>() {
                     @Override
                     public void onResponse(Call<ArrayList<Lecture>> call, Response<ArrayList<Lecture>> response) {
-                        if(response.code() == 200 && response.body() != null){
+                        if (response.code() == 200 && response.body() != null) {
                             testFragmentView.showDialog(response.body());
-                        }else{
+                        } else {
                             testFragmentView.showToast(AppString.ERROR_LOAD_LECTURE_LIST);
-                            Log.e("TestFragmentPresenter",response.message());
+                            Log.e("TestFragmentPresenter", response.message());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<Lecture>> call, Throwable t) {
-                        Log.e("TestFragmentPresenter",t.getMessage(),t);
+                        Log.e("TestFragmentPresenter", t.getMessage(), t);
                     }
                 });
     }

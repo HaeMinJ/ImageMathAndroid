@@ -13,7 +13,7 @@
         android:layout_marginStart="30dp"
         android:background="@color/edit_disabled"
         android:gravity="center"
-        android:maxLength="1"
+        android:maxLength="2"
         android:hint="월"
         app:layout_constraintLeft_toLeftOf="parent" />
 

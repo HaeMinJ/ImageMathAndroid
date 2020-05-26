@@ -1,7 +1,11 @@
 package com.haemin.imagemathstudent.View.Activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +33,13 @@ public class AlarmActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     @BindView(R.id.btn_back)
     ImageButton btnBack;
+    @BindView(R.id.text_no_alarm_data)
+    TextView textNoAlarm;
+    public static void start(Context context) {
+        Intent starter = new Intent(context, AlarmActivity.class);
+     //   starter.putExtra();
+        context.startActivity(starter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +58,11 @@ public class AlarmActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<Alarm>> call, Response<ArrayList<Alarm>> response) {
                         if(response.code() == 200 && response.body() != null){
+                            if(response.body().size() != 0){
+                                textNoAlarm.setVisibility(View.GONE);
+                            }else{
+                                textNoAlarm.setVisibility(View.VISIBLE);
+                            }
                             alarms.clear();
                             alarms.addAll(response.body());
                             recyclerAdapter.notifyDataSetChanged();

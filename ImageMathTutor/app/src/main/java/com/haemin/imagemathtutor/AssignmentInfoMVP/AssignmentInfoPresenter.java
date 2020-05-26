@@ -62,4 +62,24 @@ public class AssignmentInfoPresenter implements AssignmentInfoContract.Assignmen
             }
         });
     }
+
+    @Override
+    public void deleteAssignment(String assignmentSeq) {
+        GlobalApplication.getAPIService().deleteAssignmentInfo(GlobalApplication.getAccessToken(),assignmentSeq).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 200){
+                    infoView.showDeleteSuccess();
+                }else{
+                    infoView.showToast("과제 삭제에 실패했습니다.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                    infoView.showToast(AppString.ERROR_NETWORK_MESSAGE);
+                    Log.e("AssignmentDelete", t.getMessage(),t);
+            }
+        });
+    }
 }

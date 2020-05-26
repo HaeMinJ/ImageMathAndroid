@@ -1,6 +1,7 @@
 package com.haemin.imagemathstudent.Adapter;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.haemin.imagemathstudent.Data.Alarm;
 import com.haemin.imagemathstudent.R;
+import com.haemin.imagemathstudent.SingleTon.GlobalApplication;
 
 import java.util.ArrayList;
 
@@ -36,8 +38,8 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
         Alarm alarm = alarms.get(position);
         holder.textAlarmTitle.setText(alarm.getTitle());
-        holder.textAlarmContent.setText(alarm.getText());
-        holder.textAlarmTime.setText(alarm.getTime());
+        holder.textAlarmContent.setText(alarm.getContent());
+        holder.textAlarmTime.setText(DateUtils.getRelativeTimeSpanString(alarm.getPostTime()));
     }
 
     @Override

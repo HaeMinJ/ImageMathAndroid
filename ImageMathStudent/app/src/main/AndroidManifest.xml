@@ -11,9 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".View.Activity.AlarmActivity"></activity>
+        <activity android:name=".SettingMVP.SettingActivity"></activity>
+        <activity android:name=".QuestionInfoMVP.QuestionInfoActivity" />
+        <activity android:name=".QuestionAddMVP.QuestionAddActivity" />
+        <activity android:name=".View.Activity.AlarmActivity" />
         <activity android:name=".NoticeActivityMVP.NoticeActivity" />
-        <activity android:name=".TestActivityMVP.TestInfoActivity" />
+        <activity android:name=".TestInfoMVP.TestInfoActivity" />
         <activity android:name=".AssignmentInfoMVP.AssignmentInfoActivity" />
         <activity android:name=".View.Activity.MainActivity">
             <intent-filter>
@@ -34,6 +37,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
+        <service
+            android:name=".FirebaseUsage.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

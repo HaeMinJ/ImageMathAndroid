@@ -170,10 +170,10 @@ public class RegisterActivity extends AppCompatActivity {
                             User user = response.body();
                             GlobalApplication.setAccessToken(user.getAccessToken());
                             showToast(AppString.SUCCESS_REGISTER);
-                            startActivity(new Intent(RegisterActivity.this, RegisterSuccessActivity.class));
+                            RegisterSuccessActivity.start(RegisterActivity.this,user.getUserSeq()+"");
                             finish();
                         }else{
-                            showToast(response.message());
+                            showToast("이미 존재하는 이메일입니다.");
                         }
                     }
 

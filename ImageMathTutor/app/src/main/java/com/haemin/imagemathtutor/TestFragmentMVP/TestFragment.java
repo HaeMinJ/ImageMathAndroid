@@ -40,6 +40,8 @@ public class TestFragment extends Fragment implements TestFragmentContract.TestF
     ArrayList<Test> tests;
     TestFragmentContract.TestFragmentPresenter presenter;
 
+    String lectureSeq;
+
     public TestFragment() {
         // Required empty public constructor
     }
@@ -72,6 +74,14 @@ public class TestFragment extends Fragment implements TestFragmentContract.TestF
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if(lectureSeq != null && !lectureSeq.equals("")){
+            presenter.requestTestData(lectureSeq);
+        }
+    }
+
+    @Override
     public void showToast(String text) {
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
@@ -93,6 +103,7 @@ public class TestFragment extends Fragment implements TestFragmentContract.TestF
         ListPickerDialog<Lecture> lectureListPickerDialog = new ListPickerDialog<>(lectures, "수업을 선택해주세요.");
         lectureListPickerDialog.setOnItemClickListener(data -> {
             presenter.requestTestData(data.getLectureSeq());
+            lectureSeq = data.getLectureSeq();
             updateLectureName(data);
             lectureListPickerDialog.dismiss();
         });

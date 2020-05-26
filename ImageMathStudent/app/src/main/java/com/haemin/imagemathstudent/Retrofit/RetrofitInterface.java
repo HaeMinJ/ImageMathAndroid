@@ -8,21 +8,51 @@ import retrofit2.http.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public interface RetrofitInterface {
+
     @GET("/alarm")
 //userSeq로 LectureSeqs찾고 해당 알람리스트 출력 수정필요
     Call<ArrayList<Alarm>> getAlarmList(@Header("x-access-token") String accessToken);
 
-    @GET("/notice/{lectureSeq}")
+    @FormUrlEncoded
+    @POST("/alarm/pushToken")
+    Call<Void> setPushToken(@Header("x-access-token")String accessToken, @Field("fcmToken")String fcmToken);
+
+    @GET("/qna/question")
+    Call<ArrayList<Question>> getQuestionList(@Header("x-access-token")String accessToken);
+
+    @GET("/qna/question/file/{questionSeq}")
+    Call<ArrayList<ServerFile>> getQuestionFileList(@Header("x-access-token")String accessToken, @Path("questionSeq") String questionSeq);
+
+    @GET("/qna/answer/{questionSeq}")
+    Call<ArrayList<Answer>> getAnswerList(@Header("x-access-token")String accessToken,@Path("questionSeq") String questionSeq);
+
+    @GET("qna/answer/file/{answerSeq}")
+    Call<ArrayList<ServerFile>> getAnswerFileList(@Header("x-access-token")String accessToken, @Path("answerSeq") String answerSeq);
+
+    @GET("/notice/file")
+    Call<ArrayList<ServerFile>> getNoticeFileList(@Header("x-access-token")String accessToken, @Query("noticeSeq") String noticeSeq);
+
+    @FormUrlEncoded
+    @POST("/qna/question")
+    Call<Question> writeQuestion(@Header("x-access-token")String accessToken, @Field("title")String title,@Field("contents")String contents);
+
+    @Multipart
+    @POST("/qna/editQuestion/{questionSeq}")
+    Call<Void> addQuestionFile(@Header("x-access-token") String accessToken, @Path("questionSeq") String questionSeq, @Part MultipartBody.Part questionFile);
+
+
+
+
+    @GET("/notice")
 //수업에 해당하는 공지 출력 ok page구현
-    Call<ArrayList<Notice>> getNoticeList(@Header("x-access-token") String accessToken, @Path("lectureSeq") String lectureSeq, @Query("page") int page);
+    Call<ArrayList<Notice>> getNoticeList(@Header("x-access-token") String accessToken, @Query("lectureSeq") String lectureSeq, @Query("page") int page);
 
 
     @GET("/assignment/{assignmentSeq}")
 //assignment/{assignmentSeq}:1  이런식으로 경로작성 ok    내일 만들거 studentAssignment 필요함
-    Call<Assignment> getAssignmentInfo(@Header("x-access-token")String accessToken, @Path("assignmentSeq") String assignmentSeq);
+    Call<Assignment> getAssignmentInfo(@Header("x-access-token") String accessToken, @Path("assignmentSeq") String assignmentSeq);
 
     //경로바꿈 ok
     @GET("/account/school")
@@ -59,8 +89,10 @@ public interface RetrofitInterface {
     //-----------------------------------------------------------
     @GET("/test/student")
 //ok testAdm accessToken 확인 ->userSeq testSeq 둘다 일치하는거score포함
-    Call<StudentTest> getStudentTestInfo(@Header("x-access-token") String accessToken, @Query("testSeq") String testSeq);
+    Call<StudentTest> getStudentTestInfo(@Header("x-access-token") String accessToken, @Query("testAdmSeq") String testAdmSeq);
 
+    @GET("/test/tutor")
+    Call<Test> getTestInfo(@Header("x-access-token") String accessToken, @Query("testSeq") String testSeq);
 
     @GET("/test/student/{lectureSeq}")
 //보류 testAdm userSeq, lectureSeq 해당 데이터리스트

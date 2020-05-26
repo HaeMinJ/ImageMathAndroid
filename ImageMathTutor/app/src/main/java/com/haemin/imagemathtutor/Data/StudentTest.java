@@ -2,11 +2,10 @@ package com.haemin.imagemathtutor.Data;
 
 import java.util.ArrayList;
 
-public class StudentTest {
+public class StudentTest extends Test{
 
     int score;
     int rank;
-    int averageScore;
     String userSeq;
     String userName;
 
@@ -27,14 +26,6 @@ public class StudentTest {
     }
 
 
-
-    public int getAverageScore() {
-        return averageScore;
-    }
-
-    public void setAverageScore(int averageScore) {
-        this.averageScore = averageScore;
-    }
 
     public int getScore() {
         return score;

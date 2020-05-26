@@ -1,6 +1,7 @@
 package com.haemin.imagemathtutor.TestInfoMVP;
 
 import android.util.Log;
+import android.widget.Toast;
 import com.haemin.imagemathtutor.AppString;
 import com.haemin.imagemathtutor.Data.StudentTest;
 import com.haemin.imagemathtutor.Data.Test;
@@ -61,5 +62,25 @@ public class TestInfoPresenter implements TestInfoContract.TestInfoPresenter {
                         Log.e("TestInfoStudent",t.getMessage(),t);
                     }
                 });
+    }
+
+    @Override
+    public void deleteTestInfo(String testSeq) {
+        GlobalApplication.getAPIService().deleteTestInfo(GlobalApplication.getAccessToken(),testSeq).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 200){
+                    infoView.showDeleteSuccess();
+                }else{
+                    infoView.showToast("테스트 삭제가 실패했습니다.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                infoView.showToast(AppString.ERROR_NETWORK_MESSAGE);
+                Log.e("TestInfoDelete",t.getMessage(),t);
+            }
+        });
     }
 }

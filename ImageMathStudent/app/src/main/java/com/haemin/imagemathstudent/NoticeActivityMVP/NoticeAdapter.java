@@ -2,11 +2,13 @@ package com.haemin.imagemathstudent.NoticeActivityMVP;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -14,7 +16,12 @@ import butterknife.ButterKnife;
 import com.haemin.imagemathstudent.Data.Notice;
 import com.haemin.imagemathstudent.Data.ServerFile;
 import com.haemin.imagemathstudent.R;
+import com.haemin.imagemathstudent.SingleTon.AppString;
+import com.haemin.imagemathstudent.SingleTon.GlobalApplication;
 import com.haemin.imagemathstudent.View.UI.FileButton;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.ArrayList;
 
@@ -42,16 +49,29 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeHold
         holder.textNoticeTime.setText(DateUtils.getRelativeTimeSpanString(notice.getPostTime())+ " 게시");
         holder.textNoticeText.setText(notice.getContents());
         holder.textNoticeTitle.setText(notice.getTitle());
-        ArrayList<ServerFile> files = notice.getFiles();
-        if(files != null && files.size() != 0){
-            for (ServerFile file :
-                    files) {
-                FileButton fileButton = new FileButton(context);
-                fileButton.setFile(file);
-                fileButton.setDeleteAble(false);
-                holder.groupFile.addView(fileButton);
+        GlobalApplication.getAPIService().getNoticeFileList(GlobalApplication.getAccessToken(),notice.getNoticeSeq()+"").enqueue(new Callback<ArrayList<ServerFile>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ServerFile>> call, Response<ArrayList<ServerFile>> response) {
+                if(response.code() == 200 && response.body() != null){
+                    holder.groupFile.removeAllViews();
+                    for(ServerFile serverFile : response.body()){
+                        FileButton fileButton = new FileButton(context);
+                        fileButton.setDeleteAble(false);
+                        fileButton.setFile(serverFile);
+                        holder.groupFile.addView(fileButton);
+                    }
+                }else{
+                    Toast.makeText(context,"공지사항 파일을 읽어오는데 실패했습니다.",Toast.LENGTH_SHORT).show();
+                    Log.e("NoticeRecyclerAdapter",response.message());
+                }
             }
-        }
+
+            @Override
+            public void onFailure(Call<ArrayList<ServerFile>> call, Throwable t) {
+                Log.e("NoticeRecyclerAdapter",t.getMessage(),t);
+                Toast.makeText(context, AppString.ERROR_NETWORK_MESSAGE,Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

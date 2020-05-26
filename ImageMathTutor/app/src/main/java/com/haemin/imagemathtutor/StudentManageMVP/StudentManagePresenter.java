@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class StudentManagePresenter implements StudentManageContract.StudentManagePresenter {
 
-    public static String TAG = "StudentManagePresenter";
+    public String TAG = "StudentManagePresenter";
 
     StudentManageContract.StudentManageView view;
 
@@ -50,7 +50,7 @@ public class StudentManagePresenter implements StudentManageContract.StudentMana
                     view.showToast("성공적으로 학생을 삭제했습니다.");
                 }else{
                     view.showToast(AppString.ERROR_DELETE_USER);
-                    Log.e(TAG,response.message());
+                    Log.e(TAG,response.message()+"a");
                 }
             }
 

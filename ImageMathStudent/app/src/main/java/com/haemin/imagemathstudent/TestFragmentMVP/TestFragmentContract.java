@@ -13,6 +13,8 @@ public interface TestFragmentContract {
         void updateRecycler(ArrayList<StudentTest> studentTests);
         void updateAverages(String averageRank, String averageScore, String recentScore);
         void updateLectureName(String lectureName);
+        void showNoData();
+        void showHasData();
     }
     interface TestFragmentPresenter{
         void updateData(String lectureSeq);

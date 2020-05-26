@@ -27,7 +27,7 @@ public class NoticePresenter implements NoticeContract.NoticePresenter {
 
     @Override
     public void updateData(String lectureSeq) {
-        GlobalApplication.getAPIService().getNoticeList(GlobalApplication.getAccessToken(),lectureSeq,0).enqueue(new Callback<ArrayList<Notice>>() {
+        GlobalApplication.getAPIService().getNoticeList(GlobalApplication.getAccessToken(),lectureSeq).enqueue(new Callback<ArrayList<Notice>>() {
             @Override
             public void onResponse(Call<ArrayList<Notice>> call, Response<ArrayList<Notice>> response) {
                 if(response.code() == 200 && response.body() != null){
@@ -44,25 +44,6 @@ public class NoticePresenter implements NoticeContract.NoticePresenter {
                 noticeView.showErrorMessage(AppString.ERROR_NETWORK_MESSAGE);
             }
         });
-        /*
-        retrofitInterface.getNoticeInfos(TutorApplication.getAccessToken(), lectureSeq).enqueue(new Callback<ArrayList<Notice>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Notice>> call, Response<ArrayList<Notice>> response) {
-                if (response.code() == 200 && response.body() != null) {
-                    notices.clear();
-                    notices.addAll(response.body());
-                    noticeView.refreshView();
-                } else {
-                    noticeView.showErrorMessage(response.message());
-                }
-            }
-            @Override
-            public void onFailure(Call<ArrayList<Notice>> call, Throwable t) {
-                noticeView.showErrorMessage("네트워크 연결이 원활하지 않습니다.\n인터넷 연결을 확인해주세요.");
-                Log.e("NOTICE-API", t.getMessage(), t);
-            }
-        });
-         */
     }
 
     private ArrayList<Notice> addDummyData() {

@@ -63,20 +63,35 @@ public class NoticeRecyclerAdapter extends RecyclerView.Adapter<NoticeRecyclerAd
                 }
             });
         });
-        if(notice.getFiles() != null){
-            Log.e("NoticeRecyclerAdapter","NOT NULL!!");
-            holder.groupFile.removeAllViews();
-            for(ServerFile serverFile : notice.getFiles()){
-                FileButton fileButton = new FileButton(context);
-                fileButton.setDeleteAble(false);
-                fileButton.setFile(serverFile);
-                holder.groupFile.addView(fileButton);
+        GlobalApplication.getAPIService().getNoticeFileList(GlobalApplication.getAccessToken(),notice.getNoticeSeq()).enqueue(new Callback<ArrayList<ServerFile>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ServerFile>> call, Response<ArrayList<ServerFile>> response) {
+                if(response.code() == 200 && response.body() != null){
+                    holder.groupFile.removeAllViews();
+                    for(ServerFile serverFile : response.body()){
+                        FileButton fileButton = new FileButton(context);
+                        fileButton.setDeleteAble(false);
+                        fileButton.setFile(serverFile);
+                        holder.groupFile.addView(fileButton);
+                    }
+                }else{
+                    Toast.makeText(context,"공지사항 파일을 읽어오는데 실패했습니다.",Toast.LENGTH_SHORT).show();
+                    Log.e("NoticeRecyclerAdapter",response.message());
+                }
             }
-        }
+
+            @Override
+            public void onFailure(Call<ArrayList<ServerFile>> call, Throwable t) {
+                Log.e("NoticeRecyclerAdapter",t.getMessage(),t);
+                Toast.makeText(context,AppString.ERROR_NETWORK_MESSAGE,Toast.LENGTH_SHORT).show();
+            }
+        });
+
         holder.textNoticeTime.setText(DateUtils.getRelativeTimeSpanString(notice.getPostTime()));
         holder.textNoticeNumber.setText(notice.getNoticeSeq());
         holder.textNoticeTitle.setText(notice.getTitle());
         holder.textNoticeText.setText(notice.getContents());
+
     }
 
     @Override

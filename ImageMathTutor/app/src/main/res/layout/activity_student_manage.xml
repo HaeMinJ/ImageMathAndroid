@@ -78,16 +78,17 @@
         <TextView
             android:textSize="14sp"
             android:id="@+id/toggle_check_student"
-            android:layout_width="60dp"
+            android:layout_width="0dp"
+            app:layout_constraintHorizontal_weight="0.75"
             android:layout_height="wrap_content"
-            android:text="학생 번호"
+            android:text="학생 선택"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            app:layout_constraintHorizontal_weight="1.5"
+            app:layout_constraintHorizontal_weight="1.25"
             android:gravity="center"
             app:layout_constraintRight_toLeftOf="@id/dummy_divide_2"
             app:layout_constraintLeft_toRightOf="@id/dummy_divide_1"
@@ -98,13 +99,25 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
-            app:layout_constraintHorizontal_weight="1"
+            android:id="@+id/text_student_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:text="학생코드"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toRightOf="@id/dummy_divide_2"
             app:layout_constraintRight_toLeftOf="@id/dummy_divide_3"
-            android:id="@+id/text_student_code"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            app:layout_constraintHorizontal_weight="1.75"
+            android:gravity="center"
+            app:layout_constraintLeft_toRightOf="@id/dummy_divide_3"
+            app:layout_constraintRight_toLeftOf="@id/dummy_divide_4"
+            android:id="@+id/text_student_school"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="학교"
@@ -144,7 +157,7 @@
         <View
             android:visibility="invisible"
             app:layout_constraintLeft_toRightOf="@id/text_student_code"
-            app:layout_constraintRight_toLeftOf="@id/btn_student_info"
+            app:layout_constraintRight_toLeftOf="@id/text_student_school"
             android:id="@+id/dummy_divide_3"
             android:layout_width="2dp"
             android:layout_height="match_parent"
@@ -152,7 +165,7 @@
 
         <View
             android:visibility="invisible"
-            app:layout_constraintLeft_toRightOf="@id/text_student_code"
+            app:layout_constraintLeft_toRightOf="@id/text_student_school"
             app:layout_constraintRight_toLeftOf="@id/btn_student_info"
             android:id="@+id/dummy_divide_4"
             android:layout_width="2dp"
@@ -165,6 +178,7 @@
             android:layout_height="1dp"
             android:background="#A7A7A7"
             app:layout_constraintBottom_toBottomOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
