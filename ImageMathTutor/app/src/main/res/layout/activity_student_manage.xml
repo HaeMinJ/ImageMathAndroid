@@ -50,6 +50,15 @@
         android:layout_marginTop="20dp"
         android:textSize="18sp" />
     <Button
+        android:id="@+id/btn_post_push"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintRight_toLeftOf="@id/btn_delete_students"
+        app:layout_constraintBottom_toBottomOf="@id/dummy_text_list_divide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="알림 전송"/>
+
+    <Button
         android:id="@+id/btn_delete_students"
         android:layout_marginEnd="14dp"
         app:layout_constraintRight_toRightOf="parent"
@@ -75,17 +84,26 @@
         android:layout_height="60dp">
 
 
-        <TextView
-            android:textSize="14sp"
-            android:id="@+id/toggle_check_student"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            app:layout_constraintHorizontal_weight="0.75"
-            android:layout_height="wrap_content"
-            android:text="학생 선택"
+            android:layout_height="match_parent"
             android:gravity="center"
+            android:id="@+id/group_toggle_check_student"
+            app:layout_constraintHorizontal_weight="0.75"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintRight_toLeftOf="@id/dummy_divide_1"
+            app:layout_constraintTop_toTopOf="parent">
+            <CheckBox
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/toggle_check_all_student"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             app:layout_constraintHorizontal_weight="1.25"
@@ -138,7 +156,7 @@
         <View
             android:visibility="invisible"
             android:layout_marginStart="0dp"
-            app:layout_constraintLeft_toRightOf="@id/toggle_check_student"
+            app:layout_constraintLeft_toRightOf="@id/group_toggle_check_student"
             app:layout_constraintRight_toLeftOf="@id/text_student_name"
             android:id="@+id/dummy_divide_1"
             android:layout_width="2dp"

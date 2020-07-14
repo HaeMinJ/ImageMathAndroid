@@ -12,6 +12,10 @@ import java.util.Map;
 
 public interface RetrofitInterface {
 
+    @FormUrlEncoded
+    @POST("/push/postPush")
+    Call<Void> postPushAlarm(@Header("x-access-token")String accessToken, @Field("userSeq")String userSeq, @Field("message")String message);
+
     @GET("/qna/question")
     Call<ArrayList<Question>> getQuestionList(@Header("x-access-token")String accessToken);
 
