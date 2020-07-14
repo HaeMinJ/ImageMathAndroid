@@ -41,7 +41,7 @@ public class StudentManageActivity extends AppCompatActivity implements StudentM
     @BindView(R.id.btn_post_push)
     Button btnPostPush;
     @BindView(R.id.toggle_check_all_student)
-    ToggleButton toggleCheckAll;
+    CheckBox toggleCheckAll;
 
 
     StudentManagePresenter presenter;
@@ -95,7 +95,7 @@ public class StudentManageActivity extends AppCompatActivity implements StudentM
             });
             btnPostPush.setOnClickListener(v -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Title");
+                builder.setTitle("알림메시지 작성");
 
 // Set up the input
                 final EditText input = new EditText(this);
@@ -104,7 +104,7 @@ public class StudentManageActivity extends AppCompatActivity implements StudentM
                 builder.setView(input);
 
 // Set up the buttons
-                builder.setPositiveButton("OK", (dialog, which) -> {
+                builder.setPositiveButton("전송", (dialog, which) -> {
                     for (User user : students) {
 
                         if (user.isChecked()) {
@@ -124,7 +124,7 @@ public class StudentManageActivity extends AppCompatActivity implements StudentM
                         }
                     }
                 });
-                builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+                builder.setNegativeButton("취소", (dialog, which) -> dialog.cancel());
 
                 builder.show();
 
