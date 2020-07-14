@@ -6,8 +6,8 @@ android {
         applicationId "com.haemin.imagemathstudent"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 6
-        versionName "1.4-release"
+        versionCode 8
+        versionName "1.6-release"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -47,4 +47,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'gun0912.ted:tedpermission:2.0.0'
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.9.2'
 }

@@ -90,6 +90,11 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
                 textSubmitState.setText("미제출");
                 textSubmitState.setTextColor(getResources().getColor(android.R.color.black));
                 textOverlayFile.setVisibility(View.VISIBLE);
+                if (studentAssignment.getEndTime() < System.currentTimeMillis()) {
+                    textSubmitState.setText("불성실");
+                    textSubmitState.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                    textOverlayFile.setVisibility(View.VISIBLE);
+                }
                 break;
             case 1:
                 textSubmitState.setText("제출");
@@ -120,13 +125,14 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
                 textSubmitState.setText("불성실");
                 textSubmitState.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
                 textOverlayFile.setVisibility(View.VISIBLE);
+                if (studentAssignment.getEndTime() < System.currentTimeMillis()) {
+                    textSubmitState.setText("불성실");
+                    textSubmitState.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                    textOverlayFile.setVisibility(View.VISIBLE);
+                }
                 break;
         }
-        if (studentAssignment.getEndTime() < System.currentTimeMillis()) {
-            textSubmitState.setText("불성실");
-            textSubmitState.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
-            textOverlayFile.setVisibility(View.VISIBLE);
-        }
+
         textLectureName.setText(studentAssignment.getLectureName());
         textAssignmentName.setText(studentAssignment.getTitle());
         textAssignmentNotice.setText(studentAssignment.getContents());

@@ -46,6 +46,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageHolder>
                 .applyDefaultRequestOptions(new RequestOptions().fitCenter())
                 .load(image.getFileUrl())
                 .placeholder(R.drawable.e_mgt02)
+                .thumbnail(0.1f)
                 .into(holder.submitImage);
 
         ImagePopup imagePopup = new ImagePopup(context);
