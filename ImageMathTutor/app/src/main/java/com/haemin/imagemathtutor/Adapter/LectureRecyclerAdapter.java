@@ -146,9 +146,9 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         GlobalApplication.getAPIService().setExpiredLecture(GlobalApplication.getAccessToken(),lectures.get(position).getLectureSeq(), 1).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.code() == 200 && response.body() != null){
+                if(response.code() == 200){
                     showToast("성공적으로 수업을 종강처리했습니다.");
-                    lectures.remove(position);
+                    lectures.get(position).setExpired(true);
                     notifyDataSetChanged();
                 }else{
                     showToast("종강처리에 실패했습니다.");
@@ -165,7 +165,7 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         GlobalApplication.getAPIService().deleteLecture(GlobalApplication.getAccessToken(), lectures.get(position).getLectureSeq()).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.code() == 200 && response.body() != null){
+                if(response.code() == 200){
                     showToast("성공적으로 수업을 삭제했습니다.");
                     lectures.remove(position);
                     notifyDataSetChanged();

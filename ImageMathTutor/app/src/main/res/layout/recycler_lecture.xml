@@ -52,7 +52,7 @@
             android:layout_marginTop="14dp"
             android:background="@drawable/bg_rounded_btn_box"
             android:elevation="14dp"
-            android:text="휴강처리"
+            android:text="종강처리"
             android:textSize="14sp"
             android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="@id/text_lecture_name"
