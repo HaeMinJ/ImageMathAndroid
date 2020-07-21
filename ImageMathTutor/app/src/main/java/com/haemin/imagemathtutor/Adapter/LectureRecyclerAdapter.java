@@ -1,5 +1,6 @@
 package com.haemin.imagemathtutor.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.haemin.imagemathtutor.AppString;
 import com.haemin.imagemathtutor.Data.Lecture;
 import com.haemin.imagemathtutor.Data.Notice;
 import com.haemin.imagemathtutor.GlobalApplication;
@@ -65,6 +67,12 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         holder.btnRecognition.setOnClickListener(v -> {
             RecognitionActivity.start(context,lecture);
         });
+        holder.btnDeleteLecture.setOnClickListener(v -> {
+            checkDelete(position);
+        });
+        holder.btnSetExpired.setOnClickListener(v -> {
+            checkExpired(position);
+        });
 
         holder.textLectureName.setText(lecture.getName());
         holder.textClassTimes.setText(lecture.getTime());
@@ -103,6 +111,76 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
             StudentTestActivity.start(context,lecture);
         });
     }
+
+    private void checkExpired(int position) {
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setTitle(lectures.get(position).getName()+" 수업 종강 처리")
+                .setMessage("정말로 종강 처리하시겠습니까?")
+                .setNegativeButton("취소",(dialog1, which) -> {
+                    dialog1.dismiss();
+                })
+                .setPositiveButton("확인",(dialog1, which) -> {
+                    setLectureExpired(position);
+                    dialog1.dismiss();
+                })
+                .create();
+        dialog.show();
+    }
+
+    private void checkDelete(int position) {
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setTitle(lectures.get(position).getName()+" 수업 삭제")
+                .setMessage("정말로 삭제하시겠습니까?")
+                .setNegativeButton("취소",(dialog1, which) -> {
+                    dialog1.dismiss();
+                })
+                .setPositiveButton("삭제",(dialog1, which) -> {
+                    deleteLecture(position);
+                    dialog1.dismiss();
+                })
+                .create();
+        dialog.show();
+    }
+
+    private void setLectureExpired(int position){
+        GlobalApplication.getAPIService().setExpiredLecture(GlobalApplication.getAccessToken(),lectures.get(position).getLectureSeq(), 1).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 200 && response.body() != null){
+                    showToast("성공적으로 수업을 종강처리했습니다.");
+                    lectures.remove(position);
+                    notifyDataSetChanged();
+                }else{
+                    showToast("종강처리에 실패했습니다.");
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                showToast(AppString.ERROR_NETWORK_MESSAGE);
+            }
+        });
+    }
+
+    private void deleteLecture(int position) {
+        GlobalApplication.getAPIService().deleteLecture(GlobalApplication.getAccessToken(), lectures.get(position).getLectureSeq()).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 200 && response.body() != null){
+                    showToast("성공적으로 수업을 삭제했습니다.");
+                    lectures.remove(position);
+                    notifyDataSetChanged();
+                }else{
+                    showToast("수업 삭제에 실패했습니다.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                showToast(AppString.ERROR_NETWORK_MESSAGE);
+            }
+        });
+    }
+
     void showToast(String text){
         Toast.makeText(context,text,Toast.LENGTH_SHORT).show();
     }
@@ -121,9 +199,12 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
 
         @BindView(R.id.btn_student_manage)
         Button btnStudentManage;
-
         @BindView(R.id.btn_recognition)
         Button btnRecognition;
+        @BindView(R.id.btn_delete_lecture)
+        Button btnDeleteLecture;
+        @BindView(R.id.btn_set_expired)
+        Button btnSetExpired;
 
         @BindView(R.id.text_lecture_name)
         TextView textLectureName;

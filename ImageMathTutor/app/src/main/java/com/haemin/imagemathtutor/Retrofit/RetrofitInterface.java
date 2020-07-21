@@ -108,6 +108,14 @@ public interface RetrofitInterface {
     Call<ArrayList<Lecture>> getLectureList();
 
     @FormUrlEncoded
+    @PATCH("/lecture/{lectureSeq}")
+    Call<Void> setExpiredLecture(@Header("x-access-token")String accessToken, @Path("lectureSeq")String lectureSeq, @Field("isExpired") int isExpired);
+
+    @FormUrlEncoded
+    @DELETE("/lecture/{lectureSeq}")
+    Call<Void> deleteLecture(@Header("x-access-token")String accessToken, @Path("lectureSeq")String lectureSeq);
+
+    @FormUrlEncoded
     @POST("/lecture/add")
 //경로바꿈 ok
     Call<Void> addLecture(@Header("x-access-token") String accessToken, @FieldMap Map<String, String> lectureField);
