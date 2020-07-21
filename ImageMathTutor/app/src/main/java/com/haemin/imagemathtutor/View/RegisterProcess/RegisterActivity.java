@@ -130,25 +130,25 @@ public class RegisterActivity extends AppCompatActivity {
             });
         });
 
-        btnSearchSchool.setOnClickListener(v -> {
-            GlobalApplication.getAPIService().getSchoolList().enqueue(new Callback<ArrayList<School>>() {
-                @Override
-                public void onResponse(Call<ArrayList<School>> call, Response<ArrayList<School>> response) {
-                    if (response.code() == 200 && response.body() != null) {
-                        showSchoolDialog(response.body());
-                    } else {
-                        showToast(AppString.ERROR_LOAD_SCHOOL_LIST);
-                        Log.e("RegisterActivity",response.message());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ArrayList<School>> call, Throwable t) {
-                    showToast(AppString.ERROR_NETWORK_MESSAGE);
-                    Log.e("RegisterActivity",t.getMessage(),t);
-                }
-            });
-        });
+//        btnSearchSchool.setOnClickListener(v -> {
+//            GlobalApplication.getAPIService().getSchoolList().enqueue(new Callback<ArrayList<School>>() {
+//                @Override
+//                public void onResponse(Call<ArrayList<School>> call, Response<ArrayList<School>> response) {
+//                    if (response.code() == 200 && response.body() != null) {
+//                        showSchoolDialog(response.body());
+//                    } else {
+//                        showToast(AppString.ERROR_LOAD_SCHOOL_LIST);
+//                        Log.e("RegisterActivity",response.message());
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<ArrayList<School>> call, Throwable t) {
+//                    showToast(AppString.ERROR_NETWORK_MESSAGE);
+//                    Log.e("RegisterActivity",t.getMessage(),t);
+//                }
+//            });
+//        });
 
         /*
         btnAddLecture.setOnClickListener(v -> {

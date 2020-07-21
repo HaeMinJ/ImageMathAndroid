@@ -55,9 +55,9 @@ public interface RetrofitInterface {
     @POST("/notice/{noticeSeq}")
     Call<Void> addNoticeFile(@Header("x-access-token") String accessToken, @Path("noticeSeq") String noticeSeq, @Part MultipartBody.Part noticeFile);
 
-    @GET("/account/school")
-//경로바꿈 ok
-    Call<ArrayList<School>> getSchoolList();
+//    @GET("/account/school")
+////경로바꿈 ok
+//    Call<ArrayList<School>> getSchoolList();
 
     @GET("/account/academy")
     Call<ArrayList<Academy>> getAcademyList();
