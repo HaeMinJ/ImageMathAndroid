@@ -54,18 +54,18 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         holder.btnNoticeGroup.setOnClickListener(v -> {
             NoticeActivity.start(context, lecture.getLectureSeq(), lecture.getName());
         });
-        if(lecture.isExpired()){
+        if (lecture.isExpired()) {
             holder.toggleWhole.setChecked(false);
             holder.toggleBtnList.setChecked(false);
-        }else{
+        } else {
             holder.toggleWhole.setChecked(true);
             holder.toggleBtnList.setChecked(true);
         }
         holder.btnStudentManage.setOnClickListener(v -> {
-            StudentManageActivity.start(context,lecture);
+            StudentManageActivity.start(context, lecture);
         });
         holder.btnRecognition.setOnClickListener(v -> {
-            RecognitionActivity.start(context,lecture);
+            RecognitionActivity.start(context, lecture);
         });
         holder.btnDeleteLecture.setOnClickListener(v -> {
             checkDelete(position);
@@ -79,21 +79,21 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         holder.textAcademyName.setText(lecture.getAcademyName());
         holder.textClassDuration.setText(lecture.getTotalDate());
 
-        GlobalApplication.getAPIService().getNoticeList(GlobalApplication.getAccessToken(),lecture.getLectureSeq()+"")
+        GlobalApplication.getAPIService().getNoticeList(GlobalApplication.getAccessToken(), lecture.getLectureSeq() + "")
                 .enqueue(new Callback<ArrayList<Notice>>() {
                     @Override
                     public void onResponse(Call<ArrayList<Notice>> call, Response<ArrayList<Notice>> response) {
-                        if(response.code() == 200 && response.body() != null){
+                        if (response.code() == 200 && response.body() != null) {
                             ArrayList<Notice> notices = response.body();
-                            Log.e("LectureRecyclerAdapter",notices.toString());
-                            if(notices.size() >= 2 && notices.get(0) != null && notices.get(1) != null){
-                                holder.notice_preview.setText(notices.get(0).getTitle()+"\n"+notices.get(1).getTitle());
-                            }else if(notices.size() == 1 && notices.get(0) != null){
+                            Log.e("LectureRecyclerAdapter", notices.toString());
+                            if (notices.size() >= 2 && notices.get(0) != null && notices.get(1) != null) {
+                                holder.notice_preview.setText(notices.get(0).getTitle() + "\n" + notices.get(1).getTitle());
+                            } else if (notices.size() == 1 && notices.get(0) != null) {
                                 holder.notice_preview.setText(notices.get(0).getTitle());
-                            }else{
+                            } else {
                                 holder.notice_preview.setText("공지사항이 없습니다.");
                             }
-                        }else{
+                        } else {
                             holder.notice_preview.setText("공지사항 정보를 불러오는데에 실패했습니다.");
                         }
                     }
@@ -101,25 +101,25 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
                     @Override
                     public void onFailure(Call<ArrayList<Notice>> call, Throwable t) {
                         //showToast(AppString.ERROR_NETWORK_MESSAGE);
-                        Log.e("LectureRecyclerAdapter",t.getMessage(),t);
+                        Log.e("LectureRecyclerAdapter", t.getMessage(), t);
                     }
                 });
         holder.btnAssignment.setOnClickListener(v -> {
-           // AssignmentInfoActivity.start(context,lecture);
+            // AssignmentInfoActivity.start(context,lecture);
         });
         holder.btnTest.setOnClickListener(v -> {
-            StudentTestActivity.start(context,lecture);
+            StudentTestActivity.start(context, lecture);
         });
     }
 
     private void checkExpired(int position) {
         AlertDialog dialog = new AlertDialog.Builder(context)
-                .setTitle(lectures.get(position).getName()+" 수업 종강 처리")
+                .setTitle(lectures.get(position).getName() + " 수업 종강 처리")
                 .setMessage("정말로 종강 처리하시겠습니까?")
-                .setNegativeButton("취소",(dialog1, which) -> {
+                .setNegativeButton("취소", (dialog1, which) -> {
                     dialog1.dismiss();
                 })
-                .setPositiveButton("확인",(dialog1, which) -> {
+                .setPositiveButton("확인", (dialog1, which) -> {
                     setLectureExpired(position);
                     dialog1.dismiss();
                 })
@@ -129,12 +129,12 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
 
     private void checkDelete(int position) {
         AlertDialog dialog = new AlertDialog.Builder(context)
-                .setTitle(lectures.get(position).getName()+" 수업 삭제")
+                .setTitle(lectures.get(position).getName() + " 수업 삭제")
                 .setMessage("정말로 삭제하시겠습니까?")
-                .setNegativeButton("취소",(dialog1, which) -> {
+                .setNegativeButton("취소", (dialog1, which) -> {
                     dialog1.dismiss();
                 })
-                .setPositiveButton("삭제",(dialog1, which) -> {
+                .setPositiveButton("삭제", (dialog1, which) -> {
                     deleteLecture(position);
                     dialog1.dismiss();
                 })
@@ -142,18 +142,19 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         dialog.show();
     }
 
-    private void setLectureExpired(int position){
-        GlobalApplication.getAPIService().setExpiredLecture(GlobalApplication.getAccessToken(),lectures.get(position).getLectureSeq(), 1).enqueue(new Callback<Void>() {
+    private void setLectureExpired(int position) {
+        GlobalApplication.getAPIService().setExpiredLecture(GlobalApplication.getAccessToken(), lectures.get(position).getLectureSeq(), 1).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.code() == 200){
+                if (response.code() == 200) {
                     showToast("성공적으로 수업을 종강처리했습니다.");
                     lectures.get(position).setExpired(true);
                     notifyDataSetChanged();
-                }else{
+                } else {
                     showToast("종강처리에 실패했습니다.");
                 }
             }
+
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 showToast(AppString.ERROR_NETWORK_MESSAGE);
@@ -165,11 +166,11 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         GlobalApplication.getAPIService().deleteLecture(GlobalApplication.getAccessToken(), lectures.get(position).getLectureSeq()).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.code() == 200){
+                if (response.code() == 200) {
                     showToast("성공적으로 수업을 삭제했습니다.");
                     lectures.remove(position);
                     notifyDataSetChanged();
-                }else{
+                } else {
                     showToast("수업 삭제에 실패했습니다.");
                 }
             }
@@ -181,8 +182,8 @@ public class LectureRecyclerAdapter extends RecyclerView.Adapter<LectureRecycler
         });
     }
 
-    void showToast(String text){
-        Toast.makeText(context,text,Toast.LENGTH_SHORT).show();
+    void showToast(String text) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
