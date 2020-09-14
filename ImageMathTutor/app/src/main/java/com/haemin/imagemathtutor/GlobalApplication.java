@@ -42,5 +42,6 @@ public class GlobalApplication extends Application {
         return retrofit;
     }
     public static RetrofitInterface getAPIService(){
-        return getRetrofit().create(RetrofitInterface.class);
+        return getRetrofit().create(
+                RetrofitInterface.class);
     }}
