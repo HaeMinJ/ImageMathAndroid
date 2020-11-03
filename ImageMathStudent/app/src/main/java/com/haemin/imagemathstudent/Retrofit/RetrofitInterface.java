@@ -11,6 +11,12 @@ import java.util.HashMap;
 
 public interface RetrofitInterface {
 
+    @GET("/video")
+    Call<ArrayList<Video>> getVideoList(@Header("x-access-token") String accessToken);
+
+    @GET("/file/video/attachedVideo")
+    Call<ArrayList<ServerFile>> getVideoFileList(@Header("x-access-token") String accessToken, @Query("videoSeq") String videoSeq);
+
     @GET("/alarm")
 //userSeq로 LectureSeqs찾고 해당 알람리스트 출력 수정필요
     Call<ArrayList<Alarm>> getAlarmList(@Header("x-access-token") String accessToken);

@@ -1,59 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.haemin.imagemathstudent">
+	package="com.haemin.imagemathstudent">
 
-    <application
-        android:name=".SingleTon.GlobalApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/icon"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/icon_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".SettingMVP.SettingActivity"></activity>
-        <activity android:name=".QuestionInfoMVP.QuestionInfoActivity" />
-        <activity android:name=".QuestionAddMVP.QuestionAddActivity" />
-        <activity android:name=".View.Activity.AlarmActivity" />
-        <activity android:name=".NoticeActivityMVP.NoticeActivity" />
-        <activity android:name=".TestInfoMVP.TestInfoActivity" />
-        <activity android:name=".AssignmentInfoMVP.AssignmentInfoActivity" />
-        <activity android:name=".View.Activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".View.RegisterProcess.RegisterSuccessActivity" />
-        <activity android:name=".View.RegisterProcess.RegisterActivity" />
-        <activity android:name=".View.RegisterProcess.RegisterTermsActivity" />
-        <activity android:name=".View.Activity.LoginActivity" />
-        <activity
-            android:name=".View.Activity.SplashActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+	<uses-permission android:name="android.permission.INTERNET" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+	<application
+		android:name=".SingleTon.GlobalApplication"
+		android:allowBackup="true"
+		android:icon="@mipmap/icon"
+		android:label="@string/app_name"
+		android:roundIcon="@mipmap/icon_round"
+		android:supportsRtl="true"
+		android:theme="@style/AppTheme"
+		android:usesCleartextTraffic="true">
+		<activity android:name=".VideoDetailView.VideoPlayActivity"></activity>
+		<activity android:name=".SettingMVP.SettingActivity" />
+		<activity android:name=".QuestionInfoMVP.QuestionInfoActivity" />
+		<activity android:name=".QuestionAddMVP.QuestionAddActivity" />
+		<activity android:name=".View.Activity.AlarmActivity" />
+		<activity android:name=".NoticeActivityMVP.NoticeActivity" />
+		<activity android:name=".TestInfoMVP.TestInfoActivity" />
+		<activity android:name=".AssignmentInfoMVP.AssignmentInfoActivity" />
+		<activity android:name=".View.Activity.MainActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".View.RegisterProcess.RegisterSuccessActivity" />
+		<activity android:name=".View.RegisterProcess.RegisterActivity" />
+		<activity android:name=".View.RegisterProcess.RegisterTermsActivity" />
+		<activity android:name=".View.Activity.LoginActivity" />
+		<activity
+			android:name=".View.Activity.SplashActivity"
+			android:configChanges="orientation|keyboardHidden|screenSize"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
 
-        <meta-data
-            android:name="firebase_messaging_auto_init_enabled"
-            android:value="false" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
 
-        <meta-data
-            android:name="firebase_analytics_collection_enabled"
-            android:value="false" />
-        <service
-            android:name=".FirebaseUsage.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-    </application>
+		<meta-data
+			android:name="firebase_messaging_auto_init_enabled"
+			android:value="false" />
+		<meta-data
+			android:name="firebase_analytics_collection_enabled"
+			android:value="false" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
+		<service
+			android:name=".FirebaseUsage.MyFirebaseMessagingService"
+			android:exported="false">
+			<intent-filter>
+				<action android:name="com.google.firebase.MESSAGING_EVENT" />
+			</intent-filter>
+		</service>
+	</application>
 
 </manifest>
