@@ -97,7 +97,7 @@ public class TestAddPresenter implements TestAddContract.TestAddPresenter {
 
     @Override
     public void requestLectureData() {
-        GlobalApplication.getAPIService().getLectureList().enqueue(new Callback<ArrayList<Lecture>>() {
+        GlobalApplication.getAPIService().getLectureList(false).enqueue(new Callback<ArrayList<Lecture>>() {
             @Override
             public void onResponse(Call<ArrayList<Lecture>> call, Response<ArrayList<Lecture>> response) {
                 if(response.code() ==200 && response.body() != null){

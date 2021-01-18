@@ -69,7 +69,7 @@ public class LectureInfoFragment extends Fragment {
         });
 
         btnAddLecture.setOnClickListener(v1 -> {
-            GlobalApplication.getAPIService().getLectureList().enqueue(new Callback<ArrayList<Lecture>>() {
+            GlobalApplication.getAPIService().getLectureList(true).enqueue(new Callback<ArrayList<Lecture>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Lecture>> call, Response<ArrayList<Lecture>> response) {
 

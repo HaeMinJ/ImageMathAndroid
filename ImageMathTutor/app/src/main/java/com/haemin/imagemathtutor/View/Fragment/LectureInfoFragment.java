@@ -7,10 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Toast;
-import android.widget.ToggleButton;
+import android.widget.*;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,6 +64,11 @@ public class LectureInfoFragment extends Fragment {
             refresh();
             refreshLayout.setRefreshing(false);
         });
+        toggleExceptExpire.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            refreshLayout.setRefreshing(true);
+            refresh();
+            refreshLayout.setRefreshing(false);
+        });
 
         btnAddLecture.setOnClickListener(v1 -> {
             Intent i = new Intent(getContext(), AddLectureActivity.class);
@@ -80,11 +82,10 @@ public class LectureInfoFragment extends Fragment {
     public void onResume() {
         super.onResume();
         refresh();
-
     }
 
     private void refresh() {
-        GlobalApplication.getAPIService().getLectureList().enqueue(new Callback<ArrayList<Lecture>>() {
+        GlobalApplication.getAPIService().getLectureList(toggleExceptExpire.isChecked()).enqueue(new Callback<ArrayList<Lecture>>() {
             @Override
             public void onResponse(Call<ArrayList<Lecture>> call, Response<ArrayList<Lecture>> response) {
                 if(response.code() == 200 && response.body() != null){

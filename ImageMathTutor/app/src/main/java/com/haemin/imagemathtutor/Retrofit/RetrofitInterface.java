@@ -105,13 +105,12 @@ public interface RetrofitInterface {
 
     @GET("/lecture")
 //수업 리스트 출력 ok  tutor : 모든수업, student : 듣는수업
-    Call<ArrayList<Lecture>> getLectureList();
+    Call<ArrayList<Lecture>> getLectureList(@Query("exceptExpired") Boolean exceptExpired);
 
     @FormUrlEncoded
     @PATCH("/lecture/{lectureSeq}")
     Call<Void> setExpiredLecture(@Header("x-access-token")String accessToken, @Path("lectureSeq")String lectureSeq, @Field("isExpired") int isExpired);
 
-    @FormUrlEncoded
     @DELETE("/lecture/{lectureSeq}")
     Call<Void> deleteLecture(@Header("x-access-token")String accessToken, @Path("lectureSeq")String lectureSeq);
 

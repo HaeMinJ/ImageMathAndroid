@@ -14,6 +14,9 @@ public interface RetrofitInterface {
     @GET("/video")
     Call<ArrayList<Video>> getVideoList(@Header("x-access-token") String accessToken);
 
+    @GET("/video/lecture/{lectureSeq}")
+    Call<ArrayList<Video>> getVideoListByLecture(@Header("x-access-token") String accessToken, @Path("lectureSeq")String lectureSeq);
+
     @GET("/file/video/attachedVideo")
     Call<ArrayList<ServerFile>> getVideoFileList(@Header("x-access-token") String accessToken, @Query("videoSeq") String videoSeq);
 
@@ -78,7 +81,7 @@ public interface RetrofitInterface {
 
     @GET("/lecture")
 //수업 리스트 출력 ok  tutor : 모든수업, student : 듣는수업
-    Call<ArrayList<Lecture>> getLectureList();
+    Call<ArrayList<Lecture>> getLectureList(@Query("exceptExpired")Boolean exceptExpired);
 
     @GET("/lecture/student")
     Call<ArrayList<Lecture>> getMyLectureList(@Header("x-access-token") String accessToken, @Query("exceptExpired") boolean exceptExpired, @Query("page") int page);

@@ -14,7 +14,7 @@ public class GlobalApplication extends Application {
     private static Retrofit retrofit = null;
     private static String accessToken;
     private static Context context;
-    private static String SERVER_BASE_URL = "http://api-doc.imagemath.kr:3000/";
+    private static String SERVER_BASE_URL = "https://api-doc.imagemath.kr:3001/";
 
     public static String getAccessToken() {
         SharedPreferences pref = context.getSharedPreferences("ImageMathStudent", MODE_PRIVATE);

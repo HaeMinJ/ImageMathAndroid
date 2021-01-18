@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -56,22 +57,18 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         holder.textContents.setText(video.getContents());
         holder.textUpdateTime.setText(DateUtils.getRelativeTimeSpanString(context, video.getUploadTime()));
 
-        GlobalApplication.getAPIService().getVideoFileList(GlobalApplication.getAccessToken(), ""+video.getVideoSeq())
+        GlobalApplication.getAPIService().getVideoFileList(GlobalApplication.getAccessToken(), "" + video.getVideoSeq())
                 .enqueue(new Callback<ArrayList<ServerFile>>() {
                     @Override
                     public void onResponse(Call<ArrayList<ServerFile>> call, Response<ArrayList<ServerFile>> response) {
-                        if(response.code() == 200 &&response.body() != null && response.body().size() > 0){
+                        if (response.code() == 200 && response.body() != null && response.body().size() > 0) {
                             ServerFile videoFile = response.body().get(0);
 
-                            Bitmap bitmap;
-                            bitmap = retriveVideoFrameFromVideo(videoFile.getFileUrl());
-                            if (bitmap != null) {
-                                bitmap = Bitmap.createScaledBitmap(bitmap, 240, 240, false);
-                                holder.imageThumbnail.setImageBitmap(bitmap);
-                            }
-
+                            ThumbnailTask.ThumbnailHolder holder1 = new ThumbnailTask.ThumbnailHolder(videoFile.getFileUrl(), holder.imageThumbnail);
+                            new ThumbnailTask()
+                                    .execute(holder1);
                             holder.imageThumbnail.setOnClickListener(v -> VideoPlayActivity.start(context, videoFile.getFileUrl()));
-                        }else{
+                        } else {
                             Toast.makeText(context, "동영상 파일을 가져오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -87,29 +84,73 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     public int getItemCount() {
         return videos.size();
     }
-    public static Bitmap retriveVideoFrameFromVideo(String videoPath){
-        Bitmap bitmap = null;
-        MediaMetadataRetriever mediaMetadataRetriever = null;
-        try {
-            mediaMetadataRetriever = new MediaMetadataRetriever();
-            if (Build.VERSION.SDK_INT >= 14)
-                mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
-            else
-                mediaMetadataRetriever.setDataSource(videoPath);
 
-            bitmap = mediaMetadataRetriever.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("VideoAdapter", "Thumbnail Error!", new Throwable(
-                    "Exception in retriveVideoFrameFromVideo(String videoPath)"
-                            + e.getMessage()));
 
-        } finally {
-            if (mediaMetadataRetriever != null) {
-                mediaMetadataRetriever.release();
+    public static class ThumbnailTask extends AsyncTask<ThumbnailTask.ThumbnailHolder, Void, Bitmap> {
+        public static class ThumbnailHolder {
+            private String videoPath;
+            private ImageView holder;
+
+            public ThumbnailHolder(String videoPath, ImageView holder) {
+                this.videoPath = videoPath;
+                this.holder = holder;
+            }
+
+            public String getVideoPath() {
+                return videoPath;
+            }
+
+            public void setVideoPath(String videoPath) {
+                this.videoPath = videoPath;
+            }
+
+            public ImageView getHolder() {
+                return holder;
+            }
+
+            public void setHolder(ImageView holder) {
+                this.holder = holder;
             }
         }
-        return bitmap;
+
+        ThumbnailHolder thumbnailHolder;
+
+        @Override
+        protected Bitmap doInBackground(ThumbnailHolder... holders) {
+            thumbnailHolder = holders[0];
+            String videoPath = thumbnailHolder.videoPath;
+            Bitmap bitmap = null;
+            MediaMetadataRetriever mediaMetadataRetriever = null;
+            try {
+                mediaMetadataRetriever = new MediaMetadataRetriever();
+                if (Build.VERSION.SDK_INT >= 14)
+                    mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
+                else
+                    mediaMetadataRetriever.setDataSource(videoPath);
+
+                bitmap = mediaMetadataRetriever.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e("VideoAdapter", "Thumbnail Error!", new Throwable(
+                        "Exception in retriveVideoFrameFromVideo(String videoPath)"
+                                + e.getMessage()));
+
+            } finally {
+                if (mediaMetadataRetriever != null) {
+                    mediaMetadataRetriever.release();
+                }
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            if (bitmap != null) {
+                bitmap = Bitmap.createScaledBitmap(bitmap, 240, 240, false);
+                thumbnailHolder.holder.setImageBitmap(bitmap);
+            }
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

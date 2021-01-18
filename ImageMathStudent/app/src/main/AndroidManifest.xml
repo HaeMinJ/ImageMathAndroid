@@ -13,7 +13,8 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		android:usesCleartextTraffic="true">
-		<activity android:name=".VideoDetailView.VideoPlayActivity"></activity>
+		<activity android:name=".VideoDetailView.VideoPlayActivity"
+			android:configChanges="orientation|keyboardHidden|screenSize"></activity>
 		<activity android:name=".SettingMVP.SettingActivity" />
 		<activity android:name=".QuestionInfoMVP.QuestionInfoActivity" />
 		<activity android:name=".QuestionAddMVP.QuestionAddActivity" />

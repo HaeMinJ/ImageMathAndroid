@@ -2,15 +2,24 @@ package com.haemin.imagemathstudent.VideoDetailView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import butterknife.BindView;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
@@ -24,24 +33,69 @@ public class VideoPlayActivity extends AppCompatActivity {
         starter.putExtra("videoUrl", videoUrl);
         context.startActivity(starter);
     }
-    private PlayerView exoPlayerView;
+    private PlayerView playerView;
     private SimpleExoPlayer player;
 
     private Boolean playWhenReady = true;
-    private int currentWindow = 0;
-    private Long playbackPosition = 0L;
+    ImageView fullscreenButton;
+    boolean fullscreen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_play);
-        hide();
+        // hide();
 
         Intent fromOutside = getIntent();
         videoUrl = fromOutside.getStringExtra("videoUrl");
-        exoPlayerView = findViewById(R.id.exoPlayerView);
-
+        playerView = findViewById(R.id.exoPlayerView);
         initializePlayer();
+
+        fullscreenButton = playerView.findViewById(R.id.exo_fullscreen_icon);
+        fullscreenButton.setOnClickListener(view -> {
+            if(fullscreen) {
+                fullscreenButton.setImageDrawable(ContextCompat.getDrawable(VideoPlayActivity.this, R.drawable.ic_fullscreen_open));
+
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+
+                if(getSupportActionBar() != null){
+                    getSupportActionBar().show();
+                }
+
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) playerView.getLayoutParams();
+                params.width = params.MATCH_PARENT;
+                params.height = (int) ( 200 * getApplicationContext().getResources().getDisplayMetrics().density);
+                playerView.setLayoutParams(params);
+
+                fullscreen = false;
+            }else{
+                fullscreenButton.setImageDrawable(ContextCompat.getDrawable(VideoPlayActivity.this, R.drawable.ic_fullscreen_close));
+
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                        |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+                if(getSupportActionBar() != null){
+                    getSupportActionBar().hide();
+                }
+
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+                ViewGroup.LayoutParams params = playerView.getLayoutParams();
+                params.width = params.MATCH_PARENT;
+                params.height = params.MATCH_PARENT;
+                playerView.setLayoutParams(params);
+
+                fullscreen = true;
+            }
+        });
+
+        playerView.setPlayer(player);
+        playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT);
+
+        player.setPlayWhenReady(true);
         player.addListener(new Player.EventListener() {
 
             /**
@@ -93,7 +147,7 @@ public class VideoPlayActivity extends AppCompatActivity {
             player = ExoPlayerFactory.newSimpleInstance(this.getApplicationContext());
 
             //플레이어 연결
-            exoPlayerView.setPlayer(player);
+            playerView.setPlayer(player);
 
         }
 
@@ -116,11 +170,10 @@ public class VideoPlayActivity extends AppCompatActivity {
     }
     private void releasePlayer() {
         if (player != null) {
-            playbackPosition = player.getCurrentPosition();
-            currentWindow = player.getCurrentWindowIndex();
+
             playWhenReady = player.getPlayWhenReady();
 
-            exoPlayerView.setPlayer(null);
+            playerView.setPlayer(null);
             player.release();
             player = null;
 

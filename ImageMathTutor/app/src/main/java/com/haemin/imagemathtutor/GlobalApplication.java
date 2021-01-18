@@ -35,7 +35,7 @@ public class GlobalApplication extends Application {
     private static Retrofit getRetrofit() {
         if(retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://ec2-54-180-115-237.ap-northeast-2.compute.amazonaws.com:3000")
+                    .baseUrl("https://api-doc.imagemath.kr:3001/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

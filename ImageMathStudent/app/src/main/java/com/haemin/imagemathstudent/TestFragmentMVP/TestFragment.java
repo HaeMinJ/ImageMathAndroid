@@ -98,6 +98,7 @@ public class TestFragment extends Fragment implements TestFragmentContract.TestF
 
     @Override
     public void updateChart(ArrayList<StudentTest> studentTests) {
+
         this.studentTests.clear();
         this.studentTests.addAll(studentTests);
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();

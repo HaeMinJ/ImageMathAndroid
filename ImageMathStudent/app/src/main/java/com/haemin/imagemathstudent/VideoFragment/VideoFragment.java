@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.haemin.imagemathstudent.Data.Lecture;
 import com.haemin.imagemathstudent.Data.Video;
 import com.haemin.imagemathstudent.R;
+import com.haemin.imagemathstudent.View.UI.ListPickerDialog;
 
 import java.util.ArrayList;
 
@@ -27,12 +29,17 @@ public class VideoFragment extends Fragment implements VideoContract.VideoView {
     ArrayList<Video> videos;
     VideoContract.VideoPresenter presenter;
 
+    @BindView(R.id.text_lecture_name)
+    TextView textLectureName;
     @BindView(R.id.text_no_video)
     TextView textNoVideo;
     @BindView(R.id.recycler_video)
     RecyclerView recyclerVideo;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
+
+
+    String lectureSeq = null;
 
 
     public VideoFragment() {
@@ -49,10 +56,13 @@ public class VideoFragment extends Fragment implements VideoContract.VideoView {
         videos = new ArrayList<>();
         adapter = new VideoAdapter(getContext(), videos);
         presenter = new VideoPresenter(this);
-
-        presenter.requestData();
+        textLectureName.setOnClickListener(v1 -> {
+            presenter.requestLecturePick();
+        });
+        lectureSeq = lectureSeq == null? "0" : lectureSeq;
+        presenter.requestData(lectureSeq);
         swipeRefresh.setOnRefreshListener(() -> {
-            presenter.requestData();
+            presenter.requestData(lectureSeq);
             swipeRefresh.setRefreshing(false);
         });
 
@@ -60,6 +70,24 @@ public class VideoFragment extends Fragment implements VideoContract.VideoView {
         recyclerVideo.setAdapter(adapter);
 
         return v;
+    }
+
+    @Override
+    public void updateLectureName(String lectureName) {
+        textLectureName.setText(lectureName);
+    }
+
+    @Override
+    public void showDialog(ArrayList<Lecture> lectures) {
+        ListPickerDialog<Lecture> lectureListPickerDialog = new ListPickerDialog<>(lectures, "수업을 선택해주세요.");
+        lectureListPickerDialog.setOnItemClickListener(data -> {
+            lectureSeq = data.getLectureSeq();
+            presenter.requestData(data.getLectureSeq()+"");
+            updateLectureName(data.getName());
+            lectureListPickerDialog.dismiss();
+        });
+        lectureListPickerDialog.show(getFragmentManager(), "TAG");
+
     }
 
     @Override
