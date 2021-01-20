@@ -1,7 +1,11 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ServerData {
+    @SerializedName("msg")
     String msg;
+    @SerializedName("code")
     int code;
 
     public String getMsg() {

@@ -1,13 +1,21 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class Notice extends ServerData{
+    @SerializedName("noticeSeq")
     int noticeSeq;
+    @SerializedName("title")
     String title;
+    @SerializedName("postTime")
     long postTime;
+    @SerializedName("contents")
     String contents;
+    @SerializedName("lectureSeq")
     String lectureSeq;
+    @SerializedName("files")
     ArrayList<ServerFile> files;
 
     public String getLectureSeq() {

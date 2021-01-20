@@ -1,10 +1,17 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Video {
+    @SerializedName("videoSeq")
     int videoSeq;
+    @SerializedName("userSeq")
     int userSeq;
+    @SerializedName("uploadTime")
     long uploadTime;
+    @SerializedName("title")
     String title;
+    @SerializedName("contents")
     String contents;
 
     public int getVideoSeq() {

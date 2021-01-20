@@ -62,7 +62,7 @@ public class SplashActivity extends AppCompatActivity {
                 })
                 .setRationaleMessage("앱을 이용하기 위해서는 메모리 사용 권한이 필요합니다.")
                 .setDeniedMessage("권한 설정에 동의하셔야 앱을 이용할 수 있습니다.\n하지만 [설정] > [권한] 에서 권한을 허용할 수 있어요.")
-                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .setPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE})
                 .check();
 
         setContentView(R.layout.activity_splash);

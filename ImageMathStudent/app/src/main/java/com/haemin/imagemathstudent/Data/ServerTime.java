@@ -1,8 +1,13 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ServerTime {
+    @SerializedName("lectureTimeDay")
     String lectureTimeDay;
+    @SerializedName("lectureTimeFirst")
     String lectureTimeFirst;
+    @SerializedName("lectureTimeSecond")
     String lectureTimeSecond;
 
     public String getLectureTimeDay() {

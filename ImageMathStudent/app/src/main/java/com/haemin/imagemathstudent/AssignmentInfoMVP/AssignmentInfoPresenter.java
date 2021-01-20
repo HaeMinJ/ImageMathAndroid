@@ -1,7 +1,7 @@
 package com.haemin.imagemathstudent.AssignmentInfoMVP;
 
+import android.net.Uri;
 import android.util.Log;
-import com.esafirm.imagepicker.model.Image;
 import com.haemin.imagemathstudent.Data.Assignment;
 import com.haemin.imagemathstudent.Data.StudentAssignment;
 import com.haemin.imagemathstudent.SingleTon.AppString;
@@ -48,7 +48,7 @@ public class AssignmentInfoPresenter implements AssignmentInfoContract.Assignmen
     }
 
     @Override
-    public void submitPicture(String assignmentSeq, Image imageUri) {
+    public void submitPicture(String assignmentSeq, Uri imageUri) {
 
         MultipartBody.Part part = MultipartBody.Part.createFormData("submitFile", imageUri.getPath(), RequestBody.create(MediaType.parse("image/png"), new File(imageUri.getPath())));
 

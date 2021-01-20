@@ -1,18 +1,27 @@
 package com.haemin.imagemathstudent.Data;
 
 import android.annotation.SuppressLint;
+import com.google.gson.annotations.SerializedName;
 
 public class Lecture extends SelectableData{
+    @SerializedName("lectureSeq")
     String lectureSeq;
+    @SerializedName("time")
     String time;
+    @SerializedName("name")
     String name;
+    @SerializedName("totalDate")
     String totalDate; // ,를 구분자로 사용함.
     //String week;
-    @SuppressLint("reqStudentCnt")
+    @SerializedName("reqStudentCnt")
     int reqStudentCount;
+    @SerializedName("studentNum")
     String studentNum;
+    @SerializedName("academyName")
     String academyName;
+    @SerializedName("academySeq")
     String academySeq;
+    @SerializedName("isExpired")
     boolean isExpired;
 
     @Override

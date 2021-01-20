@@ -1,5 +1,7 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ServerFile extends ServerData{
 
     public static final String FILE_TYPE_IMAGE = "image";
@@ -15,12 +17,19 @@ public class ServerFile extends ServerData{
         this.fileType = fileType;
     }
 
+    @SerializedName("fileSeq")
     int fileSeq;
+    @SerializedName("fileName")
     String fileName;
+    @SerializedName("fileUrl")
     String fileUrl;
+    @SerializedName("fileType")
     String fileType;
+    @SerializedName("postSeq")
     String postSeq;
+    @SerializedName("uploadTime")
     long uploadTime;
+    @SerializedName("userSeq")
     String userSeq;
 
     public String getPostSeq() {

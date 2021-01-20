@@ -1,11 +1,16 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class StudentTest extends Test{
 
+    @SerializedName("score")
     int score;
+    @SerializedName("rank")
     int rank;
+    @SerializedName("testAdmSeq")
     String testAdmSeq;
 
     public String getTestAdmSeq() {

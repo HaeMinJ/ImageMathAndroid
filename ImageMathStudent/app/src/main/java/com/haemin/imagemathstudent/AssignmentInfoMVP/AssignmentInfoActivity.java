@@ -3,6 +3,7 @@ package com.haemin.imagemathstudent.AssignmentInfoMVP;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -15,13 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
 import com.haemin.imagemathstudent.Data.ServerFile;
 import com.haemin.imagemathstudent.Data.StudentAssignment;
 import com.haemin.imagemathstudent.R;
 import com.haemin.imagemathstudent.Utils.ConfirmStarter;
 import com.haemin.imagemathstudent.View.UI.FileButton;
+import gun0912.tedbottompicker.TedBottomPicker;
+import gun0912.tedbottompicker.TedBottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
@@ -140,8 +141,11 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
         textLectureDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getLectureTime()));
         textUploadDay.setText(DateUtils.getRelativeTimeSpanString(studentAssignment.getPostTime()));
         btnAddSubmit.setOnClickListener(v -> {
-            ImagePicker.create(this)
-                    .start();
+            TedBottomPicker.with(AssignmentInfoActivity.this)
+                    .show(uri -> {
+                        // here is selected image uri
+                        presenter.submitPicture(assignmentSeq, uri);
+                    });
         });
         imageFiles.clear();
         imageFiles.addAll(studentAssignment.getSubmitFiles());
@@ -172,11 +176,6 @@ public class AssignmentInfoActivity extends AppCompatActivity implements Assignm
 
     @Override
     protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
-        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
-            // Get a list of picked images
-            Image image = ImagePicker.getFirstImageOrNull(data);
-            presenter.submitPicture(assignmentSeq, image);
-        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -1,7 +1,11 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class School extends SelectableData{
+    @SerializedName("schoolSeq")
     int schoolSeq;
+    @SerializedName("schoolName")
     String schoolName;
 
     @Override

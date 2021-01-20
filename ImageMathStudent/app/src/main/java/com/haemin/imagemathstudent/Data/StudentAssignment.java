@@ -1,12 +1,18 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
-public class StudentAssignment extends Assignment{
-        String userSeq;
-        ArrayList<ServerFile> submitFiles;
-        int submitState;
-        Assignment assignment;
+public class StudentAssignment extends Assignment {
+    @SerializedName("userSeq")
+    String userSeq;
+    @SerializedName("submitFiles")
+    ArrayList<ServerFile> submitFiles;
+    @SerializedName("submitState")
+    int submitState;
+    @SerializedName("assignment")
+    Assignment assignment;
 
     public Assignment getAssignment() {
         return assignment;

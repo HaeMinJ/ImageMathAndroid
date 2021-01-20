@@ -1,12 +1,21 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Answer {
+    @SerializedName("answerSeq")
     String answerSeq;
+    @SerializedName("questionSeq")
     String questionSeq;
+    @SerializedName("title")
     String title;
+    @SerializedName("contents")
     String contents;
+    @SerializedName("postTime")
     long postTime;
+    @SerializedName("updateTime")
     long updateTime;
+    @SerializedName("uploaderSeq")
     String uploaderSeq;
 
     public String getTitle() {

@@ -125,8 +125,8 @@ public class TestFragment extends Fragment implements TestFragmentContract.TestF
         LineDataSet d2 = new LineDataSet(averageEntries, "평균 점수");
         d2.setLineWidth(2.5f);
         d2.setCircleRadius(4f);
-        d2.setColor(R.color.ef_grey);
-        d2.setCircleColor(R.color.ef_grey);
+        d2.setColor(R.color.exo_gray);
+        d2.setCircleColor(R.color.exo_gray);
 
         dataSets.add(d);
         dataSets.add(d2);

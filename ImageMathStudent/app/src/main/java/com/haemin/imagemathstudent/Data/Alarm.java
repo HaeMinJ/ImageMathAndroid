@@ -1,11 +1,16 @@
 package com.haemin.imagemathstudent.Data;
 
 import android.text.format.DateUtils;
+import com.google.gson.annotations.SerializedName;
 
 public class Alarm extends ServerData{
+    @SerializedName("title")
     String title;
+    @SerializedName("content")
     String content;
+    @SerializedName("type")
     String type;
+    @SerializedName("postTime")
     long postTime;
 
     public String getTitle() {

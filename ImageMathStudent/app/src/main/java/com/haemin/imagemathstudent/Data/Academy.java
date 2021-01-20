@@ -1,8 +1,12 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Academy extends SelectableData{
 
+    @SerializedName("academySeq")
     int academySeq;
+    @SerializedName("academyName")
     String academyName;
 
     @Override

@@ -1,17 +1,29 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class User extends ServerData{
+    @SerializedName("userSeq")
     int userSeq;
+    @SerializedName("name")
     String name;
+    @SerializedName("birthday")
     String birthday;
+    @SerializedName("email")
     String email;
+    @SerializedName("password")
     String password;
+    @SerializedName("lectureSeqs")
     String lectureSeqs; // "3,5,6,~"
+    @SerializedName("reqLectureSeqs")
     String reqLectureSeqs;
+    @SerializedName("schoolName")
     String schoolName;
+    @SerializedName("phone")
     String phone;
+    @SerializedName("accessToken")
     String accessToken;
 
     public String getSchoolName() {

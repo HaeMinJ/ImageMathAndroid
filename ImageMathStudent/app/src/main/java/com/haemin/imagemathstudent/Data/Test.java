@@ -1,18 +1,31 @@
 package com.haemin.imagemathstudent.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class Test{
+    @SerializedName("testSeq")
     int testSeq;
+    @SerializedName("title")
     String title;
+    @SerializedName("postTime")
     long postTime;
+    @SerializedName("endTime")
     long endTime;
+    @SerializedName("lectureTime")
     long lectureTime;
+    @SerializedName("solutionFileUrl")
     String solutionFileUrl;
+    @SerializedName("lectureName")
     String lectureName;
+    @SerializedName("lectureSeq")
     String lectureSeq;
+    @SerializedName("answerFiles")
     ArrayList<ServerFile> answerFiles;
+    @SerializedName("averageScore")
     int averageScore;
+    @SerializedName("contents")
     String contents;
 
     public int getAverageScore() {
