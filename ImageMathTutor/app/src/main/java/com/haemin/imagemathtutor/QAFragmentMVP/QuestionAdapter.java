@@ -5,6 +5,7 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextClock;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +41,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         holder.textTitle.setText(question.getTitle());
         holder.textContents.setText(question.getContents());
         holder.textUploaderName.setText(question.getName()+" 작성");
+        holder.textUploadTime.setText(DateUtils.getRelativeTimeSpanString(question.getPostTime())+" 작성됨.");
         if(question.getUpdateTime() != 0) {
             holder.textUpdateTime.setText(DateUtils.getRelativeTimeSpanString(question.getUpdateTime()) + " 답변완료");
             holder.qaStatus.setBackground(context.getResources().getDrawable(R.color.etoos_color,null));
@@ -68,6 +70,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         View qaStatus;
         @BindView(R.id.text_uploader_name)
         TextView textUploaderName;
+        @BindView(R.id.text_upload_time)
+        TextView textUploadTime;
 
 
         public QuestionHolder(@NonNull View itemView) {

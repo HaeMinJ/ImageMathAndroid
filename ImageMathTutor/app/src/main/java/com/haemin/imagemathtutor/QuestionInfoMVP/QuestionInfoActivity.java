@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +42,8 @@ public class QuestionInfoActivity extends AppCompatActivity implements QuestionC
     RecyclerView recyclerAnswer;
     @BindView(R.id.btn_add_answer)
     Button btnAddAnswer;
+    @BindView(R.id.btn_back)
+    ImageButton btnBack;
 
     AnswerAdapter answerAdapter;
     ArrayList<Answer> answers;
@@ -77,6 +76,10 @@ public class QuestionInfoActivity extends AppCompatActivity implements QuestionC
         btnAddAnswer.setOnClickListener(v -> {
             AnswerAddActivity.start(this, questionSeq);
         });
+        btnBack.setOnClickListener(v ->{
+            finish();
+        });
+
 
     }
 
